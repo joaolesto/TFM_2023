@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="estiloAE.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troços correntes de Autoestrada (AE)</title>
+</head>
+<h1>Troços correntes da Autoestrada (AE)</h1>
+<body>
+    <div class="parent">
+        <div class="form-input-gerais">
+            <form name="input" id="input_geral" class="form" method="post">
+                <fieldset>
+                  <legend>Inputs Gerais</legend>
+                    <input type="radio" name="terreno" id="ondulado" />
+                    <label>Terreno Ondulado</label>
+                    <br/>
+                    <input type="radio" name="terreno" id="plano" />
+                    <label>Terreno Plano</label>
+                    <br/>
+                    <input type="radio" name="terreno" id="montanhoso" />
+                    <label>Terreno Montanhoso</label>
+                    <br/>
+                    <div class="general-inputs">
+                        <div class="row">
+                            <label for="car_volume">Volume de tráfego (pc/h)</label>
+                            <input type="number" name="car_volume" id="car_volume" min="0" number-only />
+                        </div>
+                        <div class="row">
+                            <label for="phf">Fator de Ponta Horário</label>
+                            <input type="number" name="phf" id="phf" step="0.01" min="0.80" max="0.95" />
+                        </div>
+                        <div class="row">
+                            <label for="N">Número de Vias</label>
+                            <input type="number" name="N_vias" id="N_vias" min="2" max="10" step="1" number-only/>
+                        </div>
+                        <div class="row">
+                            <label for="pt">% de Veiculos Pesados</label>
+                            <input type="number" name="pt" id="pt" min="0" max="100"/>
+                        </div>
+                        <div class="row">
+                            <label for="pr">% de Veiculos Recriativos</label>
+                            <input type="number" name="pr" id="pr" min="0" max="100"/>
+                        </div>
+                        <div class="row"> 
+                            <label for="FFS">Velocidade de fluxo livre (km/h)</label>
+                            <input type="number" name="FFS_m" id="FFS" min="0"/>
+                        </div>
+                        <input type="radio" name="FFS" id="FFS_c"/>
+                        <label for="FFS_c">Calculado</label>
+                        <input type="radio" name="FFS" id="FFS_m"/>
+                        <label for="FFS_m">Medido em campo</label>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form-hcm-2000">
+            <form name="input" id="input_HCM2000" class="form" method="post">
+                <fieldset>
+                    <legend>Inputs HCM 2000</legend>
+                    <div class="row">
+                        <label>Tipos de Condutores</label>
+                        <select id= "tipos_de_condutores" name="tipos_de_condutores">
+                            <option value="">Select Option</option>
+                            <option>Condutores Habituais</option>
+                            <option>Condutores Exporádicos</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label for="berma">Largura da Berma (m)</label>
+                        <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
+                    </div>
+                    <div class="row">
+                           <label for="via">Largura da Via (m)</label>
+                    <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
+                    </div>
+                    <div class="row">
+                        <label for="length">Comprimento da Via (km)</label>
+                        <input type="number" name="length" id="length" step ="0.01" min="0" max="100" />
+                    </div>
+                    <div class="row">
+                        <label for="acessos">Número de Acessos</label>
+                        <input type="number" name="acessos" id="N_acessos" min="0" />
+                    </div>
+                    <div class="row">
+                        <label for="BFFS">Velocidade base em regime livre (km/h)</label>
+                        <input type="number" name="BFFS" id="BFFS" min="45"/>
+                    </div>
+                </fieldset>
+            </form>
+            <button type="submit" id="Calcular">Calcular</button>
+        </div>
+        <div class="form-outputs">
+            <form name="output" id="Outputs" class="form">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Outputs</th>
+                            <th>HCM 2000</th>
+                            <th>HCM 7ª edição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FHV</td>
+                            <td><input type="text" name="fHv" id="fhv" disabled></td>
+                            <td><input type="text" name="fHv" id="fhv_2022" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Vp (uvl/h/via)</td>
+                            <td><input type="text" name="vp" id="vp" disabled></td>
+                            <td><input type="text" name="vp" id="vp_2022" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Velocidade de fluxo livre (km/h)</td>
+                            <td><input type="text" name="FFS" id="FFS_o" disabled></td>
+                            <td><input type="text" name="FFS" id="FFS_o_2022" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Velocidade média (km/h)</td>
+                            <td><input type="text" name="Velocidade_média" id="S" disabled></td>
+                            <td><input type="text" name="Velocidade_média" id="S_2022" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Densidade de tráfego por via (uvl/km/via)</td>
+                            <td><input type="text" name="Densidade" id="D" disabled></td>
+                            <td><input type="text" name="Densidade" id="D_2022" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Nivel de Serviço</td>
+                            <td><input type="text" name="service_level" id="service_level" disabled></td>
+                            <td><input type="text" name="service_level" id="service_level_2022" disabled></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <button type="submit" id="Exportar">Exportar</button>
+         </div>
+        <div class="form-hcm-7-edition">
+            <form name="input" id="input_HCM7" class="form" method="post">
+                <fieldset>
+                    <legend>Inputs HCM 7ª Edição</legend>
+                    <div class="row">
+                        <label>Passing Zones</label>
+                        <select id= "passing_zones" name="passing_zones">
+                            <option value="">Select Option</option>
+                            <option>0</option>
+                            <option>20</option>
+                            <option>40</option>
+                            <option>60</option>
+                            <option>80</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label for="FFS">Velocidade de fluxo livre (km/h)</label>
+                        <input type="number" name="FFS_m" id="FFS" min="0"/>
+                    </div>
+                    <input type="radio" name="FFS" id="FFS_c"/>
+                    <label for="FFS_c">Calculado</label>
+                    <input type="radio" name="FFS" id="FFS_m"/>
+                    <label for="FFS_m">Medido em campo</label>
+                    <div class="row">
+                        <label for="berma">Largura da berma (m)</label>
+                        <input type="number" name="berma" id="berma" step ="0.01" min="0" max="100" />
+                    </div>
+                    <div class="row">
+                        <label for="via">Largura da faixa de rodagem (m)</label>
+                        <input type="number" name="via" id="via" step ="0.01" min="2.70" max="100" />
+                    </div>
+                    <div class="row">
+                        <label for="length">Comprimento da Via (km)</label>
+                        <input type="number" name="length" id="length" step ="0.01" min="1" max="100" />
+                    </div>
+                    <div class="row">
+                        <label for="BFFS">Velocidade base em regime livre (km/h)</label>
+                        <input type="number" name="BFFS" id="BFFS" min="90"/>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>  
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.6.4.min.js"
+  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(function () {
+        $("#FFS_m").click(function () {
+            if ($(this).is(":checked")) {
+                $("#FFS").attr("disabled", false);
+                $("#length").attr("disabled",true);
+                $("#via").attr("disabled",true);
+                $("#berma").attr("disabled",true);
+                $("#BFFS").attr("disabled",true);
+                $("#N_acessos").attr("disabled",true)
+            }
+        });
+    });
+    $(function () {
+        $("#FFS_c").click(function () {
+            if ($(this).is(":checked")) {
+                $("#FFS").attr("disabled", true);
+                $("#length").attr("disabled",false);
+                $("#berma").attr("disabled",false);
+                $("#via").attr("disabled",false);
+                $("#BFFS").attr("disabled",false);
+                $("#N_acessos").attr("disabled",false)
+                
+            }
+        });
+    });
+</script>
+<script src="AE_HCM2000.js"></script>
+<script defer>
+    $('#Calcular').click(function(e) {
+        e.preventDefault();
+        // HCM2000
+        let car_volume = parseInt($('#car_volume').val());
+        let N_acessos = parseInt($('#N_acessos').val());
+        let phf = parseFloat($('#phf').val());
+        let PT = parseInt($('#pt').val());
+        let PR = parseInt($('#pr').val());
+        let berma = parseFloat($('#berma').val());
+        let via = parseFloat($('#via').val())
+        let length = parseFloat($('#length').val());
+        let N = parseInt($('#N_vias').val());
+        let BFFS = parseFloat($('#BFFS').val());
+        let ET = 0;
+        let ER = 0;
+        let fp = 0;
+        let fhv = 0;
+        let vp = 0;
+        let FFS = 0;
+        let S = 0;
+        let D = 0;
+
+        if ($('#ondulado').is(":checked")) {
+            ET = 2.5
+            ER = 2.0
+        }else if ($('#plano').is(":checked")) {
+            ET = 1.5;
+            ER = 1.2;
+        }else if ($('#montanhoso').is(":checked")) {
+            ET = 4.5
+            ER = 4.0;
+        }
+
+        fhv = f_hv(PT,ET,PR,ER); // Passo 2
+
+        $('#fhv').val(fhv.toFixed(3));
+
+        if ($('#tipos_de_condutores').val()==="Condutores Exporádicos") {
+            fp = 0.85
+        }else {
+            fp = 1.0
+        }
+
+        vp = v_p(car_volume,phf,N,fhv,fp); // Passo 3
+        $('#vp').val(vp.toFixed(1));
+        if (vp<2400) {
+            if ($('#FFS_m').is(":checked")) {
+                FFS = parseFloat($('#FFS').val());
+                $('#FFS_o').val(FFS.toFixed(1));
+                $('#FFS_o_2022').val(FFS.toFixed(1));
+
+            } else if ($('#FFS_c').is(":checked")) {
+                let flw = 0; //via
+                flw = f_lw(via);
+                let flc = 0; //Nº vias e berma
+                flc = f_lc(N,berma);
+                let fn = 0;
+                fn = f_n(N);
+                let fid = 0;
+                fid = f_id(N_acessos/length)
+                FFS = FFS_f(BFFS,flw,flc,fn,fid)
+                $('#FFS_o').val(FFS.toFixed(1));
+                $('#FFS').val('');
+            }
+            S = S_f(FFS,vp)
+            $('#S').val(S.toFixed(1));
+            D = D_f(vp,S)
+            $('#D').val(D.toFixed(1));
+            $('#service_level').val(LOS(D));
+        }else {
+            $('#S').val('');
+            $('#D').val('');
+            $('#FFS_o').val('');
+            $('#service_level').val("F");
+        }
+        // HCM 7ªEdição
+        
+            // $('#service_level').val(vp.toFixed());
+    })
+</script>
+</html>
