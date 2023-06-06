@@ -64,14 +64,14 @@ $(document).ready(function() {
      */
     $("#pt").on('focusout', function() {
 
-        let regex = /^([1-9]|[1-9][0-9])$/;
+        let validacao = (!(parseFloat($(this).val()) > 0) || !(parseFloat($(this).val()) < 100));
 
-        if(!regex.test($(this).val()) && !$('#error-pt').length ) {
+        if( validacao && !$('#error-pt').length ) {
             $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 1-99</strong>`)
             return false
         }
 
-        if(!regex.test($(this).val())) {
+        if( validacao ) {
             return false
         }
         
@@ -83,14 +83,14 @@ $(document).ready(function() {
      */
      $("#pr").on('focusout', function() {
 
-        let regex = /^([1-9]|[1-9][0-9]|[1][0][0])$/;
+        let validacao = (!(parseFloat($(this).val()) > 0) || !(parseFloat($(this).val()) <= 100))
 
-        if(!regex.test($(this).val()) && !$('#error-pr').length ) {
+        if( validacao && !$('#error-pr').length ) {
             $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 1-100</strong>`)
             return false
         }
 
-        if(!regex.test($(this).val())) {
+        if( validacao ) {
             return false
         }
         
@@ -102,14 +102,14 @@ $(document).ready(function() {
      */
      $("#FFS").on('focusout', function() {
 
-        let regex = /^([9][0-9]|[1][0-2][0])$/;
+        let validacao = (!(parseFloat($(this).val()) > 90) || !(parseFloat($(this).val()) < 120));
 
-        if(!regex.test($(this).val()) && !$('#error-FFS').length ) {
+        if( validacao && !$('#error-FFS').length ) {
             $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120</strong>`)
             return false
         }
 
-        if(!regex.test($(this).val())) {
+        if( validacao ) {
             return false
         }
         
