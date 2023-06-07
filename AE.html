@@ -17,13 +17,13 @@
                 <fieldset>
                   <legend>Inputs Gerais</legend>
                     <input type="radio" name="terreno" id="ondulado" />
-                    <label>Terreno Ondulado</label>
+                    <label for="ondulado">Terreno Ondulado</label>
                     <br/>
                     <input type="radio" name="terreno" id="plano" />
-                    <label>Terreno Plano</label>
+                    <label for="plano">Terreno Plano</label>
                     <br/>
                     <input type="radio" name="terreno" id="montanhoso" />
-                    <label>Terreno Montanhoso</label>
+                    <label for="montanhoso">Terreno Montanhoso</label>
                     <br/>
                     <div class="general-inputs">
                         <div class="row">
@@ -35,7 +35,7 @@
                             <input type="number" name="phf" id="phf" step="0.01" min="0.80" max="0.95" />
                         </div>
                         <div class="row">
-                            <label for="N">Número de Vias</label>
+                            <label for="N_vias">Número de Vias</label>
                             <input type="number" name="N_vias" id="N_vias" min="2" max="10" step="1" number-only/>
                         </div>
                         <div class="row">
@@ -83,7 +83,7 @@
                 <fieldset>
                     <legend>Inputs HCM 2000</legend>
                     <div class="row">
-                        <label>Tipos de Condutores</label>
+                        <label for="tipos_de_condutores">Tipos de Condutores</label>
                         <select id= "tipos_de_condutores" name="tipos_de_condutores">
                             <option value="">Select Option</option>
                             <option>Condutores Habituais</option>
@@ -148,7 +148,7 @@
                         <label>Condições Atmosféricas</label>
                         <select id= "cond_atmos" name="Condições_base">
                             <option value="">Select Option</option>
-                            <option>Situação de Base</Base></option>
+                            <option>Situação de Base</option>
                             <option>Precipitação Média</option>
                             <option>Precipitação Elevada</option>
                             <option>Pouca Neve</option>
