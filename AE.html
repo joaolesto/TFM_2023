@@ -55,21 +55,6 @@
                         <input type="radio" name="FFS" id="FFS_m"/>
                         <label for="FFS_m">Medido em campo</label>
                     </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="form-hcm-2000">
-            <form name="input" id="input_HCM2000" class="form" method="post">
-                <fieldset>
-                    <legend>Inputs HCM 2000</legend>
-                    <div class="row">
-                        <label>Tipos de Condutores</label>
-                        <select id= "tipos_de_condutores" name="tipos_de_condutores">
-                            <option value="">Select Option</option>
-                            <option>Condutores Habituais</option>
-                            <option>Condutores Exporádicos</option>
-                        </select>
-                    </div>
                     <div class="row">
                         <label for="berma">Largura da Berma (m)</label>
                         <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
@@ -89,6 +74,21 @@
                     <div class="row">
                         <label for="BFFS">Velocidade base em regime livre (km/h)</label>
                         <input type="number" name="BFFS" id="BFFS" min="45"/>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form-hcm-2000">
+            <form name="input" id="input_HCM2000" class="form" method="post">
+                <fieldset>
+                    <legend>Inputs HCM 2000</legend>
+                    <div class="row">
+                        <label>Tipos de Condutores</label>
+                        <select id= "tipos_de_condutores" name="tipos_de_condutores">
+                            <option value="">Select Option</option>
+                            <option>Condutores Habituais</option>
+                            <option>Condutores Exporádicos</option>
+                        </select>
                     </div>
                 </fieldset>
             </form>
@@ -145,40 +145,21 @@
                 <fieldset>
                     <legend>Inputs HCM 7ª Edição</legend>
                     <div class="row">
-                        <label>Passing Zones</label>
-                        <select id= "passing_zones" name="passing_zones">
+                        <label>Condições Atmosféricas</label>
+                        <select id= "cond_atmos" name="Condições_base">
                             <option value="">Select Option</option>
-                            <option>0</option>
-                            <option>20</option>
-                            <option>40</option>
-                            <option>60</option>
-                            <option>80</option>
-                            <option>100</option>
+                            <option>Situação de Base</Base></option>
+                            <option>Precipitação Média</option>
+                            <option>Precipitação Elevada</option>
+                            <option>Pouca Neve</option>
+                            <option>Neve Ligeira</option>
+                            <option>Muita Neve</option>
+                            <option>Nevão</option>
+                            <option>Frio Severo</option>
+                            <option>Pouca visibilidade</option>
+                            <option>Péssima Visibilidade</option>
+                            <option>Visibilidade Minima</option>
                         </select>
-                    </div>
-                    <div class="row">
-                        <label for="FFS">Velocidade de fluxo livre (km/h)</label>
-                        <input type="number" name="FFS_m" id="FFS" min="0"/>
-                    </div>
-                    <input type="radio" name="FFS" id="FFS_c"/>
-                    <label for="FFS_c">Calculado</label>
-                    <input type="radio" name="FFS" id="FFS_m"/>
-                    <label for="FFS_m">Medido em campo</label>
-                    <div class="row">
-                        <label for="berma">Largura da berma (m)</label>
-                        <input type="number" name="berma" id="berma" step ="0.01" min="0" max="100" />
-                    </div>
-                    <div class="row">
-                        <label for="via">Largura da faixa de rodagem (m)</label>
-                        <input type="number" name="via" id="via" step ="0.01" min="2.70" max="100" />
-                    </div>
-                    <div class="row">
-                        <label for="length">Comprimento da Via (km)</label>
-                        <input type="number" name="length" id="length" step ="0.01" min="1" max="100" />
-                    </div>
-                    <div class="row">
-                        <label for="BFFS">Velocidade base em regime livre (km/h)</label>
-                        <input type="number" name="BFFS" id="BFFS" min="90"/>
                     </div>
                 </fieldset>
             </form>
