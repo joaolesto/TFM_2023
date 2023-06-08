@@ -59,7 +59,6 @@ class Export
         $writter->save($this->filePath);
 
         return $create;
-
     }
 
     /**

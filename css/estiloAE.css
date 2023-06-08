@@ -145,7 +145,7 @@ body {
   .form-hcm-7-edition { grid-area: 1 / 5 / 2 / 7; }
   .form-outputs { grid-area: 2 / 3 / 5 / 7; }
 
-  #error-vias, #error-pt, #error-pr, #error-FFS {
+  #error-N_vias, #error-pt, #error-pr, #error-FFS, #error-phf {
     display: block;
     color: red;
     margin-top: 0;
