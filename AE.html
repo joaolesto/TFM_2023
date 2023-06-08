@@ -301,7 +301,7 @@
         $('#vp').val(vp.toFixed(1));
         $('#vp_2022').val(vp_2022.toFixed(1));
 
-        if (vp<2400) {
+        if (vp<2400 || vp_2022<2400) {
             if ($('#FFS_m').is(":checked")) {
                 FFS = parseFloat($('#FFS').val());
                 $('#FFS_o').val(FFS.toFixed(1));
@@ -323,13 +323,15 @@
                 $('#FFS_o').val(FFS.toFixed(1));
                 //HCM2022
                 let flw_2022 = 0;
-                flw_2022 = f_lw_2022(via); //via
+                flw_2022 = f_lw_2022(via*(1/0.305)); //via
                 let flrc = 0;
-                flrc = f_rlc(N,berma) //N e berma
+                flrc = f_rlc(N,berma*(1/0.305)) //N e berma
                 let TRD_2022 = 0;
                 TRD_2022=N_acessos/(length/1.61)
-                FFS_2022 = FFS_f_2022(BFFS,flw_2022,flrc,TRD_2022)
-                $('#FFS_o_2022').val(FFS_2022.toFixed(1))
+                let FFS_2022_c=0;
+                FFS_2022_c = FFS_f_2022(BFFS*(1/1.61),flw_2022,flrc,TRD_2022)
+                FFS_2022 = FFS_2022_c*1.61;
+                $('#FFS_o_2022').val((FFS_2022*1.61).toFixed(1))
                 $('#FFS').val('');
             }
 
@@ -558,27 +560,38 @@
             }
             c_2022 = c_f(FFS_2022/1.61);
             $('#c_2022').val(c_2022.toFixed(0));
+            if (c_2022>2400){
+                $('#S_2022').val('');
+                $('#D_2022').val('');
+                $('#FFS_o_2022').val('');
+                $('#service_level_2022').val("F");
+            }else{
+                FFSadj=FFSadj_f(FFS_2022/1.61,SAF); //mi/h
+                cadj_2022 = cadj_f(c_2022,CAF);
+                BP=BP_f(FFS_2022/1.61,CAF);
+                BPadj=BPadj_f(FFSadj,CAF);
+                S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
+                $('#S_2022').val((S_2022*1.61).toFixed(1));
+                D_2022 = D_f(vp_2022,S_2022); 
+                $('#D_2022').val((D_2022/1.61).toFixed(1));
+                $('#service_level_2022').val(LOS_2022(D_2022));
+            }
             $('#c').val(2400);
-            FFSadj=FFSadj_f(FFS_2022,SAF); //mi/h
-            console.log(FFSadj)
-            cadj_2022 = cadj_f(c_2022,CAF);
-            BP=BP_f(FFS_2022/1.61,CAF);
-            BPadj=BPadj_f(FFSadj,CAF);
-            S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
-            $('#S_2022').val((S_2022*1.61).toFixed(1));
             S = S_f(FFS,vp);
             $('#S').val(S.toFixed(1));
-            D_2022 = D_f(vp_2022,S_2022);
             D = D_f(vp,S);
             $('#D').val(D.toFixed(1));
-            $('#D_2022').val((D_2022/1.61).toFixed(1));
             $('#service_level').val(LOS(D));
-            $('#service_level_2022').val(LOS_2022(D_2022));
+            
         }else {
             $('#S').val('');
             $('#D').val('');
             $('#FFS_o').val('');
             $('#service_level').val("F");
+            $('#S_2022').val('');
+            $('#D_2022').val('');
+            $('#FFS_o_2022').val('');
+            $('#service_level_2022').val("F");
         }
         // HCM 7ªEdição
         
