@@ -8,27 +8,20 @@ function f_hv_2022(PT,ET){
 }
 // Função de FFS
 function FFS_f_2022(BFFS,flw,frlc,TRD){
-    let FFS = 0
-    let BFFS_c = 0
-    let FFS_c = 0
-    BFFS_c=BFFS*(1/1.61) //converter para milhas/h
-    FFS = BFFS_c - flw - frlc - (3.22*TRD**0.84) //milhas
-    FFS_c = FFS*1.61 //convert para km/h
-    return FFS_c
+    let FFS = 0;
+    FFS = BFFS - flw - frlc - (3.22*TRD**0.84) //milhas
+    return FFS
 }
 
 // Função de Flw
 function f_lw_2022(lar){
-    let lar_c = 0
-    lar_c = lar * (1/0.305)
-
-    if (lar_c>=12.0) {
+    if (lar>=12.0) {
         return 0
 
-    }else if (lar_c>=11.0 && lar_c<12.0){
+    }else if (lar>=11.0 && lar<12.0){
         return 1.9
     
-    }else if (lar_c>=10.0 && lar_c<11.0){
+    }else if (lar>=10.0 && lar<11.0){
         return 6.6
 
     }
@@ -39,37 +32,31 @@ function inter(x1,x2,xc,y1,y2){
 }
 // Função de Flc
 function f_rlc(N,Berma){
-    let Berma_c = 0
-    Berma_c = Berma * (1/0.305)
 
-    if (Berma_c>=6){
+    if (Berma>=6){
         return 0
     }
     if (N===2){
-        return -0.6*Berma_c+3.6
+        return -0.6*Berma+3.6
     }
     if (N===3){
-        return -0.4*Berma_c+2.4
+        return -0.4*Berma+2.4
     }
     if (N===4){
-        return -0.2*Berma_c+1.2
+        return -0.2*Berma+1.2
     }
     if (N>=5){
-       return -0.1*Berma_c+0.6
+       return -0.1*Berma+0.6
     }
 }
 //FFS_adj
 function FFSadj_f(FFS,SAF){
-    let FFS_c = 0
-    FFS_c = FFS*(1/1.61)
-    return FFS_c*SAF
+    return FFS*SAF
 }
 
 //c 
 function c_f(FFS){
-    let FFS_c = 0
-    FFS_c=FFS*(1/1.61) //converter para milhas
-    return 2200+10*(FFS_c-50)
+    return 2200+10*(FFS-50)
 }
 
 //c ajustado
