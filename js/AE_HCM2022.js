@@ -93,7 +93,7 @@ function S_f_2022(FFSadj,vp,BPadj,c,cadj){
         return FFSadj
 
     }else if (vp>BPadj && vp<=c){
-        return FFSadj-((FFSadj-((cadj/45)*(vp-BPadj)**2)/((cadj-BPadj)**2)))
+        return FFSadj-(((FFSadj-((cadj/45)*(vp-BPadj)**2))/((cadj-BPadj)**2)))
     }
 }
 
