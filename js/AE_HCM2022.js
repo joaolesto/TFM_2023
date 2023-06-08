@@ -9,7 +9,9 @@ function f_hv_2022(PT,ET){
 // Função de FFS
 function FFS_f_2022(BFFS,flw,frlc,TRD){
     let FFS = 0
-    FFS = BFFS - flw - frlc - (3.22*TRD**0,84)
+    let BFFS_c = 0
+    BFFS_c=BFFS*(1/1.61)
+    FFS = BFFS_c - flw - frlc - (3.22*TRD**0,84)
     return FFS
 }
 
@@ -34,7 +36,7 @@ function inter(x1,x2,xc,y1,y2){
     return y1-((x1-xc)*(y1-y2)/(x1-x2))
 }
 // Função de Flc
-function f_lc_2022(N,Berma){
+function f_rlc(N,Berma){
     let Berma_c = 0
     Berma_c = Berma * (1/0.305)
 
@@ -54,71 +56,40 @@ function f_lc_2022(N,Berma){
        return -0.1*Berma_c+0.6
     }
 }
-
-//Função de FN
-function f_n(N){
-    if (N<=5){
-        return 0
-    
-    }else if (N===4) {
-        return 2.4
-
-    }else if (N===3) {
-        return 4.8
-    
-    }else if (N===2) {
-        return 7.3
-    }
+//FFS_adj
+function FFSadj_f(FFS,SAF){
+    return FFS*SAF
 }
 
-//Função de FID
+//c 
+function c_f(FFS){
+    let FFS_c = 0
+    FFS_c=FFS*(1/1.61)
+    return 2200+10*(FFS_c-50)
+}
 
-function f_id(Pa){
-    if (Pa>=1.2) {
-        return 12.1
+//c ajustado
+function cadj_f(c,CAF){
+    return c*CAF
+}
 
-    }else if (Pa<1.2 && Pa>=1.1){
-        return inter(1.2,1.1,Pa,12.1,10.2)
+//Bp
+function BP_f(FFS,CAF){
+    return (CAF**2)*(1000+40*(75-FFS)) 
+}
 
-    }else if (Pa<1.1 && Pa>=1.0){
-        return inter(1.1,1.0,Pa,10.2,9.2)
-
-    }else if (Pa<1.0 && Pa>=0.9) {
-        return inter(1.0,0.9,Pa,9.2,8.1)
-
-    }else if (Pa<0.9 && Pa>=0.8) {
-        return inter(0.9,0.8,Pa,8.1,6.0)
-
-    }else if (Pa<0.8 && Pa>=0.7) {
-        return inter(0.8,0.7,Pa,6.0,5.0)
-
-    }else if (Pa<0.7 && Pa>=0.6) {
-        return inter(0.7,0.6,Pa,5.0,3.9)
-
-    }else if (Pa<0.6 && Pa>=0.5) {
-        return inter(0.6,0.5,Pa,3.9,2.1)
-
-    }else if (Pa<0.5 && Pa>=0.4) {
-        return inter(0.5,0.4,Pa,2.1,1.1)
-
-    }else if (Pa<0.4 && Pa>=0.3) {
-        return inter(0.4,0.3,Pa,1.1,0.0)
-    
-    }else if (Pa<0.3) {
-        return 0.0
-    }
+//BPadj
+function BPadj_f(FFSadj,CAF){
+    return (CAF**2)*(1000+40*(75-FFSadj))
 }
 
 //velocidade média S (Km/h)
-function S_f_2022(FFS,vp){
-    if (FFS<=120 && FFS>=90){
-        if(vp>(3100-15*FFS) && vp<=(1800-5*FFS)){
-            return FFS - ((1/28)*(23*FFS-1800)*((vp+15*FFS-3100)/(20*FFS-1300)))
+function S_f_2022(FFSadj,vp,BPadj,c,cadj){
+    if(vp<=BPadj){
+        return FFSadj
 
-        }else if (vp<=(3100-15*FFS)){
-            return FFS
-        
-        }
+    }else if (vp>BPadj && vp<=c){
+        return FFSadj-((FFSadj-((cadj/45)*(vp-BPadj)**2)/((cadj-BPadj)**2)))
     }
 }
 
@@ -129,7 +100,7 @@ function D_f(vp,S){
 
 
 //Nivel de serviço (A,F)
-function LOS (D){
+function LOS_2022 (D){
     if (D>=0 && D<7){
         return "A"
 
