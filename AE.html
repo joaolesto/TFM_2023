@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="css/estiloAE.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/validator.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +98,7 @@
         </div>
         <div class="form-outputs">
             <form name="output" id="Outputs" class="form">
-                <table>
+                <table id="tabela">
                     <thead>
                         <tr>
                             <th>Outputs</th>
@@ -193,7 +195,6 @@
                 $("#via").attr("disabled",false);
                 $("#BFFS").attr("disabled",false);
                 $("#N_acessos").attr("disabled",false)
-                
             }
         });
     });
@@ -278,6 +279,7 @@
                 FFS = parseFloat($('#FFS').val());
                 $('#FFS_o').val(FFS.toFixed(1));
                 $('#FFS_o_2022').val(FFS.toFixed(1));
+                FFS_2022 = FFS;
 
             } else if ($('#FFS_c').is(":checked")) {
                 //HCM2000
@@ -527,11 +529,11 @@
                     SAF = 1.0;
                 }
             }
-
             c_2022 = c_f(FFS_2022/1.61);
             $('#c_2022').val(c_2022.toFixed(0));
             $('#c').val(2400);
             FFSadj=FFSadj_f(FFS_2022,SAF); //mi/h
+            console.log(FFSadj)
             cadj_2022 = cadj_f(c_2022,CAF);
             BP=BP_f(FFS_2022/1.61,CAF);
             BPadj=BPadj_f(FFSadj,CAF);
@@ -544,7 +546,7 @@
             $('#D').val(D.toFixed(1));
             $('#D_2022').val((D_2022/1.61).toFixed(1));
             $('#service_level').val(LOS(D));
-            $('#service_level_2022').val(LOS_2022(D));
+            $('#service_level_2022').val(LOS_2022(D_2022));
         }else {
             $('#S').val('');
             $('#D').val('');
@@ -555,5 +557,34 @@
         
             // $('#service_level').val(vp.toFixed());
     })
+    $("#Exportar").click(function() {
+    // Obtenha os dados do formulário
+    var formData = $('#Outputs').serializeArray();
+
+    // Obtenha os dados da tabela
+    var tableData = [];
+    $('#tabela tbody tr').each(function() {
+      var rowData = [];
+      $(this).find('td').each(function() {
+        rowData.push($(this).text());
+      });
+      tableData.push(rowData);
+    });
+
+    // Crie o objeto de workbook
+    var wb = XLSX.utils.book_new();
+
+    // Crie uma worksheet para os dados do formulário
+    var formDataSheet = XLSX.utils.json_to_sheet(formData);
+    XLSX.utils.book_append_sheet(wb, formDataSheet, 'Formulário');
+
+    // Crie uma worksheet para os dados da tabela
+    var tableDataSheet = XLSX.utils.aoa_to_sheet(tableData);
+    XLSX.utils.book_append_sheet(wb, tableDataSheet, 'Tabela');
+
+    // Salve o arquivo XLSX
+    var fileName = 'dados.xlsx';
+    XLSX.writeFile(wb, fileName);
+  });
 </script>
 </html>
