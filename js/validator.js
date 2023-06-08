@@ -26,7 +26,7 @@ $(document).ready(function() {
 
         let regex = /^([2-9]|[1][0])$/;
 
-        if(!regex.test($(this).val()) && !$('#error-vias').length ) {
+        if(!regex.test($(this).val()) && !$('#error-vias').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-vias">Numero tem que ser entre 2-10</strong>`)
             return false
         }
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
         let validacao = (!(parseFloat($(this).val()) > 0) || !(parseFloat($(this).val()) <= 100));
 
-        if( validacao && !$('#error-pt').length ) {
+        if( validacao && !$('#error-pt').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 1-99</strong>`)
             return false
         }
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
         let validacao = (!(parseFloat($(this).val()) > 0) || !(parseFloat($(this).val()) <= 100))
 
-        if( validacao && !$('#error-pr').length ) {
+        if( validacao && !$('#error-pr').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 1-100</strong>`)
             return false
         }
@@ -104,16 +104,15 @@ $(document).ready(function() {
 
         let validacao = (!(parseFloat($(this).val()) >= 90) || !(parseFloat($(this).val()) <= 120));
 
-        if( validacao && !$('#error-FFS').length ) {
-            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120</strong>`)
-            return false
+        if( validacao && !$('#error-FFS').length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120</strong>`);
+            return false;
         }
 
         if( validacao ) {
-            return false
+            return false;
         }
         
         $('#error-FFS').remove()
     })
-
 });
