@@ -64,7 +64,7 @@ $(document).ready(function() {
      */
     $("#pt").on('focusout', function() {
 
-        let validacao = (!(parseFloat($(this).val()) > 0) || !(parseFloat($(this).val()) <= 100));
+        let validacao = (!(parseFloat($(this).val()) >= 0) || !(parseFloat($(this).val()) <= 100));
 
         if( validacao && !$('#error-pt').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 1-99</strong>`)
@@ -83,7 +83,7 @@ $(document).ready(function() {
      */
      $("#pr").on('focusout', function() {
 
-        let validacao = (!(parseFloat($(this).val()) > 0) || !(parseFloat($(this).val()) <= 100))
+        let validacao = (!(parseFloat($(this).val()) >= 0) || !(parseFloat($(this).val()) <= 100))
 
         if( validacao && !$('#error-pr').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 1-100</strong>`)
