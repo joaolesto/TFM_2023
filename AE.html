@@ -121,6 +121,11 @@
                             <td><input type="text" name="FFS" id="FFS_o_2022" disabled></td>
                         </tr>
                         <tr>
+                            <td>Capacidade (uvl/h/via)</td>
+                            <td><input type="text" name="capacidade" id="c_o" disabled></td>
+                            <td><input type="text" name="capacidade" id="c_2022" disabled></td>
+                        </tr>
+                        <tr>
                             <td>Velocidade média (km/h)</td>
                             <td><input type="text" name="Velocidade_média" id="S" disabled></td>
                             <td><input type="text" name="Velocidade_média" id="S_2022" disabled></td>
@@ -217,30 +222,57 @@
         let FFS = 0;
         let S = 0;
         let D = 0;
+        //HCM2022
+        let ET_2022 = 0;
+        let fhv_2022 = 0;
+        let vp_2022 = 0;
+        let FFS_2022 = 0;
+        let FFSadj_2022 = 0;
+        let c_2022 = 0;
+        let cadj_2022 = 0;
+        let CAF = 0;
+        let SAF = 0;
+        let BP = 0;
+        let BPadj = 0;
+        let S_2022 = 0;
+        let D_2022 = 0;
 
         if ($('#ondulado').is(":checked")) {
             ET = 2.5
             ER = 2.0
+            //HCM 2022
+            ET_2022 = 3.0
         }else if ($('#plano').is(":checked")) {
             ET = 1.5;
             ER = 1.2;
+            //HCM 2022
+            ET_2022=2.0
         }else if ($('#montanhoso').is(":checked")) {
             ET = 4.5
             ER = 4.0;
+            //HCM 2022
+            ET_2022 = 3.0
         }
 
         fhv = f_hv(PT,ET,PR,ER); // Passo 2
+        fhv_2022 = f_hv_2022(PT,ET_2022);
+
 
         $('#fhv').val(fhv.toFixed(3));
+        $('#fhv_2022').val(fhv_2022.toFixed(3));
 
-        if ($('#tipos_de_condutores').val()==="Condutores Exporádicos") {
+        if ($('#tipos_de_condutores').val()==="") {
             fp = 0.85
         }else {
             fp = 1.0
         }
 
         vp = v_p(car_volume,phf,N,fhv,fp); // Passo 3
+        vp_2022 = v_p_2022(car_volume,phf,N,fhv_2022)
+
         $('#vp').val(vp.toFixed(1));
+        $('#vp_2022').val(vp_2022.toFixed(1));
+
         if (vp<2400) {
             if ($('#FFS_m').is(":checked")) {
                 FFS = parseFloat($('#FFS').val());
@@ -248,6 +280,7 @@
                 $('#FFS_o_2022').val(FFS.toFixed(1));
 
             } else if ($('#FFS_c').is(":checked")) {
+                //HCM2000
                 let flw = 0; //via
                 flw = f_lw(via);
                 let flc = 0; //Nº vias e berma
@@ -255,16 +288,263 @@
                 let fn = 0;
                 fn = f_n(N);
                 let fid = 0;
-                fid = f_id(N_acessos/length)
+                let TRD = N_acessos/length
+                fid = f_id(TRD)
                 FFS = FFS_f(BFFS,flw,flc,fn,fid)
                 $('#FFS_o').val(FFS.toFixed(1));
+                //HCM2022
+                let flw_2022 = 0;
+                flw_2022 = f_lw_2022(via); //via
+                let flrc = 0;
+                flrc = f_rlc(N,berma) //N e berma
+                let TRD_2022 = 0;
+                TRD_2022=N_acessos/(length/1.61)
+                FFS_2022 = FFS_f_2022(BFFS,flw_2022,flrc,TRD_2022)
+                $('#FFS_o_2022').val(FFS_2022.toFixed(1))
                 $('#FFS').val('');
             }
-            S = S_f(FFS,vp)
+
+            if ((FFS_2022/1.61)>=55 && (FFS_2022/1.61)<60){
+                if ($('#cond_atmos').val()==="Precipitação Média") {
+                    CAF = 0.94;
+                    SAF = 0,96;
+                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                    CAF = 0.89;
+                    SAF = 0.94;
+                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                    CAF = 0.97;
+                    SAF = 0.94;
+                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                    CAF = 0.95;
+                    SAF = 0.92;
+                }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                    CAF = 0.93;
+                    SAF = 0.9;
+                }else if  ($('#cond_atmos').val()==="Nevão") {
+                    CAF = 0.8;
+                    SAF = 0.88;
+
+                }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                    CAF = 0.93;
+                    SAF = 0.95;
+
+                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                    CAF = 0.90;
+                    SAF = 0.96;
+
+                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                    CAF = 0.88;
+                    SAF = 0.95;
+
+                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                    CAF = 0.90;
+                    SAF = 0.95;
+
+                }else{
+                    CAF = 1.0;
+                    SAF = 1.0;
+                }
+
+            }else if((FFS_2022/1.61)>=60 && (FFS_2022/1.61)<65){
+
+                if ($('#cond_atmos').val()==="Precipitação Média") {
+                    CAF = 0.93;
+                    SAF = 0.95;
+                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                    CAF = 0.88;
+                    SAF = 0.93;
+
+                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                    CAF = 0.96;
+                    SAF = 0.92;
+
+                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                    CAF = 0.94
+                    SAF = 0.9;
+
+                }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                    CAF = 0.91;
+                    SAF = 0.88;
+
+                }else if  ($('#cond_atmos').val()==="Nevão") {
+                    CAF = 0.78;
+                    SAF = 0.86;
+
+                }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                    CAF = 0.92;
+                    SAF = 0.95;
+
+                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                    CAF = 0.9;
+                    SAF = 0.95;
+
+                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                    CAF = 0.88;
+                    SAF = 0.94;
+
+                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                    CAF = 0.9;
+                    SAF = 0.94;
+
+                }else{
+                    CAF = 1.0;
+                    SAF = 1.0;
+                }
+            }else if((FFS_2022/1.61)>=65 && (FFS_2022/1.61)<70){
+                if ($('#cond_atmos').val()==="Precipitação Média") {
+                    CAF = 0.92;
+                    SAF = 0.94;
+                    
+                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                    CAF = 0.86;
+                    SAF = 0.93;
+
+                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                    CAF = 0.96;
+                    SAF = 0.89;
+
+                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                    CAF = 0.92;
+                    SAF = 0.88;
+
+                }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                    CAF = 0.9;
+                    SAF = 0.86;
+
+                }else if  ($('#cond_atmos').val()==="Nevão") {
+                    CAF = 0.76;
+                    SAF = 0.85;
+
+                }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                    CAF = 0.92;
+                    SAF = 0.94;
+
+                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                    CAF = 0.9;
+                    SAF = 0.94;
+
+                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                    CAF = 0.88;
+                    SAF = 0.93;
+
+                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                    CAF = 0.9;
+                    SAF = 0.93;
+
+                }else{
+                    CAF = 1.0;
+                    SAF = 1.0;
+                }
+            
+            }else if((FFS_2022/1.61)>=70 && (FFS_2022/1.61)<75){
+                if ($('#cond_atmos').val()==="Precipitação Média") {
+                    CAF = 0.91;
+                    SAF = 0.93;
+                    
+                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                    CAF = 0.84;
+                    SAF = 0.92;
+
+                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                    CAF = 0.95;
+                    SAF = 0.87;
+
+                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                    CAF = 0.9;
+                    SAF = 0.86;
+
+                }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                    CAF = 0.88;
+                    SAF = 0.84;
+
+                }else if  ($('#cond_atmos').val()==="Nevão") {
+                    CAF = 0.74;
+                    SAF = 0.83;
+
+                }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                    CAF = 0.91;
+                    SAF = 0.93;
+
+                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                    CAF = 0.9;
+                    SAF = 0.94;
+
+                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                    CAF = 0.88;
+                    SAF = 0.92;
+
+                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                    CAF = 0.9;
+                    SAF = 0.92;
+
+                }else{
+                    CAF = 1.0;
+                    SAF = 1.0;
+                }
+            }else if((FFS_2022/1.61)>=75){
+                if ($('#cond_atmos').val()==="Precipitação Média") {
+                    CAF = 0.9;
+                    SAF = 0.93;
+                    
+                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                    CAF = 0.82;
+                    SAF = 0.91;
+
+                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                    CAF = 0.95;
+                    SAF = 0.84;
+
+                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                    CAF = 0.88;
+                    SAF = 0.83;
+
+                }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                    CAF = 0.87;
+                    SAF = 0.82;
+
+                }else if  ($('#cond_atmos').val()==="Nevão") {
+                    CAF = 0.72;
+                    SAF = 0.81;
+
+                }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                    CAF = 0.9;
+                    SAF = 0.92;
+
+                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                    CAF = 0.9;
+                    SAF = 0.93;
+
+                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                    CAF = 0.88;
+                    SAF = 0.91;
+
+                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                    CAF = 0.9;
+                    SAF = 0.91;
+
+                }else{
+                    CAF = 1.0;
+                    SAF = 1.0;
+                }
+            }
+
+            c_2022 = c_f(FFS_2022/1.61);
+            $('#c_2022').val(c_2022.toFixed(0));
+            $('#c').val(2400);
+            FFSadj=FFSadj_f(FFS_2022,SAF); //mi/h
+            cadj_2022 = cadj_f(c_2022,CAF);
+            BP=BP_f(FFS_2022/1.61,CAF);
+            BPadj=BPadj_f(FFSadj,CAF);
+            S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
+            $('#S_2022').val((S_2022*1.61).toFixed(1));
+            S = S_f(FFS,vp);
             $('#S').val(S.toFixed(1));
-            D = D_f(vp,S)
+            D_2022 = D_f(vp_2022,S_2022);
+            D = D_f(vp,S);
             $('#D').val(D.toFixed(1));
+            $('#D_2022').val((D_2022/1.61).toFixed(1));
             $('#service_level').val(LOS(D));
+            $('#service_level_2022').val(LOS_2022(D));
         }else {
             $('#S').val('');
             $('#D').val('');

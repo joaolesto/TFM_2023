@@ -10,9 +10,11 @@ function f_hv_2022(PT,ET){
 function FFS_f_2022(BFFS,flw,frlc,TRD){
     let FFS = 0
     let BFFS_c = 0
-    BFFS_c=BFFS*(1/1.61)
-    FFS = BFFS_c - flw - frlc - (3.22*TRD**0,84)
-    return FFS
+    let FFS_c = 0
+    BFFS_c=BFFS*(1/1.61) //converter para milhas/h
+    FFS = BFFS_c - flw - frlc - (3.22*TRD**0.84) //milhas
+    FFS_c = FFS*1.61 //convert para km/h
+    return FFS_c
 }
 
 // Função de Flw
@@ -58,13 +60,15 @@ function f_rlc(N,Berma){
 }
 //FFS_adj
 function FFSadj_f(FFS,SAF){
-    return FFS*SAF
+    let FFS_c = 0
+    FFS_c = FFS*(1/1.61)
+    return FFS_c*SAF
 }
 
 //c 
 function c_f(FFS){
     let FFS_c = 0
-    FFS_c=FFS*(1/1.61)
+    FFS_c=FFS*(1/1.61) //converter para milhas
     return 2200+10*(FFS_c-50)
 }
 
@@ -101,22 +105,22 @@ function D_f(vp,S){
 
 //Nivel de serviço (A,F)
 function LOS_2022 (D){
-    if (D>=0 && D<7){
+    if (D>=0 && D<=11){
         return "A"
 
-    }else if (D>=7 && D<11){
+    }else if (D>11 && D<=18){
         return "B"
 
-    }else if (D>=11 && D<16){
+    }else if (D>18 && D<=26){
         return "C"
 
-    }else if (D>=16 && D<22){
+    }else if (D>26 && D<=35){
         return "D"
 
-    }else if (D>=22 && D<28){
+    }else if (D>35 && D<=45){
         return "E"
 
-    }else if (D>=28) {
+    }else if (D>45) {
         return "F"
     }
 }
