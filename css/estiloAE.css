@@ -45,6 +45,7 @@ body {
 
   tr td input[type="text"] {
     border: unset;
+    background: unset;
     font-size: 16px;
   }
 

@@ -97,7 +97,7 @@
             <button type="submit" id="Calcular">Calcular</button>
         </div>
         <div class="form-outputs">
-            <form name="output" id="Outputs" class="form">
+            <form name="outputs" id="outputs" class="form" action="php/validation.php" method="post">
                 <table id="tabela">
                     <thead>
                         <tr>
@@ -108,39 +108,60 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>FHV</td>
-                            <td><input type="text" name="fHv" id="fhv" disabled></td>
-                            <td><input type="text" name="fHv" id="fhv_2022" disabled></td>
+                            <td id="label_fhv">FHV</td>
+                            <input type="hidden" name="label_fhv">
+                            <td><input type="text" name="fhv" id="fhv" disabled></td>
+                            <input type="hidden" name="fhv">
+                            <td><input type="text" name="fhv_2022" id="fhv_2022" disabled></td>
+                            <input type="hidden" name="fhv_2022">
                         </tr>
                         <tr>
-                            <td>Vp (uvl/h/via)</td>
+                            <td id="label_vp">Vp (uvl/h/via)</td>
+                            <input type="hidden" name="label_vp">
                             <td><input type="text" name="vp" id="vp" disabled></td>
-                            <td><input type="text" name="vp" id="vp_2022" disabled></td>
+                            <input type="hidden" name="vp">
+                            <td><input type="text" name="vp_2022" id="vp_2022" disabled></td>
+                            <input type="hidden" name="vp_2022">
                         </tr>
                         <tr>
-                            <td>Velocidade de fluxo livre (km/h)</td>
-                            <td><input type="text" name="FFS" id="FFS_o" disabled></td>
-                            <td><input type="text" name="FFS" id="FFS_o_2022" disabled></td>
+                            <td id="label_ffs">Velocidade de fluxo livre (km/h)</td>
+                            <input type="hidden" name="label_ffs">
+                            <td><input type="text" name="ffs_o" id="FFS_o" disabled></td>
+                            <input type="hidden" name="FFS_o">
+                            <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
+                            <input type="hidden" name="FFS_o_2022">
                         </tr>
                         <tr>
-                            <td>Capacidade (uvl/h/via)</td>
+                            <td  id="label_capacidade">Capacidade (uvl/h/via)</td>
+                            <input type="hidden" name="label_capacidade">
                             <td><input type="text" name="capacidade" id="c" disabled></td>
-                            <td><input type="text" name="capacidade" id="c_2022" disabled></td>
+                            <input type="hidden" name="c">
+                            <td><input type="text" name="capacidade_2022" id="c_2022" disabled></td>
+                            <input type="hidden" name="c_2022">
                         </tr>
                         <tr>
-                            <td>Velocidade média (km/h)</td>
-                            <td><input type="text" name="Velocidade_média" id="S" disabled></td>
-                            <td><input type="text" name="Velocidade_média" id="S_2022" disabled></td>
+                            <td id="label_velocidade_media">Velocidade média (km/h)</td>
+                            <input type="hidden" name="label_velocidade_media">
+                            <td><input type="text" name="velocidade_media" id="S" disabled></td>
+                            <input type="hidden" name="S">
+                            <td><input type="text" name="velocidade_media_2022" id="S_2022" disabled></td>
+                            <input type="hidden" name="S_2022">
                         </tr>
                         <tr>
-                            <td>Densidade de tráfego por via (uvl/km/via)</td>
-                            <td><input type="text" name="Densidade" id="D" disabled></td>
-                            <td><input type="text" name="Densidade" id="D_2022" disabled></td>
+                            <td id="label_densidade">Densidade de tráfego por via (uvl/km/via)</td>
+                            <input type="hidden" name="label_densidade">
+                            <td><input type="text" name="densidade" id="D" disabled></td>
+                            <input type="hidden" name="D">
+                            <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
+                            <input type="hidden" name="D_2022">
                         </tr>
                         <tr>
-                            <td>Nivel de Serviço</td>
+                            <td id="label_service_level">Nivel de Serviço</td>
+                            <input type="hidden" name="label_service_level">
                             <td><input type="text" name="service_level" id="service_level" disabled></td>
-                            <td><input type="text" name="service_level" id="service_level_2022" disabled></td>
+                            <input type="hidden" name="service_level">
+                            <td><input type="text" name="service_level_2022" id="service_level_2022" disabled></td>
+                            <input type="hidden" name="service_level_2022">
                         </tr>
                     </tbody>
                 </table>
@@ -151,8 +172,8 @@
                 <fieldset>
                     <legend>Inputs HCM 7ª Edição</legend>
                     <div class="row">
-                        <label>Condições Atmosféricas</label>
-                        <select id= "cond_atmos" name="Condições_base">
+                        <label for="cond_atmos">Condições Atmosféricas</label>
+                        <select id="cond_atmos" name="Condições_base">
                             <option value="">Select Option</option>
                             <option>Situação de Base</option>
                             <option>Precipitação Média</option>
@@ -169,7 +190,7 @@
                     </div>
                 </fieldset>
             </form>
-            <button type="submit" id="Exportar">Exportar</button>
+            <button type="submit" id="Exportar" form="outputs">Exportar</button>
         </div>
     </div>  
 </body>
@@ -202,6 +223,12 @@
 <script src="js/AE_HCM2000.js"></script>
 <script src="js/AE_HCM2022.js"></script>
 <script defer>
+    $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
+        $('#'+el).on('change', function () {
+            $(`input[type="hidden"][name="${el}"]`).val($(this).val() ?$(this).val() : $(this).text())
+        })
+    })
+
     $('#Calcular').click(function(e) {
         e.preventDefault();
         // HCM2000
@@ -556,35 +583,39 @@
         // HCM 7ªEdição
         
             // $('#service_level').val(vp.toFixed());
+
+        $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
+            $('#'+el).change();
+        })
     })
-    $("#Exportar").click(function() {
-    // Obtenha os dados do formulário
-    var formData = $('#Outputs').serializeArray();
-
-    // Obtenha os dados da tabela
-    var tableData = [];
-    $('#tabela tbody tr').each(function() {
-      var rowData = [];
-      $(this).find('td').each(function() {
-        rowData.push($(this).text());
-      });
-      tableData.push(rowData);
-    });
-
-    // Crie o objeto de workbook
-    var wb = XLSX.utils.book_new();
-
-    // Crie uma worksheet para os dados do formulário
-    var formDataSheet = XLSX.utils.json_to_sheet(formData);
-    XLSX.utils.book_append_sheet(wb, formDataSheet, 'Formulário');
-
-    // Crie uma worksheet para os dados da tabela
-    var tableDataSheet = XLSX.utils.aoa_to_sheet(tableData);
-    XLSX.utils.book_append_sheet(wb, tableDataSheet, 'Tabela');
-
-    // Salve o arquivo XLSX
-    var fileName = 'dados.xlsx';
-    XLSX.writeFile(wb, fileName);
-  });
+  //   $("#Exportar").click(function() {
+  //   // Obtenha os dados do formulário
+  //   var formData = $('#Outputs').serializeArray();
+  //
+  //   // Obtenha os dados da tabela
+  //   var tableData = [];
+  //   $('#tabela tbody tr').each(function() {
+  //     var rowData = [];
+  //     $(this).find('td').each(function() {
+  //       rowData.push($(this).text());
+  //     });
+  //     tableData.push(rowData);
+  //   });
+  //
+  //   // Crie o objeto de workbook
+  //   var wb = XLSX.utils.book_new();
+  //
+  //   // Crie uma worksheet para os dados do formulário
+  //   var formDataSheet = XLSX.utils.json_to_sheet(formData);
+  //   XLSX.utils.book_append_sheet(wb, formDataSheet, 'Formulário');
+  //
+  //   // Crie uma worksheet para os dados da tabela
+  //   var tableDataSheet = XLSX.utils.aoa_to_sheet(tableData);
+  //   XLSX.utils.book_append_sheet(wb, tableDataSheet, 'Tabela');
+  //
+  //   // Salve o arquivo XLSX
+  //   var fileName = 'dados.xlsx';
+  //   XLSX.writeFile(wb, fileName);
+  // });
 </script>
 </html>
