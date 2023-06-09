@@ -1,4 +1,23 @@
 $(document).ready(function() {
+
+    /**
+     * Positive Decimal Numbers
+     */
+    $("#pt,#pr,#FFS").each(function(){
+        $(this).on('keydown',  function(event) {
+
+            // Handle paste
+            if (event.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = event.keyCode || event.which;
+                key = String.fromCharCode(key);
+            }
+
+            return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 43 && event.keyCode !== 187
+        });
+    });
     
      /**
      * Positive Whole Numbers
@@ -22,42 +41,40 @@ $(document).ready(function() {
     /**
      * Show error message
      */
-    $("#N_vias").on('focusout', function(event) {
+    $("#phf").on('focusout', function(event) {
 
-        let regex = /^([2-9]|[1][0])$/;
+        let validacao = (!(parseFloat($(this).val()) >= 0.82) || !(parseFloat($(this).val()) <= 0.98));
 
-        if(!regex.test($(this).val()) && !$('#error-vias').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-vias">Numero tem que ser entre 2-10</strong>`)
+        if( validacao && !$('#error-phf').length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-phf">Numero tem que ser entre 0.82-0.98</strong>`)
             return false
         }
 
-        if(!regex.test($(this).val())) {
+        if( validacao ) {
+            return false
+        }
+
+        $('#error-phf').remove()
+    })
+
+    /**
+     * Show error message
+     */
+    $("#N_vias").on('focusout', function(event) {
+
+        let validacao = (!(parseFloat($(this).val()) >= 2) || !(parseFloat($(this).val()) <= 10));
+
+        if( validacao && !$('#error-N_vias').length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-N_vias">Numero tem que ser entre 2-10</strong>`)
+            return false
+        }
+
+        if( validacao ) {
             return false
         }
         
-        $('#error-vias').remove()
+        $('#error-N_vias').remove()
     })
-
-
-     /**
-     * Positive Decimal Numbers
-     */
-     $("#pt,#pr,#FFS").each(function(){
-        $(this).on('keydown',  function(event) {
-            
-            // Handle paste
-            if (event.type === 'paste') {
-                key = event.clipboardData.getData('text/plain');
-            } else {
-            // Handle key press
-                var key = event.keyCode || event.which;
-                key = String.fromCharCode(key);
-            }
-
-            return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 43 && event.keyCode !== 187
-        });
-    });
-
 
     /**
      * Show error message for veiculos pesados
