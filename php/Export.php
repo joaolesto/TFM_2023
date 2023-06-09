@@ -51,7 +51,7 @@ class Export
         $writter = new Xlsx($spreadsheet);
 
         // File name and its directory
-        $this->fileName = 'exported_'. date('d_m_Y H:i') . ".xlsx";
+        $this->fileName = 'AEexported_'. date('d_m_Y H:i') . ".xlsx";
         $this->filePath = "../docs/" . $this->fileName;
         
         // create
