@@ -48,14 +48,14 @@
                             <label for="pr">% de Veiculos Recriativos</label>
                             <input type="number" name="pr" id="pr" min="0" max="100"/>
                         </div>
+                        <input type="radio" name="FFS" id="FFS_m"/>
+                        <label for="FFS_m">FFS(Medido em campo)</label>
                         <div class="row"> 
                             <label for="FFS">Velocidade de fluxo livre (km/h)</label>
                             <input type="number" name="FFS_m" id="FFS" min="0"/>
                         </div>
                         <input type="radio" name="FFS" id="FFS_c"/>
-                        <label for="FFS_c">Calculado</label>
-                        <input type="radio" name="FFS" id="FFS_m"/>
-                        <label for="FFS_m">Medido em campo</label>
+                        <label for="FFS_c">FFS(Calculado)</label>
                     </div>
                     <div class="row">
                         <label for="berma">Largura da Berma (m)</label>
@@ -64,6 +64,10 @@
                     <div class="row">
                            <label for="via">Largura da Via (m)</label>
                     <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
+                    </div>
+                    <div class="row">
+                        <label for="MeioRural">AE em Meio Rural</label>
+                    <input type="checkbox" name="rural" id="rural"/>
                     </div>
                     <div class="row">
                         <label for="length">Comprimento da Via (km)</label>
@@ -315,7 +319,11 @@
                 let flc = 0; //Nº vias e berma
                 flc = f_lc(N,berma);
                 let fn = 0;
-                fn = f_n(N);
+                if ($('#rural').prop('checked')) {
+                    fn = 0;
+                }else{
+                   fn = f_n(N); 
+                }
                 let fid = 0;
                 let TRD = N_acessos/length
                 fid = f_id(TRD)
