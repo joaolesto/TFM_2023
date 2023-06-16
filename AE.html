@@ -320,19 +320,28 @@
                 let TRD = N_acessos/length
                 fid = f_id(TRD)
                 FFS = FFS_f(BFFS,flw,flc,fn,fid)
+                console.log(BFFS)
+                console.log(flw)
+                console.log(flc)
+                console.log(fn)
+                console.log(fid)
                 $('#FFS_o').val(FFS.toFixed(1));
                 //HCM2022
                 let flw_2022 = 0;
                 flw_2022 = f_lw_2022(via*(1/0.305)); //via
+                console.log(flw_2022)
                 let flrc = 0;
                 flrc = f_rlc(N,berma*(1/0.305)) //N e berma
+                console.log(flrc)
                 let TRD_2022 = 0;
                 TRD_2022=N_acessos/(length/1.61)
+                console.log(TRD_2022)
                 let FFS_2022_c=0;
                 FFS_2022_c = FFS_f_2022(BFFS*(1/1.61),flw_2022,flrc,TRD_2022)
+                console.log(FFS_2022_c)
                 FFS_2022 = FFS_2022_c*1.61;
-                $('#FFS_o_2022').val((FFS_2022*1.61).toFixed(1))
-                $('#FFS').val('');
+                console.log(FFS_2022)
+                $('#FFS_o_2022').val((FFS_2022).toFixed(1))
             }
 
             if ((FFS_2022/1.61)>=55 && (FFS_2022/1.61)<60){
@@ -582,7 +591,6 @@
             D = D_f(vp,S);
             $('#D').val(D.toFixed(1));
             $('#service_level').val(LOS(D));
-            
         }else {
             $('#c').val(2400);
             $('#S').val('');

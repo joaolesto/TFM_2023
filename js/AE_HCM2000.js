@@ -68,7 +68,7 @@ function f_lc(N,Berma){
             return inter(1.2,1.5,Berma,1.9,1.0)
 
         }else if (Berma>1.5 && Berma<=1.8) {
-            return inter(1.5,1.5,Berma,1.0,0)
+            return inter(1.5,1.8,Berma,1.0,0)
         }
     }
 
@@ -147,7 +147,7 @@ function f_lc(N,Berma){
 
 //Função de FN
 function f_n(N){
-    if (N<=5){
+    if (N>=5){
         return 0
     
     }else if (N===4) {
@@ -204,10 +204,9 @@ function S_f(FFS,vp){
     if(FFS<=120 && FFS>=90 && vp>(3100-15*FFS) && vp<=(1800+5*FFS)){
         return (FFS - ((1/28)*(23*FFS-1800)*(((vp+15*FFS-3100)/(20*FFS-1300))**2.6)))
 
-    }else if (FFS<=120 && FFS>=90 && vp<=(3100-15*FFS)){
+    }else
         return FFS
     }
-}
 
 //densidade (pc/km/via)
 function D_f(vp,S){

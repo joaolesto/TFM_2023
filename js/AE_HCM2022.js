@@ -8,9 +8,7 @@ function f_hv_2022(PT,ET){
 }
 // Função de FFS
 function FFS_f_2022(BFFS,flw,frlc,TRD){
-    let FFS = 0;
-    FFS = BFFS - flw - frlc - (3.22*TRD**0.84) //milhas
-    return FFS
+    return BFFS - flw - frlc - (3.22*TRD**0.84) //milhas
 }
 
 // Função de Flw
@@ -24,7 +22,10 @@ function f_lw_2022(lar){
     }else if (lar>=10.0 && lar<11.0){
         return 6.6
 
+    }else{
+        return 6.6
     }
+
 }
 //interpolação
 function inter(x1,x2,xc,y1,y2){
