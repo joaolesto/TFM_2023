@@ -49,13 +49,13 @@
                             <input type="number" name="pr" id="pr" min="0" max="100"/>
                         </div>
                         <input type="radio" name="FFS" id="FFS_m"/>
-                        <label for="FFS_m">FFS(Medido em campo)</label>
+                        <label for="FFS_m">FFS (Medido em campo)</label>
                         <div class="row"> 
                             <label for="FFS">Velocidade de fluxo livre (km/h)</label>
                             <input type="number" name="FFS_m" id="FFS" min="0"/>
                         </div>
                         <input type="radio" name="FFS" id="FFS_c"/>
-                        <label for="FFS_c">FFS(Calculado)</label>
+                        <label for="FFS_c">FFS (Calculado)</label>
                     </div>
                     <div class="row">
                         <label for="berma">Largura da Berma (m)</label>
@@ -614,38 +614,9 @@
         
             // $('#service_level').val(vp.toFixed());
 
-        $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
+        $(['car_volume','fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
             $('#'+el).change();
         })
     })
-  //   $("#Exportar").click(function() {
-  //   // Obtenha os dados do formulário
-  //   var formData = $('#Outputs').serializeArray();
-  //
-  //   // Obtenha os dados da tabela
-  //   var tableData = [];
-  //   $('#tabela tbody tr').each(function() {
-  //     var rowData = [];
-  //     $(this).find('td').each(function() {
-  //       rowData.push($(this).text());
-  //     });
-  //     tableData.push(rowData);
-  //   });
-  //
-  //   // Crie o objeto de workbook
-  //   var wb = XLSX.utils.book_new();
-  //
-  //   // Crie uma worksheet para os dados do formulário
-  //   var formDataSheet = XLSX.utils.json_to_sheet(formData);
-  //   XLSX.utils.book_append_sheet(wb, formDataSheet, 'Formulário');
-  //
-  //   // Crie uma worksheet para os dados da tabela
-  //   var tableDataSheet = XLSX.utils.aoa_to_sheet(tableData);
-  //   XLSX.utils.book_append_sheet(wb, tableDataSheet, 'Tabela');
-  //
-  //   // Salve o arquivo XLSX
-  //   var fileName = 'dados.xlsx';
-  //   XLSX.writeFile(wb, fileName);
-  // });
 </script>
 </html>
