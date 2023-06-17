@@ -34,7 +34,8 @@ $(document).ready(function() {
                 key = String.fromCharCode(key);
             }
 
-            return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190 && event.keyCode !== 43 && event.keyCode !== 187
+            return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 43 && event.keyCode !== 187;
+
         });
     });
 
@@ -47,14 +48,17 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-phf').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-phf">Numero tem que ser entre 0.82-0.98</strong>`)
+            $('#Calcular').attr('disabled', true);
             return false
         }
 
         if( validacao ) {
+            $('#Calcular').attr('disabled', true); 
             return false
         }
 
-        $('#error-phf').remove()
+        $('#error-phf').remove();
+        $('#Calcular').attr('disabled', false);
     })
 
     /**
@@ -62,18 +66,22 @@ $(document).ready(function() {
      */
     $("#N_vias").on('focusout', function(event) {
 
-        let validacao = (!(parseFloat($(this).val()) >= 2) || !(parseFloat($(this).val()) <= 10));
+        let validacao = (!(parseInt($(this).val()) >= 2) || !(parseInt($(this).val()) <= 10));
 
         if( validacao && !$('#error-N_vias').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-N_vias">Numero tem que ser entre 2-10</strong>`)
+            $('#Calcular').attr('disabled', true); 
             return false
+           
         }
 
         if( validacao ) {
+            $("#Calcular").attr("disabled",true)
             return false
         }
         
-        $('#error-N_vias').remove()
+        $('#error-N_vias').remove();
+        $('#Calcular').attr('disabled', false);
     })
 
     /**
@@ -85,14 +93,17 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-pt').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 1-99</strong>`)
+            $('#Calcular').attr('disabled', true); 
             return false
         }
 
         if( validacao ) {
+            $('#Calcular').attr('disabled', true); 
             return false
         }
         
-        $('#error-pt').remove()
+        $('#error-pt').remove();
+        $('#Calcular').attr('disabled', false);
     })
 
      /**
@@ -104,14 +115,17 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-pr').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 1-100</strong>`)
+            $('#Calcular').attr('disabled', true); 
             return false
         }
 
         if( validacao ) {
+            $('#Calcular').attr('disabled', true); 
             return false
         }
         
-        $('#error-pr').remove()
+        $('#error-pr').remove();
+        $('#Calcular').attr('disabled', false);
     })
 
      /**
@@ -123,13 +137,17 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-FFS').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120</strong>`);
+            $('#Calcular').attr('disabled', true); 
             return false;
+
         }
 
         if( validacao ) {
+            $('#Calcular').attr('disabled', true); 
             return false;
         }
         
         $('#error-FFS').remove()
+        $('#Calcular').attr('disabled', false);
     })
 });
