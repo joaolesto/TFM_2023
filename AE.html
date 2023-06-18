@@ -271,12 +271,16 @@
         let D_2022 = 0;
         if ($('#car_volume').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' || $('#N_vias').val() === '' || $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
             alert("Preencha todos os campos necessários");
+            
         }else if ($('#FFS_m').is(":checked") && $('#FFS').val()===''){
-            alert("Preencha todos os campos necessários");
+            alert("Introduza o valor do FFS (km/h)");
+
         }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#length').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#BFFS').val() === '')) {
-            alert("Preencha todos os campos necessários");
-        }else if ($('#cond_atmos').val()==="" || $('#tipos_de_condutores').val()==="") {
-            alert('Selecione a condição atmosférica ou tipo de condutor');
+            alert("Preencha todos os campos necessários para calcular o FFS");
+
+        }else if ($('#cond_atmos').val()==="" || $('#tipos_de_condutores').val()===" ") {
+            alert('Selecione a condição atmosférica e/ou tipo de condutor');
+
         }else{
         // Campos preenchidos, prosseguir com o cálculo
         if ($('#ondulado').is(":checked")) {
