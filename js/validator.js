@@ -3,7 +3,7 @@ $(document).ready(function() {
     /**
      * Positive Decimal Numbers
      */
-    $("#pt,#pr,#FFS").each(function(){
+    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS").each(function(){
         $(this).on('keydown',  function(event) {
 
             // Handle paste
@@ -22,7 +22,7 @@ $(document).ready(function() {
      /**
      * Positive Whole Numbers
      */
-    $("#car_volume,#N_vias").each(function(){
+    $("#car_volume,#N_vias,#N_acessos").each(function(){
         $(this).on('keydown',  function(event) {
             
             // Handle paste
@@ -34,11 +34,10 @@ $(document).ready(function() {
                 key = String.fromCharCode(key);
             }
 
-            return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 43 && event.keyCode !== 187;
+            return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 43 && event.keyCode !== 187 && event.keyCode !== 188;
 
         });
     });
-
     /**
      * Show error message
      */
@@ -48,17 +47,14 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-phf').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-phf">Numero tem que ser entre 0.82-0.98</strong>`)
-            $('#Calcular').attr('disabled', true);
             return false
         }
 
         if( validacao ) {
-            $('#Calcular').attr('disabled', true); 
             return false
         }
 
         $('#error-phf').remove();
-        $('#Calcular').attr('disabled', false);
     })
 
     /**
@@ -70,18 +66,15 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-N_vias').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-N_vias">Numero tem que ser entre 2-10</strong>`)
-            $('#Calcular').attr('disabled', true); 
             return false
            
         }
 
         if( validacao ) {
-            $("#Calcular").attr("disabled",true)
             return false
         }
         
         $('#error-N_vias').remove();
-        $('#Calcular').attr('disabled', false);
     })
 
     /**
@@ -93,17 +86,15 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-pt').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 1-99</strong>`)
-            $('#Calcular').attr('disabled', true); 
+
             return false
         }
 
         if( validacao ) {
-            $('#Calcular').attr('disabled', true); 
             return false
         }
         
         $('#error-pt').remove();
-        $('#Calcular').attr('disabled', false);
     })
 
      /**
@@ -115,17 +106,14 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-pr').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 1-100</strong>`)
-            $('#Calcular').attr('disabled', true); 
             return false
         }
 
         if( validacao ) {
-            $('#Calcular').attr('disabled', true); 
             return false
         }
         
         $('#error-pr').remove();
-        $('#Calcular').attr('disabled', false);
     })
 
      /**
@@ -137,17 +125,47 @@ $(document).ready(function() {
 
         if( validacao && !$('#error-FFS').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120</strong>`);
-            $('#Calcular').attr('disabled', true); 
             return false;
 
         }
 
         if( validacao ) {
-            $('#Calcular').attr('disabled', true); 
             return false;
         }
         
         $('#error-FFS').remove()
-        $('#Calcular').attr('disabled', false);
+    })
+    $("#berma").on('focusout', function() {
+
+        let validacao = (!(parseFloat($(this).val()) >= 0) || !(parseFloat($(this).val()) <= 4));
+
+        if( validacao && !$('#error-berma').length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-berma">A berma deve ter um valor entre 0 e 4 metros</strong>`);
+            return false;
+
+        }
+
+        if( validacao ) {
+            return false;
+        }
+        
+        $('#error-berma').remove()
+    })
+    $("#lenght").on('focusout', function() {
+
+        let validacao = (!(parseFloat($(this).val()) > 0));
+
+        if( validacao && !$('#error-lenght').length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-lenght">A berma deve ter um valor superior ao número que indicou</strong>`);
+            return false;
+
+        }
+
+        if( validacao ) {
+            return false;
+        }
+        
+        $('#error-lenght').remove()
     })
 });
+

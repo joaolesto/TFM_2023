@@ -170,6 +170,7 @@
                     </tbody>
                 </table>
             </form>
+            <button type="submit" id="Limpar">Limpar Outputs</button>
          </div>
         <div class="form-hcm-7-edition">
             <form name="input" id="input_HCM7" class="form" method="post">
@@ -268,7 +269,16 @@
         let BPadj = 0;
         let S_2022 = 0;
         let D_2022 = 0;
-
+        if ($('#car_volume').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' || $('#N_vias').val() === '' || $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
+            alert("Preencha todos os campos necessários");
+        }else if ($('#FFS_m').is(":checked") && $('#FFS').val()===''){
+            alert("Preencha todos os campos necessários");
+        }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#length').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#BFFS').val() === '')) {
+            alert("Preencha todos os campos necessários");
+        }else if ($('#cond_atmos').val()==="" || $('#tipos_de_condutores').val()==="") {
+            alert('Selecione a condição atmosférica ou tipo de condutor');
+        }else{
+        // Campos preenchidos, prosseguir com o cálculo
         if ($('#ondulado').is(":checked")) {
             ET = 2.5
             ER = 2.0
@@ -328,27 +338,17 @@
                 let TRD = N_acessos/length
                 fid = f_id(TRD)
                 FFS = FFS_f(BFFS,flw,flc,fn,fid)
-                console.log(BFFS)
-                console.log(flw)
-                console.log(flc)
-                console.log(fn)
-                console.log(fid)
                 $('#FFS_o').val(FFS.toFixed(1));
                 //HCM2022
                 let flw_2022 = 0;
                 flw_2022 = f_lw_2022(via*(1/0.305)); //via
-                console.log(flw_2022)
                 let flrc = 0;
                 flrc = f_rlc(N,berma*(1/0.305)) //N e berma
-                console.log(flrc)
                 let TRD_2022 = 0;
                 TRD_2022=N_acessos/(length/1.61)
-                console.log(TRD_2022)
                 let FFS_2022_c=0;
                 FFS_2022_c = FFS_f_2022(BFFS*(1/1.61),flw_2022,flrc,TRD_2022)
-                console.log(FFS_2022_c)
                 FFS_2022 = FFS_2022_c*1.61;
-                console.log(FFS_2022)
                 $('#FFS_o_2022').val((FFS_2022).toFixed(1))
             }
 
@@ -617,6 +617,25 @@
         $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
             $('#'+el).change();
         })
+        }
+        
+    })
+    $('#Limpar').click(function(e) {
+        e.preventDefault(); 
+        $('#fhv').val('');
+        $('#fhv_2022').val('');
+        $('#vp').val('');
+        $('#vp_2022').val('');
+        $('#FFS_o').val('');
+        $('#FFS_o_2022').val('');
+        $('#S').val('');
+        $('#S_2022').val('');
+        $('#c').val('');
+        $('#c_2022').val('');
+        $('#D').val('');
+        $('#service_level').val("");
+        $('#D_2022').val('');
+        $('#service_level_2022').val("");
     })
 </script>
 </html>
