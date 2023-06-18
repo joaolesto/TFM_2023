@@ -33,7 +33,6 @@ class Export
         $this->downloadFile();
     }
 
-
     /**
      * Upload File
      *
