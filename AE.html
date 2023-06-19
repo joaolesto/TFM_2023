@@ -170,7 +170,7 @@
                     </tbody>
                 </table>
             </form>
-            <button type="submit" id="Limpar">Limpar Outputs</button>
+            <button type="submit" id="Limpar">Limpar Dados</button>
          </div>
         <div class="form-hcm-7-edition">
             <form name="input" id="input_HCM7" class="form" method="post">
@@ -271,7 +271,7 @@
         let D_2022 = 0;
         if ($('#car_volume').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' || $('#N_vias').val() === '' || $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
             alert("Preencha todos os campos necessários");
-            
+
         }else if ($('#FFS_m').is(":checked") && $('#FFS').val()===''){
             alert("Introduza o valor do FFS (km/h)");
 
@@ -625,7 +625,24 @@
         
     })
     $('#Limpar').click(function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
+        ///inputs
+        $('input[name="terreno"]').prop('checked', false);
+        $('input[name="FFS"]').prop('checked', false);
+        $('#car_volume').val('');
+        $('#N_acessos').val('');
+        $('#phf').val('');
+        $('#pt').val('');
+        $('#pr').val('');
+        $('#berma').val('');
+        $('#FFS').val('');
+        $('#via').val('')
+        $('#length').val('');
+        $('#N_vias').val('');
+        $('#BFFS').val('');
+        $('#tipos_de_condutores').val("")
+        $('#cond_atmos').val("")
+        ///outputs
         $('#fhv').val('');
         $('#fhv_2022').val('');
         $('#vp').val('');
