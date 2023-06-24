@@ -78,11 +78,14 @@
                 <fieldset>
                     <legend>Inputs HCM 2000</legend>
                     <div class="row">
-                        <label for="tipos_de_condutores">Tipos de Condutores</label>
-                        <select id= "tipos_de_condutores" name="tipos_de_condutores">
+                        <label for="Divisão">Divisão do Tráfego</label>
+                        <select id= "div_trafego" name="div_trafego">
                             <option value="">Select Option</option>
-                            <option>Condutores Habituais</option>
-                            <option>Condutores Exporádicos</option>
+                            <option>50/50</option>
+                            <option>60/40</option>
+                            <option>70/30</option>
+                            <option>80/20</option>
+                            <option>90/10</option>
                         </select>
                     </div>
                 </fieldset>
@@ -237,6 +240,10 @@
         let BFFS = parseFloat($('#BFFS').val());
         let ET = 0;
         let ER = 0;
+        let ETp = 0;
+        let ERp = 0;
+        let fg = 0;
+        let fgp = 0;
         let fp = 0;
         let fhv = 0;
         let vp = 0;
@@ -244,43 +251,87 @@
         let S = 0;
         let D = 0;
         //HCM2022
-        let ET_2022 = 0;
-        let fhv_2022 = 0;
-        let vp_2022 = 0;
-        let FFS_2022 = 0;
-        let FFSadj_2022 = 0;
-        let c_2022 = 0;
-        let cadj_2022 = 0;
-        let CAF = 0;
-        let SAF = 0;
-        let BP = 0;
-        let BPadj = 0;
-        let S_2022 = 0;
-        let D_2022 = 0;
+
 
         if ($('#ondulado').is(":checked")) {
-            ET = 2.5
-            ER = 2.0
-            //HCM 2022
-            ET_2022 = 3.0
+            if (car_volume<=600){
+                //Determinar velocidade
+                ET = 2.5;
+                ER = 1.1;
+                //Determinar % de seguidores
+                ETp = 1.8;
+                ERp = 1.0;
+                //fator de ajustamento (fg)
+                fg = 0.71;
+                //fator de ajustamente % de seguidores
+                fgp = 0.77;
+            }else if (car_volume>600 && car_volume<=1200) {
+                //Determinar velocidade
+                ET = 1.9
+                ER = 1.1
+                //Determinar % de seguidores
+                ETp = 1.5;
+                ERp = 1.0;
+                //fator de ajustamento (fg)
+                fg = 0.93;
+                //fator de ajustamente % de seguidores
+                fgp = 0.94;
+            }else if (car_volume>1200){
+                //Determinar velocidade
+                ET = 1.5
+                ER = 1.1
+                //Determinar % de seguidores
+                ETp = 1.0;
+                ERp = 1.0;
+                //fator de ajustamento (fg)
+                fg = 0.99;
+                //fator de ajustamente % de seguidores
+                fgp = 1.0;
+            }
         }else if ($('#plano').is(":checked")) {
-            ET = 1.5;
-            ER = 1.2;
-            //HCM 2022
-            ET_2022=2.0
-        }else if ($('#montanhoso').is(":checked")) {
-            ET = 4.5
-            ER = 4.0;
-            //HCM 2022
-            ET_2022 = 3.0
+            if (car_volume<=600){
+                //Determinar velocidade
+                ET = 1.7
+                ER = 1.0
+                //Determinar % de seguidores
+                ETp = 1.1;
+                ERp = 1.0;
+                //fator de ajustamento (fg)
+                fg = 1.0;
+                //fator de ajustamente % de seguidores
+                fgp = 1.0;
+            }else if (car_volume>600 && car_volume<=1200) {
+                //Determinar velocidade
+                ET = 1.2;
+                ER = 1.0;
+                //Determinar % de seguidores
+                ETp = 1.1;
+                ERp = 1.0;
+                //fator de ajustamento (fg)
+                fg = 1.0;
+                //fator de ajustamente % de seguidores
+                fgp = 1.0;
+            }else if (car_volume>1200){
+                //Determinar velocidade
+                ET = 1.1
+                ER = 1.0
+                //Determinar % de seguidores
+                ETp = 1.0;
+                ERp = 1.0;
+                //fator de ajustamento (fg)
+                fg = 1.0;
+                //fator de ajustamente % de seguidores
+                fgp = 1.0;
+            }
         }
 
         fhv = f_hv(PT,ET,PR,ER); // Passo 2
-        fhv_2022 = f_hv_2022(PT,ET_2022);
+        fhv_p = f_hv(PT,ETp,PR,ERp); // Passo 2
+
 
 
         $('#fhv').val(fhv.toFixed(3));
-        $('#fhv_2022').val(fhv_2022.toFixed(3));
+        //$('#fhv_p').val(fhv_p.toFixed(3));
 
         if ($('#tipos_de_condutores').val()==="") {
             fp = 0.85
