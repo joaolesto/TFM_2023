@@ -168,21 +168,20 @@
                 <fieldset>
                     <legend>Inputs HCM 7ª Edição</legend>
                     <div class="row">
-                        <label for="cond_atmos">Condições Atmosféricas</label>
-                        <select id="cond_atmos" name="Condições_base">
+                        <label for="tipo de segemento">Tipo de segmento</label>
+                        <select id="segment" name="segmentos">
                             <option value="">Select Option</option>
-                            <option>Situação de Base</option>
-                            <option>Precipitação Média</option>
-                            <option>Precipitação Elevada</option>
-                            <option>Pouca Neve</option>
-                            <option>Neve Ligeira</option>
-                            <option>Muita Neve</option>
-                            <option>Nevão</option>
-                            <option>Frio Severo</option>
-                            <option>Pouca visibilidade</option>
-                            <option>Péssima Visibilidade</option>
-                            <option>Visibilidade Minima</option>
+                            <option>Zona de ultrapassagem</option>
+                            <option>Zona sem ultrapassagem</option>
                         </select>
+                    </div>
+                    <div class="row">
+                        <label for="Limite">Limite de velocidade (km/h)</label>
+                        <input type="number" name="Limite de velocidade" id="limite_velocidade" min="45"/>
+                    </div>
+                    <div class="row">
+                        <label for="inclinaçãp">i (%)</label>
+                        <input type="number" name="inclinaçãp" id="i"/>
                     </div>
                 </fieldset>
             </form>
@@ -251,8 +250,6 @@
         let S = 0;
         let D = 0;
         //HCM2022
-
-
         if ($('#ondulado').is(":checked")) {
             if (car_volume<=600){
                 //Determinar velocidade
@@ -327,9 +324,6 @@
 
         fhv = f_hv(PT,ET,PR,ER); // Passo 2
         fhv_p = f_hv(PT,ETp,PR,ERp); // Passo 2
-
-
-
         $('#fhv').val(fhv.toFixed(3));
         //$('#fhv_p').val(fhv_p.toFixed(3));
 
