@@ -1,20 +1,12 @@
-// Função de ATS
-function ATS_f(FFS,vp,fnp){
-    ATS=FFS-0.0125*vp-fnp
-    return ATS
-}
-
- // Expressão de cálculo do FHV
-  function f_HV(PT, ET, PR, ER) {
-   
-    return 1 / (1 + (PT / 100) * (ET - 1) + (PR / 100) * (ER - 1));
-}
-
- // Expressão de cálculo do vp
-function v_p(V, PHF, fg, fhv) {
-    return V / (PHF * fg * fhv);
-}
-
+//classe 1
+//passo 2
+function fhv_f(PT,ET,PR,ER) {
+    return 1/(1+PT*(ET-1)+PR*(ER-1))
+  }
+  //passo3
+  function vp_f(V,PHF,fg,fhv) {
+    return V/(PHF*fg*fhv)
+  }
  // Expressão de cálculo do fls
 function f_ls(B,V){
     if (V>=2.7 && V<3.0 && B>=0 && B < 0.6){
@@ -66,13 +58,87 @@ function f_ls(B,V){
         return 0
     }
 }
-
- // Expressão de cálculo do Fa
-function f_a(a){
-    let fa=0
-    fa=(4/6)*a
-    if (a>=24){
-        fa=16
+function fa_f(Acessos){
+    let fa = 0;
+    fa = (4/6)*Acessos
+    if (Acessos=>24){
+        fa=16.0
     }
     return fa
+}
+//passo 6
+function FFS_f(BFFS,fls,fA) {
+  return BFFS-fls-fA
+}
+
+//passo7 fim da primeira parte
+function Ats_f(FFS,vp,fnp) {
+  return FFS-vp-fnp
+}
+//classe 2
+//passo 13
+function BPTSF_F(vp) {
+    return 100*(1-Math.E**(-0.000879*vp))
+}
+//passo 14
+function PTSF(BPTSF,fdnp) {
+  return BPTSF+fdnp
+}
+//passo15
+function class_F(classe,ATS,PTSF,vd,vo) {
+    let LOS = ""
+    var NS = []
+    if (vd>1700 || vo>1700) {
+        LOS = "F"
+    }else {
+        if(classe==1){
+            if(ATS<=60){
+                NS[0] = 5;
+            }else if(ATS>60 && ATS<=70){
+                NS[0] = 4;
+            }else if(ATS>70 && ATS<=80){
+                NS[0] = 3;
+            }else if(ATS>80 && ATS<=90){
+                NS[0] = 2;
+            }else if(ATS>90){
+                NS[0] = 1;
+            }
+            if (PTSF<=35) {
+                NS[1] = 1;
+            }else if(PTSF>35 && PTSF<=50){
+                NS[1] = 2;
+            }else if(PTSF>50 && PTSF<=65){
+                NS[1] = 3;
+            }else if(PTSF>65 && PTSF<=80){
+                NS[1] = 4;
+            }else if(PTSF>80){
+                NS[1] = 5;
+            }
+            var max = Math.max(...NS);
+            if (max==1){
+                LOS = "A";
+            }else if(max==2){
+                LOS = "B";
+            }else if(max==3){
+                LOS = "C";
+            }else if(max==4){
+                LOS = "D";
+            }else if(max==5){
+                LOS = "E";
+            }
+        }else if(classe==2){
+            if(PTSF<=40) {
+                LOS = "A";
+            }else if(PTSF>40 && PTSF<=55){
+                LOS = "B";
+            }else if (PTSF>55 && PTSF<=70){
+                LOS = "C";
+            }else if (PTSF>70 && PTSF<=85){
+                LOS = "D";
+            }else if (PTSF>85){
+                LOS = "E"
+            }
+        }
+    }
+    return LOS
 }
