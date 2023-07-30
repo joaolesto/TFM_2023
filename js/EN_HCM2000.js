@@ -70,11 +70,28 @@ function fa_f(Acessos){
 function FFS_f(BFFS,fls,fA) {
   return BFFS-fls-fA
 }
-
+function interpolarBilinear(x, y, x1, y1, x2, y2, q11, q12, q21, q22) {
+    const denom = (x2 - x1) * (y2 - y1);
+    const numer1 = q11 * (x2 - x) * (y2 - y);
+    const numer2 = q21 * (x - x1) * (y2 - y);
+    const numer3 = q12 * (x2 - x) * (y - y1);
+    const numer4 = q22 * (x - x1) * (y - y1);
+  
+    const valorInterpolado = (1 / denom) * (numer1 + numer2 + numer3 + numer4);
+    return valorInterpolado;
+}
+//fnp
+function fnp_f(NPS,vp) {
+    let fnp = 0;
+    if(vp==0 || NPS==0){
+        fnp = 0;
+    }else if
+}
 //passo7 fim da primeira parte
 function Ats_f(FFS,vp,fnp) {
   return FFS-vp-fnp
 }
+
 //classe 2
 //passo 13
 function BPTSF_F(vp) {
