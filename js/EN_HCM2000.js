@@ -85,8 +85,9 @@ function fnp_f(NPS,vp) {
     let fnp = 0;
     if(vp==0 || NPS==0){
         fnp = 0;
-    }else if
+    }
 }
+
 //passo7 fim da primeira parte
 function Ats_f(FFS,vp,fnp) {
   return FFS-vp-fnp
