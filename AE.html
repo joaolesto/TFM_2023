@@ -307,7 +307,7 @@
         $('#fhv').val(fhv.toFixed(3));
         $('#fhv_2022').val(fhv_2022.toFixed(3));
 
-        if ($('#tipos_de_condutores').val()==="") {
+        if ($('#tipos_de_condutores').val()==="Condutores Exporádicos") {
             fp = 0.85
         }else {
             fp = 1.0
@@ -359,7 +359,7 @@
             if ((FFS_2022/1.61)>=55 && (FFS_2022/1.61)<60){
                 if ($('#cond_atmos').val()==="Precipitação Média") {
                     CAF = 0.94;
-                    SAF = 0,96;
+                    SAF = 0.96;
                 }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
                     CAF = 0.89;
                     SAF = 0.94;
