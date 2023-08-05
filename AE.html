@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/estiloAE.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+            crossorigin="anonymous"
+    ></script>
     <script type="text/javascript" src="js/validator.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
         <div class="form-input-gerais">
             <form name="input" id="input_geral" class="form" method="post">
                 <fieldset>
-                  <legend>Inputs Gerais</legend>
+                    <legend>Inputs Gerais</legend>
                     <input type="radio" name="terreno" id="ondulado" />
                     <label for="ondulado">Terreno Ondulado</label>
                     <br/>
@@ -50,36 +51,36 @@
                         </div>
                         <input type="radio" name="FFS" id="FFS_m"/>
                         <label for="FFS_m">FFS (Medido em campo)</label>
-                        <div class="row"> 
+                        <div class="row">
                             <label for="FFS">Velocidade de fluxo livre (km/h)</label>
                             <input type="number" name="FFS_m" id="FFS" min="0"/>
                         </div>
                         <input type="radio" name="FFS" id="FFS_c"/>
                         <label for="FFS_c">FFS (Calculado)</label>
-                    </div>
-                    <div class="row">
-                        <label for="berma">Largura da Berma (m)</label>
-                        <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
-                    </div>
-                    <div class="row">
-                           <label for="via">Largura da Via (m)</label>
-                    <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
-                    </div>
-                    <div class="row">
-                        <label for="MeioRural">AE em Meio Rural</label>
-                    <input type="checkbox" name="rural" id="rural"/>
-                    </div>
-                    <div class="row">
-                        <label for="length">Comprimento da Via (km)</label>
-                        <input type="number" name="length" id="length" step ="0.01" min="0" max="100" />
-                    </div>
-                    <div class="row">
-                        <label for="N_acessos">Número de Acessos</label>
-                        <input type="number" name="acessos" id="N_acessos" min="0" />
-                    </div>
-                    <div class="row">
-                        <label for="BFFS">Velocidade base em regime livre (km/h)</label>
-                        <input type="number" name="BFFS" id="BFFS" min="45"/>
+                        <div class="row">
+                            <label for="berma">Largura da Berma (m)</label>
+                            <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
+                        </div>
+                        <div class="row">
+                            <label for="via">Largura da Via (m)</label>
+                            <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
+                        </div>
+                        <div class="row">
+                            <label for="rural">AE em Meio Rural</label>
+                            <input type="checkbox" name="rural" id="rural"/>
+                        </div>
+                        <div class="row">
+                            <label for="length">Comprimento da Via (km)</label>
+                            <input type="number" name="length" id="length" step ="0.01" min="0" max="100" />
+                        </div>
+                        <div class="row">
+                            <label for="N_acessos">Número de Acessos</label>
+                            <input type="number" name="acessos" id="N_acessos" min="0" />
+                        </div>
+                        <div class="row">
+                            <label for="BFFS">Velocidade base em regime livre (km/h)</label>
+                            <input type="number" name="BFFS" id="BFFS" min="45"/>
+                        </div>
                     </div>
                 </fieldset>
             </form>
@@ -113,59 +114,38 @@
                     <tbody>
                         <tr>
                             <td id="label_fhv">FHV</td>
-                            <input type="hidden" name="label_fhv">
                             <td><input type="text" name="fhv" id="fhv" disabled></td>
-                            <input type="hidden" name="fhv">
                             <td><input type="text" name="fhv_2022" id="fhv_2022" disabled></td>
-                            <input type="hidden" name="fhv_2022">
                         </tr>
                         <tr>
                             <td id="label_vp">Vp (uvl/h/via)</td>
-                            <input type="hidden" name="label_vp">
                             <td><input type="text" name="vp" id="vp" disabled></td>
-                            <input type="hidden" name="vp">
                             <td><input type="text" name="vp_2022" id="vp_2022" disabled></td>
-                            <input type="hidden" name="vp_2022">
                         </tr>
                         <tr>
                             <td id="label_ffs">Velocidade de fluxo livre (km/h)</td>
-                            <input type="hidden" name="label_ffs">
                             <td><input type="text" name="ffs_o" id="FFS_o" disabled></td>
-                            <input type="hidden" name="FFS_o">
                             <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
-                            <input type="hidden" name="FFS_o_2022">
                         </tr>
                         <tr>
                             <td  id="label_capacidade">Capacidade (uvl/h/via)</td>
-                            <input type="hidden" name="label_capacidade">
                             <td><input type="text" name="capacidade" id="c" disabled></td>
-                            <input type="hidden" name="c">
                             <td><input type="text" name="capacidade_2022" id="c_2022" disabled></td>
-                            <input type="hidden" name="c_2022">
                         </tr>
                         <tr>
                             <td id="label_velocidade_media">Velocidade média (km/h)</td>
-                            <input type="hidden" name="label_velocidade_media">
                             <td><input type="text" name="velocidade_media" id="S" disabled></td>
-                            <input type="hidden" name="S">
                             <td><input type="text" name="velocidade_media_2022" id="S_2022" disabled></td>
-                            <input type="hidden" name="S_2022">
                         </tr>
                         <tr>
                             <td id="label_densidade">Densidade de tráfego por via (uvl/km/via)</td>
-                            <input type="hidden" name="label_densidade">
                             <td><input type="text" name="densidade" id="D" disabled></td>
-                            <input type="hidden" name="D">
                             <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
-                            <input type="hidden" name="D_2022">
                         </tr>
                         <tr>
                             <td id="label_service_level">Nivel de Serviço</td>
-                            <input type="hidden" name="label_service_level">
                             <td><input type="text" name="service_level" id="service_level" disabled></td>
-                            <input type="hidden" name="service_level">
                             <td><input type="text" name="service_level_2022" id="service_level_2022" disabled></td>
-                            <input type="hidden" name="service_level_2022">
                         </tr>
                     </tbody>
                 </table>
@@ -197,7 +177,7 @@
             </form>
             <button type="submit" id="Exportar" form="outputs">Exportar</button>
         </div>
-    </div>  
+    </div>
 </body>
   <script type="text/javascript">
     $(function () {
@@ -227,13 +207,86 @@
 </script>
 <script src="js/AE_HCM2000.js"></script>
 <script src="js/AE_HCM2022.js"></script>
-<script defer>
-    $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
-        $('#'+el).on('change', function () {
-            $(`input[type="hidden"][name="${el}"]`).val($(this).val() ?$(this).val() : $(this).text())
-        })
-    })
+<script>
+    $('#Exportar').on('click', function (e) {
+        e.preventDefault();
 
+        let data_input = [];
+        let data_output = [];
+
+        // preparation to send the post inputs
+        data_input.push('Terreno')
+        data_input.push($('input[name="terreno"]:checked').next('label').text())
+
+        data_input.push('FFS')
+        data_input.push($('input[name="FFS"]:checked').next('label').text())
+
+
+        $('.general-inputs .row').each(function (key, el) {
+            // get the labels and inputs
+            let $el = $(el);
+            let $label = $el.find('label');
+            let $input = $el.find('input');
+
+            // remove disable ones
+            if ($input.prop('disabled')) {
+                return
+            }
+
+            // join
+            data_input.push($label.text())
+            data_input.push(
+                $input.prop('type') === 'checkbox' ?
+                    $input.prop('checked') ? 'Sim': 'Não'
+                    : $input.val()
+            )
+        })
+
+        $('.form-hcm-2000 .row, .form-hcm-7-edition .row').each(function (key, el) {
+            // get the labels and inputs
+            let $el = $(el);
+            let $label = $el.find('label');
+            let $input = $el.find('select option:selected');
+
+            // join
+            data_input.push($label.text())
+            data_input.push($input.text())
+        })
+
+        // preparation to send the post outputs
+        $([ 'label_fhv','fhv','fhv_2022',
+            'label_vp','vp','vp_2022',
+            'label_ffs','FFS_o','FFS_o_2022',
+            'label_capacidade','c','c_2022',
+            'label_velocidade_media','S','S_2022',
+            'label_densidade','D','D_2022',
+            'label_service_level','service_level','service_level_2022'
+        ]).each(function (key, el) {
+            let $element = $(`#${el}`);
+            data_output.push($element.val() || $element.text())
+        })
+
+        $.ajax({
+            url: $('#outputs').attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: { input: data_input, output : data_output },
+        }).then(resp => resp.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // the filename you want
+                a.download = 'todo-1.json';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                alert('your file has downloaded!'); // or you know, something with better UX...
+            })
+    })
+</script>
+<script defer>
     $('#Calcular').click(function(e) {
         e.preventDefault();
         // HCM2000
@@ -336,7 +389,7 @@
                 if ($('#rural').prop('checked')) {
                     fn = 0;
                 }else{
-                   fn = f_n(N); 
+                   fn = f_n(N);
                 }
                 let fid = 0;
                 let TRD = N_acessos/length
@@ -446,7 +499,7 @@
                 if ($('#cond_atmos').val()==="Precipitação Média") {
                     CAF = 0.92;
                     SAF = 0.94;
-                    
+
                 }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
                     CAF = 0.86;
                     SAF = 0.93;
@@ -487,49 +540,48 @@
                     CAF = 1.0;
                     SAF = 1.0;
                 }
-            
-            }else if((FFS_2022/1.61)>=70 && (FFS_2022/1.61)<75){
+            } else if ((FFS_2022/1.61)>=70 && (FFS_2022/1.61)<75){
                 if ($('#cond_atmos').val()==="Precipitação Média") {
                     CAF = 0.91;
                     SAF = 0.93;
-                    
-                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+
+                } else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
                     CAF = 0.84;
                     SAF = 0.92;
 
-                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                } else if ($('#cond_atmos').val()==="Pouca Neve") {
                     CAF = 0.95;
                     SAF = 0.87;
 
-                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                } else if ($('#cond_atmos').val()==="Neve Ligeira") {
                     CAF = 0.9;
                     SAF = 0.86;
 
-                }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                } else if ($('#cond_atmos').val()==="Muita Neve") {
                     CAF = 0.88;
                     SAF = 0.84;
 
-                }else if  ($('#cond_atmos').val()==="Nevão") {
+                } else if ($('#cond_atmos').val()==="Nevão") {
                     CAF = 0.74;
                     SAF = 0.83;
 
-                }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                } else if ($('#cond_atmos').val()==="Frio Severo") {
                     CAF = 0.91;
                     SAF = 0.93;
 
-                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                } else if ($('#cond_atmos').val()==="Pouca visibilidade") {
                     CAF = 0.9;
                     SAF = 0.94;
 
-                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                } else if ($('#cond_atmos').val()==="Péssima Visibilidade") {
                     CAF = 0.88;
                     SAF = 0.92;
 
-                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                } else if ($('#cond_atmos').val()==="Visibilidade Minima") {
                     CAF = 0.9;
                     SAF = 0.92;
 
-                }else{
+                } else{
                     CAF = 1.0;
                     SAF = 1.0;
                 }
@@ -537,7 +589,7 @@
                 if ($('#cond_atmos').val()==="Precipitação Média") {
                     CAF = 0.9;
                     SAF = 0.93;
-                    
+
                 }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
                     CAF = 0.82;
                     SAF = 0.91;
@@ -593,7 +645,7 @@
                 BPadj=BPadj_f(FFSadj,CAF);
                 S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
                 $('#S_2022').val((S_2022*1.61).toFixed(1));
-                D_2022 = D_f(vp_2022,S_2022); 
+                D_2022 = D_f(vp_2022,S_2022);
                 $('#D_2022').val((D_2022/1.61).toFixed(1));
                 $('#service_level_2022').val(LOS_2022(D_2022));
             }
@@ -615,15 +667,11 @@
             $('#service_level_2022').val("F");
         }
         // HCM 7ªEdição
-        
-            // $('#service_level').val(vp.toFixed());
 
-        $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
-            $('#'+el).change();
-        })
+            // $('#service_level').val(vp.toFixed());
         }
-        
     })
+
     $('#Limpar').click(function(e) {
         e.preventDefault();
         ///inputs

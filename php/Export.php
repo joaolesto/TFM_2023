@@ -16,7 +16,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Export
 {
 
-    protected array $content;
+    protected array $input;
+    protected array $output;
     protected string $filePath;
     protected string $fileName;
 
@@ -43,8 +44,11 @@ class Export
     protected function uploadXlsx($post): Worksheet
     {
         // create the content
-        $this->content = array_chunk($post,3);
-        array_unshift($this->content, ['Outputs','HCM 2000','HCM 7ª edição']);
+        $this->input = array_chunk($post['input'],2);
+        array_unshift($this->input, ['-','Inputs']);
+
+        $this->output = array_chunk($post['output'],3);
+        array_unshift($this->output, ['Outputs','HCM 2000','HCM 7ª edição']);
 
         $spreadsheet = new Spreadsheet();
         $writter = new Xlsx($spreadsheet);
@@ -52,9 +56,12 @@ class Export
         // File name and its directory
         $this->fileName = 'AEexported_'. date('d_m_Y H:i') . ".xlsx";
         $this->filePath = "../docs/" . $this->fileName;
-        
+
         // create
-        $create = $writter->getSpreadsheet()->getActiveSheet()->fromArray($this->content);
+        $create = $writter->getSpreadsheet()->getActiveSheet()
+            ->fromArray($this->input, null, 'B2')
+            ->fromArray($this->output, null, 'E2');
+
         $writter->save($this->filePath);
 
         return $create;
@@ -65,7 +72,7 @@ class Export
      *
      * @return void
      */
-    protected function downloadFile()
+    protected function downloadFile(): void
     {
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $this->fileName . '"');
