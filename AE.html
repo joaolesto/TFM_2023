@@ -176,7 +176,7 @@
                     </div>
                 </fieldset>
             </form>
-            <button type="submit" id="Exportar" form="outputs">Exportar</button>
+            <button type="submit" id="Exportar" form="outputs" disabled>Exportar</button>
         </div>
     </div>
 </body>
@@ -334,16 +334,16 @@
         let D_2022 = 0;
         if ($('#car_volume').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' || $('#N_vias').val() === '' || $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
             alert("Preencha todos os campos necessários");
-
+            return
         }else if ($('#FFS_m').is(":checked") && $('#FFS').val()===''){
             alert("Introduza o valor do FFS (km/h)");
-
+            return;
         }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#length').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#BFFS').val() === '')) {
             alert("Preencha todos os campos necessários para calcular o FFS");
-
+            return;
         }else if ($('#cond_atmos').val()==="" || $('#tipos_de_condutores').val()===" ") {
             alert('Selecione a condição atmosférica e/ou tipo de condutor');
-
+            return;
         }else{
         // Campos preenchidos, prosseguir com o cálculo
         if ($('#ondulado').is(":checked")) {
@@ -680,6 +680,8 @@
 
             // $('#service_level').val(vp.toFixed());
         }
+
+        $('#Exportar').attr('disabled', false)
     })
 
     $('#Limpar').click(function(e) {
