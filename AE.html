@@ -6,6 +6,7 @@
             integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
             crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script type="text/javascript" src="js/validator.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -268,22 +269,31 @@
 
         $.ajax({
             url: $('#outputs').attr('action'),
-            type: 'POST',
-            dataType: 'json',
+            method: 'POST',
             data: { input: data_input, output : data_output },
-        }).then(resp => resp.blob())
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (data) {
+                // Create a URL object from the binary data
+                let url = URL.createObjectURL(data);
+
+                // Create a temporary anchor element to trigger the download
+                let a = document.createElement('a');
                 a.href = url;
-                // the filename you want
-                a.download = 'todo-1.json';
+                a.download = 'AEexported_'+ moment().format('DD_MM_YYYY H:m')+'.xlsx';
+                a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
-                window.URL.revokeObjectURL(url);
-                alert('your file has downloaded!'); // or you know, something with better UX...
-            })
+
+                // Clean up the URL object and the temporary anchor element
+                URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error downloading the file:', error);
+            }
+        });
     })
 </script>
 <script defer>

@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -74,7 +76,7 @@ class Export
      */
     protected function downloadFile(): void
     {
-        header('Content-Type: application/pdf');
+        header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . $this->fileName . '"');
         readfile($this->filePath);
     }
