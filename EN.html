@@ -4,8 +4,6 @@
     <link rel="stylesheet" href="css/estiloEN.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/validator.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +15,15 @@
         <div class="form-input-gerais">
             <form name="input" id="input_geral" class="form" method="post">
                 <fieldset>
-                  <legend>Inputs Gerais</legend>
+                    <legend>Inputs Gerais</legend>
                     <input type="radio" name="terreno" id="ondulado" />
                     <label for="ondulado">Terreno Ondulado</label>
                     <br/>
                     <input type="radio" name="terreno" id="plano" />
                     <label for="plano">Terreno Plano</label>
+                    <br/>
+                    <input type="radio" name="terreno" id="montanhoso" />
+                    <label for="montanhoso">Terreno Montanhoso</label>
                     <br/>
                     <div class="general-inputs">
                         <div class="row">
@@ -34,6 +35,10 @@
                             <input type="number" name="phf" id="phf" step="0.01" min="0.80" max="0.95" />
                         </div>
                         <div class="row">
+                            <label for="N_vias">Número de Vias</label>
+                            <input type="number" name="N_vias" id="N_vias" min="2" max="10" step="1" number-only/>
+                        </div>
+                        <div class="row">
                             <label for="pt">% de Veiculos Pesados</label>
                             <input type="number" name="pt" id="pt" min="0" max="100"/>
                         </div>
@@ -43,32 +48,36 @@
                         </div>
                         <input type="radio" name="FFS" id="FFS_m"/>
                         <label for="FFS_m">FFS (Medido em campo)</label>
-                        <div class="row"> 
+                        <div class="row">
                             <label for="FFS">Velocidade de fluxo livre (km/h)</label>
                             <input type="number" name="FFS_m" id="FFS" min="0"/>
                         </div>
                         <input type="radio" name="FFS" id="FFS_c"/>
                         <label for="FFS_c">FFS (Calculado)</label>
-                    </div>
-                    <div class="row">
-                        <label for="berma">Largura da Berma (m)</label>
-                        <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
-                    </div>
-                    <div class="row">
-                           <label for="via">Largura da Via (m)</label>
-                    <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
-                    </div>
-                    <div class="row">
-                        <label for="length">Comprimento da Via (km)</label>
-                        <input type="number" name="length" id="length" step ="0.01" min="0" max="100" />
-                    </div>
-                    <div class="row">
-                        <label for="N_acessos">Número de Acessos</label>
-                        <input type="number" name="acessos" id="N_acessos" min="0" />
-                    </div>
-                    <div class="row">
-                        <label for="BFFS">Velocidade base em regime livre (km/h)</label>
-                        <input type="number" name="BFFS" id="BFFS" min="45"/>
+                        <div class="row">
+                            <label for="berma">Largura da Berma (m)</label>
+                            <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
+                        </div>
+                        <div class="row">
+                            <label for="via">Largura da Via (m)</label>
+                            <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
+                        </div>
+                        <div class="row">
+                            <label for="rural">AE em Meio Rural</label>
+                            <input type="checkbox" name="rural" id="rural"/>
+                        </div>
+                        <div class="row">
+                            <label for="length">Comprimento da Via (km)</label>
+                            <input type="number" name="length" id="length" step ="0.01" min="0" max="100" />
+                        </div>
+                        <div class="row">
+                            <label for="N_acessos">Número de Acessos</label>
+                            <input type="number" name="acessos" id="N_acessos" min="0" />
+                        </div>
+                        <div class="row">
+                            <label for="BFFS">Velocidade base em regime livre (km/h)</label>
+                            <input type="number" name="BFFS" id="BFFS" min="45"/>
+                        </div>
                     </div>
                 </fieldset>
             </form>
@@ -78,118 +87,174 @@
                 <fieldset>
                     <legend>Inputs HCM 2000</legend>
                     <div class="row">
-                        <label for="Divisão">Divisão do Tráfego</label>
-                        <select id= "div_trafego" name="div_trafego">
+                        <label for="tipos_de_condutores">Tipos de Condutores</label>
+                        <select id= "tipos_de_condutores" name="tipos_de_condutores">
                             <option value="">Select Option</option>
-                            <option>50/50</option>
-                            <option>60/40</option>
-                            <option>70/30</option>
-                            <option>80/20</option>
-                            <option>90/10</option>
+                            <option>Condutores Habituais</option>
+                            <option>Condutores Exporádicos</option>
                         </select>
                     </div>
                 </fieldset>
             </form>
-            <button type="submit" id="Calcular">Calcular</button>
         </div>
-        <div class="form-outputs">
-            <form name="outputs" id="outputs" class="form" action="php/validation.php" method="post">
+        <div class="form-outputs_2000">
+            <form name="outputs-2000" id="outputs" class="form" action="php/validation.php" method="post">
                 <table id="tabela">
                     <thead>
-                        <tr>
-                            <th>Outputs</th>
-                            <th>HCM 2000</th>
-                            <th>HCM 7ª edição</th>
-                        </tr>
+                    <tr>
+                        <th>Outputs</th>
+                        <th>HCM 2000</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td id="label_fhv">FHV</td>
-                            <input type="hidden" name="label_fhv">
-                            <td><input type="text" name="fhv" id="fhv" disabled></td>
-                            <input type="hidden" name="fhv">
-                            <td><input type="text" name="fhv_2022" id="fhv_2022" disabled></td>
-                            <input type="hidden" name="fhv_2022">
-                        </tr>
-                        <tr>
-                            <td id="label_vp">Vp (uvl/h/via)</td>
-                            <input type="hidden" name="label_vp">
-                            <td><input type="text" name="vp" id="vp" disabled></td>
-                            <input type="hidden" name="vp">
-                            <td><input type="text" name="vp_2022" id="vp_2022" disabled></td>
-                            <input type="hidden" name="vp_2022">
-                        </tr>
-                        <tr>
-                            <td id="label_ffs">Velocidade de fluxo livre (km/h)</td>
-                            <input type="hidden" name="label_ffs">
-                            <td><input type="text" name="ffs_o" id="FFS_o" disabled></td>
-                            <input type="hidden" name="FFS_o">
-                            <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
-                            <input type="hidden" name="FFS_o_2022">
-                        </tr>
-                        <tr>
-                            <td  id="label_capacidade">Capacidade (uvl/h/via)</td>
-                            <input type="hidden" name="label_capacidade">
-                            <td><input type="text" name="capacidade" id="c" disabled></td>
-                            <input type="hidden" name="c">
-                            <td><input type="text" name="capacidade_2022" id="c_2022" disabled></td>
-                            <input type="hidden" name="c_2022">
-                        </tr>
-                        <tr>
-                            <td id="label_velocidade_media">Velocidade média (km/h)</td>
-                            <input type="hidden" name="label_velocidade_media">
-                            <td><input type="text" name="velocidade_media" id="S" disabled></td>
-                            <input type="hidden" name="S">
-                            <td><input type="text" name="velocidade_media_2022" id="S_2022" disabled></td>
-                            <input type="hidden" name="S_2022">
-                        </tr>
-                        <tr>
-                            <td id="label_densidade">Densidade de tráfego por via (uvl/km/via)</td>
-                            <input type="hidden" name="label_densidade">
-                            <td><input type="text" name="densidade" id="D" disabled></td>
-                            <input type="hidden" name="D">
-                            <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
-                            <input type="hidden" name="D_2022">
-                        </tr>
-                        <tr>
-                            <td id="label_service_level">Nivel de Serviço</td>
-                            <input type="hidden" name="label_service_level">
-                            <td><input type="text" name="service_level" id="service_level" disabled></td>
-                            <input type="hidden" name="service_level">
-                            <td><input type="text" name="service_level_2022" id="service_level_2022" disabled></td>
-                            <input type="hidden" name="service_level_2022">
-                        </tr>
+                    <tr>
+                        <td id="label_fhv">FHV</td>
+                        <td><input type="text" name="fhv" id="fhv" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_vp">Vp (uvl/h/via)</td>
+                        <td><input type="text" name="vp" id="vp" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_ffs">Velocidade de fluxo livre (km/h)</td>
+                        <td><input type="text" name="ffs_o" id="FFS_o" disabled></td>
+                    </tr>
+                    <tr>
+                        <td  id="label_capacidade">Capacidade (uvl/h/via)</td>
+                        <td><input type="text" name="capacidade" id="c" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_velocidade_media">Velocidade média (km/h)</td>
+                        <td><input type="text" name="velocidade_media" id="S" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_densidade">Densidade de tráfego por via (uvl/km/via)</td>
+                        <td><input type="text" name="densidade" id="D" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_service_level">Nivel de Serviço</td>
+                        <td><input type="text" name="service_level" id="service_level" disabled></td>
+                    </tr>
                     </tbody>
                 </table>
             </form>
-         </div>
+        </div>
+        <div class="form-outputs_2022">
+            <form name="outputs_2022" id="outputs_2022" class="form" action="php/validation.php" method="post">
+                <table id="tabela_2022">
+                    <thead>
+                    <tr>
+                        <th>Outputs</th>
+                        <th>HCM 7ª edição</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="label_fhv_2022">FHV</td>
+                        <td><input type="text" name="fhv_2022" id="fhv_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_vp_2022">Vp (uvl/h/via)</td>
+                        <td><input type="text" name="vp_2022" id="vp_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_ffs_2022">Velocidade de fluxo livre (km/h)</td>
+                        <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td  id="label_capacidade_2022">Capacidade (uvl/h/via)</td>
+                        <td><input type="text" name="capacidade_2022" id="c_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_velocidade_media_2022">Velocidade média (km/h)</td>
+                        <td><input type="text" name="velocidade_media_2022" id="S_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_densidade_2022">Densidade de tráfego por via (uvl/km/via)</td>
+                        <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_service_level_2022">Nivel de Serviço</td>
+                        <td><input type="text" name="service_level_2022" id="service_level_2022" disabled></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
         <div class="form-hcm-7-edition">
             <form name="input" id="input_HCM7" class="form" method="post">
                 <fieldset>
                     <legend>Inputs HCM 7ª Edição</legend>
                     <div class="row">
-                        <label for="tipo de segemento">Tipo de segmento</label>
-                        <select id="segment" name="segmentos">
+                        <label for="cond_atmos">Condições Atmosféricas</label>
+                        <select id="cond_atmos" name="Condições_base">
                             <option value="">Select Option</option>
-                            <option>Zona de ultrapassagem</option>
-                            <option>Zona sem ultrapassagem</option>
+                            <option>Situação de Base</option>
+                            <option>Precipitação Média</option>
+                            <option>Precipitação Elevada</option>
+                            <option>Pouca Neve</option>
+                            <option>Neve Ligeira</option>
+                            <option>Muita Neve</option>
+                            <option>Nevão</option>
+                            <option>Frio Severo</option>
+                            <option>Pouca visibilidade</option>
+                            <option>Péssima Visibilidade</option>
+                            <option>Visibilidade Minima</option>
                         </select>
-                    </div>
-                    <div class="row">
-                        <label for="Limite">Limite de velocidade (km/h)</label>
-                        <input type="number" name="Limite de velocidade" id="limite_velocidade" min="45"/>
-                    </div>
-                    <div class="row">
-                        <label for="inclinaçãp">i (%)</label>
-                        <input type="number" name="inclinaçãp" id="i"/>
                     </div>
                 </fieldset>
             </form>
-            <button type="submit" id="Exportar" form="outputs">Exportar</button>
         </div>
-    </div>  
+        <div class="form-outputs-gerais">
+            <form name="outputs_gerais" id="outputs_gerais" class="form" action="php/validation.php" method="post">
+                <table id="tabela_gerais">
+                    <thead>
+                    <tr>
+                        <th>Outputs</th>
+                        <th>Gerais</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="label_fhv_gerais">FHV</td>
+                        <td><input type="text" name="fhv_gerais" id="fhv_gerais" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_vp_gerais">Vp (uvl/h/via)</td>
+                        <td><input type="text" name="vp_gerais" id="vp_gerais" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_ffs_gerais">Velocidade de fluxo livre (km/h)</td>
+                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
+                    </tr>
+                    <tr>
+                        <td  id="label_capacidade_gerais">Capacidade (uvl/h/via)</td>
+                        <td><input type="text" name="capacidade_gerais" id="c_gerais" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_velocidade_media_gerais">Velocidade média (km/h)</td>
+                        <td><input type="text" name="velocidade_media_gerais" id="S_gerais" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_densidade_gerais">Densidade de tráfego por via (uvl/km/via)</td>
+                        <td><input type="text" name="densidade_gerais" id="D_gerais" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_service_level_gerais">Nivel de Serviço</td>
+                        <td><input type="text" name="service_level_gerais" id="service_level_gerais" disabled></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="buttons">
+                <button type="submit" id="Calcular">Calcular</button>
+                <button type="submit" id="Exportar">Exportar</button>
+                <button type="submit" id="Limpar_gerais">Limpar Dados</button>
+            </div>
+        </div>
+    </div>
 </body>
-  <script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         $("#FFS_m").click(function () {
             if ($(this).is(":checked")) {
@@ -215,15 +280,97 @@
         });
     });
 </script>
-<script src="js/EN_HCM2000.js"></script>
-<script src="js/EN_HCM2022.js"></script>
-<script defer>
-    $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
-        $('#'+el).on('change', function () {
-            $(`input[type="hidden"][name="${el}"]`).val($(this).val() ?$(this).val() : $(this).text())
-        })
-    })
+<script src="js/AE_HCM2000.js"></script>
+<script src="js/AE_HCM2022.js"></script>
+<script>
+    $('#Exportar').on('click', function (e) {
+        e.preventDefault();
 
+        let data_input = [];
+        let data_output = [];
+
+        // preparation to send the post inputs
+        data_input.push('Terreno')
+        data_input.push($('input[name="terreno"]:checked').next('label').text())
+
+        data_input.push('FFS')
+        data_input.push($('input[name="FFS"]:checked').next('label').text())
+
+
+        $('.general-inputs .row').each(function (key, el) {
+            // get the labels and inputs
+            let $el = $(el);
+            let $label = $el.find('label');
+            let $input = $el.find('input');
+
+            // remove disable ones
+            if ($input.prop('disabled')) {
+                return
+            }
+
+            // join
+            data_input.push($label.text())
+            data_input.push(
+                $input.prop('type') === 'checkbox' ?
+                    $input.prop('checked') ? 'Sim': 'Não'
+                    : $input.val()
+            )
+        })
+
+        $('.form-hcm-2000 .row, .form-hcm-7-edition .row').each(function (key, el) {
+            // get the labels and inputs
+            let $el = $(el);
+            let $label = $el.find('label');
+            let $input = $el.find('select option:selected');
+
+            // join
+            data_input.push($label.text())
+            data_input.push($input.text())
+        })
+
+        // preparation to send the post outputs
+        $([ 'label_fhv','fhv','fhv_2022',
+            'label_vp','vp','vp_2022',
+            'label_ffs','FFS_o','FFS_o_2022',
+            'label_capacidade','c','c_2022',
+            'label_velocidade_media','S','S_2022',
+            'label_densidade','D','D_2022',
+            'label_service_level','service_level','service_level_2022'
+        ]).each(function (key, el) {
+            let $element = $(`#${el}`);
+            data_output.push($element.val() || $element.text())
+        })
+
+        $.ajax({
+            url: $('#outputs').attr('action'),
+            method: 'POST',
+            data: { input: data_input, output : data_output },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (data) {
+                // Create a URL object from the binary data
+                let url = URL.createObjectURL(data);
+
+                // Create a temporary anchor element to trigger the download
+                let a = document.createElement('a');
+                a.href = url;
+                a.download = 'AEexported_'+ moment().format('DD_MM_YYYY H:m')+'.xlsx';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+
+                // Clean up the URL object and the temporary anchor element
+                URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error downloading the file:', error);
+            }
+        });
+    })
+</script>
+<script defer>
     $('#Calcular').click(function(e) {
         e.preventDefault();
         // HCM2000
@@ -239,10 +386,6 @@
         let BFFS = parseFloat($('#BFFS').val());
         let ET = 0;
         let ER = 0;
-        let ETp = 0;
-        let ERp = 0;
-        let fg = 0;
-        let fgp = 0;
         let fp = 0;
         let fhv = 0;
         let vp = 0;
@@ -250,407 +393,404 @@
         let S = 0;
         let D = 0;
         //HCM2022
-        if ($('#ondulado').is(":checked")) {
-            if (car_volume<=600){
-                //Determinar velocidade
-                ET = 2.5;
-                ER = 1.1;
-                //Determinar % de seguidores
-                ETp = 1.8;
-                ERp = 1.0;
-                //fator de ajustamento (fg)
-                fg = 0.71;
-                //fator de ajustamente % de seguidores
-                fgp = 0.77;
-            }else if (car_volume>600 && car_volume<=1200) {
-                //Determinar velocidade
-                ET = 1.9
-                ER = 1.1
-                //Determinar % de seguidores
-                ETp = 1.5;
-                ERp = 1.0;
-                //fator de ajustamento (fg)
-                fg = 0.93;
-                //fator de ajustamente % de seguidores
-                fgp = 0.94;
-            }else if (car_volume>1200){
-                //Determinar velocidade
-                ET = 1.5
-                ER = 1.1
-                //Determinar % de seguidores
-                ETp = 1.0;
-                ERp = 1.0;
-                //fator de ajustamento (fg)
-                fg = 0.99;
-                //fator de ajustamente % de seguidores
-                fgp = 1.0;
-            }
-        }else if ($('#plano').is(":checked")) {
-            if (car_volume<=600){
-                //Determinar velocidade
-                ET = 1.7
-                ER = 1.0
-                //Determinar % de seguidores
-                ETp = 1.1;
-                ERp = 1.0;
-                //fator de ajustamento (fg)
-                fg = 1.0;
-                //fator de ajustamente % de seguidores
-                fgp = 1.0;
-            }else if (car_volume>600 && car_volume<=1200) {
-                //Determinar velocidade
-                ET = 1.2;
-                ER = 1.0;
-                //Determinar % de seguidores
-                ETp = 1.1;
-                ERp = 1.0;
-                //fator de ajustamento (fg)
-                fg = 1.0;
-                //fator de ajustamente % de seguidores
-                fgp = 1.0;
-            }else if (car_volume>1200){
-                //Determinar velocidade
-                ET = 1.1
-                ER = 1.0
-                //Determinar % de seguidores
-                ETp = 1.0;
-                ERp = 1.0;
-                //fator de ajustamento (fg)
-                fg = 1.0;
-                //fator de ajustamente % de seguidores
-                fgp = 1.0;
-            }
-        }
-
-        fhv = f_hv(PT,ET,PR,ER); // Passo 2
-        fhv_p = f_hv(PT,ETp,PR,ERp); // Passo 2
-        $('#fhv').val(fhv.toFixed(3));
-        //$('#fhv_p').val(fhv_p.toFixed(3));
-
-        if ($('#tipos_de_condutores').val()==="") {
-            fp = 0.85
-        }else {
-            fp = 1.0
-        }
-
-        vp = v_p(car_volume,phf,N,fhv,fp); // Passo 3
-        vp_2022 = v_p_2022(car_volume,phf,N,fhv_2022)
-
-        $('#vp').val(vp.toFixed(1));
-        $('#vp_2022').val(vp_2022.toFixed(1));
-
-        if (vp<2400 || vp_2022<2400) {
-            if ($('#FFS_m').is(":checked")) {
-                FFS = parseFloat($('#FFS').val());
-                $('#FFS_o').val(FFS.toFixed(1));
-                $('#FFS_o_2022').val(FFS.toFixed(1));
-                FFS_2022 = FFS;
-
-            } else if ($('#FFS_c').is(":checked")) {
-                //HCM2000
-                let flw = 0; //via
-                flw = f_lw(via);
-                let flc = 0; //Nº vias e berma
-                flc = f_lc(N,berma);
-                let fn = 0;
-                if ($('#rural').prop('checked')) {
-                    fn = 0;
-                }else{
-                   fn = f_n(N); 
-                }
-                let fid = 0;
-                let TRD = N_acessos/length
-                fid = f_id(TRD)
-                FFS = FFS_f(BFFS,flw,flc,fn,fid)
-                console.log(BFFS)
-                console.log(flw)
-                console.log(flc)
-                console.log(fn)
-                console.log(fid)
-                $('#FFS_o').val(FFS.toFixed(1));
-                //HCM2022
-                let flw_2022 = 0;
-                flw_2022 = f_lw_2022(via*(1/0.305)); //via
-                console.log(flw_2022)
-                let flrc = 0;
-                flrc = f_rlc(N,berma*(1/0.305)) //N e berma
-                console.log(flrc)
-                let TRD_2022 = 0;
-                TRD_2022=N_acessos/(length/1.61)
-                console.log(TRD_2022)
-                let FFS_2022_c=0;
-                FFS_2022_c = FFS_f_2022(BFFS*(1/1.61),flw_2022,flrc,TRD_2022)
-                console.log(FFS_2022_c)
-                FFS_2022 = FFS_2022_c*1.61;
-                console.log(FFS_2022)
-                $('#FFS_o_2022').val((FFS_2022).toFixed(1))
+        let ET_2022 = 0;
+        let fhv_2022 = 0;
+        let vp_2022 = 0;
+        let FFS_2022 = 0;
+        let FFSadj_2022 = 0;
+        let c_2022 = 0;
+        let cadj_2022 = 0;
+        let CAF = 0;
+        let SAF = 0;
+        let BP = 0;
+        let BPadj = 0;
+        let S_2022 = 0;
+        let D_2022 = 0;
+        if ($('#car_volume').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' || $('#N_vias').val() === '' || $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
+            alert("Preencha todos os campos necessários");
+            return
+        }else if ($('#FFS_m').is(":checked") && $('#FFS').val()===''){
+            alert("Introduza o valor do FFS (km/h)");
+            return;
+        }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#length').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#BFFS').val() === '')) {
+            alert("Preencha todos os campos necessários para calcular o FFS");
+            return;
+        }else if ($('#cond_atmos').val()==="" || $('#tipos_de_condutores').val()===" ") {
+            alert('Selecione a condição atmosférica e/ou tipo de condutor');
+            return;
+        }else{
+            // Campos preenchidos, prosseguir com o cálculo
+            if ($('#ondulado').is(":checked")) {
+                ET = 2.5
+                ER = 2.0
+                //HCM 2022
+                ET_2022 = 3.0
+            }else if ($('#plano').is(":checked")) {
+                ET = 1.5;
+                ER = 1.2;
+                //HCM 2022
+                ET_2022=2.0
+            }else if ($('#montanhoso').is(":checked")) {
+                ET = 4.5
+                ER = 4.0;
+                //HCM 2022
+                ET_2022 = 3.0
             }
 
-            if ((FFS_2022/1.61)>=55 && (FFS_2022/1.61)<60){
-                if ($('#cond_atmos').val()==="Precipitação Média") {
-                    CAF = 0.94;
-                    SAF = 0,96;
-                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
-                    CAF = 0.89;
-                    SAF = 0.94;
-                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
-                    CAF = 0.97;
-                    SAF = 0.94;
-                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
-                    CAF = 0.95;
-                    SAF = 0.92;
-                }else if  ($('#cond_atmos').val()==="Muita Neve") {
-                    CAF = 0.93;
-                    SAF = 0.9;
-                }else if  ($('#cond_atmos').val()==="Nevão") {
-                    CAF = 0.8;
-                    SAF = 0.88;
+            fhv = f_hv(PT,ET,PR,ER); // Passo 2
+            fhv_2022 = f_hv_2022(PT,ET_2022);
 
-                }else if  ($('#cond_atmos').val()==="Frio Severo") {
-                    CAF = 0.93;
-                    SAF = 0.95;
 
-                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
-                    CAF = 0.90;
-                    SAF = 0.96;
+            $('#fhv').val(fhv.toFixed(3));
+            $('#fhv_2022').val(fhv_2022.toFixed(3));
 
-                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
-                    CAF = 0.88;
-                    SAF = 0.95;
-
-                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
-                    CAF = 0.90;
-                    SAF = 0.95;
-
-                }else{
-                    CAF = 1.0;
-                    SAF = 1.0;
-                }
-
-            }else if((FFS_2022/1.61)>=60 && (FFS_2022/1.61)<65){
-
-                if ($('#cond_atmos').val()==="Precipitação Média") {
-                    CAF = 0.93;
-                    SAF = 0.95;
-                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
-                    CAF = 0.88;
-                    SAF = 0.93;
-
-                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
-                    CAF = 0.96;
-                    SAF = 0.92;
-
-                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
-                    CAF = 0.94
-                    SAF = 0.9;
-
-                }else if  ($('#cond_atmos').val()==="Muita Neve") {
-                    CAF = 0.91;
-                    SAF = 0.88;
-
-                }else if  ($('#cond_atmos').val()==="Nevão") {
-                    CAF = 0.78;
-                    SAF = 0.86;
-
-                }else if  ($('#cond_atmos').val()==="Frio Severo") {
-                    CAF = 0.92;
-                    SAF = 0.95;
-
-                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
-                    CAF = 0.9;
-                    SAF = 0.95;
-
-                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
-                    CAF = 0.88;
-                    SAF = 0.94;
-
-                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
-                    CAF = 0.9;
-                    SAF = 0.94;
-
-                }else{
-                    CAF = 1.0;
-                    SAF = 1.0;
-                }
-            }else if((FFS_2022/1.61)>=65 && (FFS_2022/1.61)<70){
-                if ($('#cond_atmos').val()==="Precipitação Média") {
-                    CAF = 0.92;
-                    SAF = 0.94;
-                    
-                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
-                    CAF = 0.86;
-                    SAF = 0.93;
-
-                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
-                    CAF = 0.96;
-                    SAF = 0.89;
-
-                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
-                    CAF = 0.92;
-                    SAF = 0.88;
-
-                }else if  ($('#cond_atmos').val()==="Muita Neve") {
-                    CAF = 0.9;
-                    SAF = 0.86;
-
-                }else if  ($('#cond_atmos').val()==="Nevão") {
-                    CAF = 0.76;
-                    SAF = 0.85;
-
-                }else if  ($('#cond_atmos').val()==="Frio Severo") {
-                    CAF = 0.92;
-                    SAF = 0.94;
-
-                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
-                    CAF = 0.9;
-                    SAF = 0.94;
-
-                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
-                    CAF = 0.88;
-                    SAF = 0.93;
-
-                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
-                    CAF = 0.9;
-                    SAF = 0.93;
-
-                }else{
-                    CAF = 1.0;
-                    SAF = 1.0;
-                }
-            
-            }else if((FFS_2022/1.61)>=70 && (FFS_2022/1.61)<75){
-                if ($('#cond_atmos').val()==="Precipitação Média") {
-                    CAF = 0.91;
-                    SAF = 0.93;
-                    
-                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
-                    CAF = 0.84;
-                    SAF = 0.92;
-
-                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
-                    CAF = 0.95;
-                    SAF = 0.87;
-
-                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
-                    CAF = 0.9;
-                    SAF = 0.86;
-
-                }else if  ($('#cond_atmos').val()==="Muita Neve") {
-                    CAF = 0.88;
-                    SAF = 0.84;
-
-                }else if  ($('#cond_atmos').val()==="Nevão") {
-                    CAF = 0.74;
-                    SAF = 0.83;
-
-                }else if  ($('#cond_atmos').val()==="Frio Severo") {
-                    CAF = 0.91;
-                    SAF = 0.93;
-
-                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
-                    CAF = 0.9;
-                    SAF = 0.94;
-
-                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
-                    CAF = 0.88;
-                    SAF = 0.92;
-
-                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
-                    CAF = 0.9;
-                    SAF = 0.92;
-
-                }else{
-                    CAF = 1.0;
-                    SAF = 1.0;
-                }
-            }else if((FFS_2022/1.61)>=75){
-                if ($('#cond_atmos').val()==="Precipitação Média") {
-                    CAF = 0.9;
-                    SAF = 0.93;
-                    
-                }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
-                    CAF = 0.82;
-                    SAF = 0.91;
-
-                }else if  ($('#cond_atmos').val()==="Pouca Neve") {
-                    CAF = 0.95;
-                    SAF = 0.84;
-
-                }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
-                    CAF = 0.88;
-                    SAF = 0.83;
-
-                }else if  ($('#cond_atmos').val()==="Muita Neve") {
-                    CAF = 0.87;
-                    SAF = 0.82;
-
-                }else if  ($('#cond_atmos').val()==="Nevão") {
-                    CAF = 0.72;
-                    SAF = 0.81;
-
-                }else if  ($('#cond_atmos').val()==="Frio Severo") {
-                    CAF = 0.9;
-                    SAF = 0.92;
-
-                }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
-                    CAF = 0.9;
-                    SAF = 0.93;
-
-                }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
-                    CAF = 0.88;
-                    SAF = 0.91;
-
-                }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
-                    CAF = 0.9;
-                    SAF = 0.91;
-
-                }else{
-                    CAF = 1.0;
-                    SAF = 1.0;
-                }
+            if ($('#tipos_de_condutores').val()==="Condutores Exporádicos") {
+                fp = 0.85
+            }else {
+                fp = 1.0
             }
-            c_2022 = c_f(FFS_2022/1.61);
-            $('#c_2022').val(c_2022.toFixed(0));
-            if (c_2022>2400){
+
+            vp = v_p(car_volume,phf,N,fhv,fp); // Passo 3
+            vp_2022 = v_p_2022(car_volume,phf,N,fhv_2022)
+
+            $('#vp').val(vp.toFixed(1));
+            $('#vp_2022').val(vp_2022.toFixed(1));
+
+            if (vp<2400 || vp_2022<2400) {
+                if ($('#FFS_m').is(":checked")) {
+                    FFS = parseFloat($('#FFS').val());
+                    $('#FFS_o').val(FFS.toFixed(1));
+                    $('#FFS_o_2022').val(FFS.toFixed(1));
+                    FFS_2022 = FFS;
+
+                } else if ($('#FFS_c').is(":checked")) {
+                    //HCM2000
+                    let flw = 0; //via
+                    flw = f_lw(via);
+                    let flc = 0; //Nº vias e berma
+                    flc = f_lc(N,berma);
+                    let fn = 0;
+                    if ($('#rural').prop('checked')) {
+                        fn = 0;
+                    }else{
+                        fn = f_n(N);
+                    }
+                    let fid = 0;
+                    let TRD = N_acessos/length
+                    fid = f_id(TRD)
+                    FFS = FFS_f(BFFS,flw,flc,fn,fid)
+                    $('#FFS_o').val(FFS.toFixed(1));
+                    //HCM2022
+                    let flw_2022 = 0;
+                    flw_2022 = f_lw_2022(via*(1/0.305)); //via
+                    let flrc = 0;
+                    flrc = f_rlc(N,berma*(1/0.305)) //N e berma
+                    let TRD_2022 = 0;
+                    TRD_2022=N_acessos/(length/1.61)
+                    let FFS_2022_c=0;
+                    FFS_2022_c = FFS_f_2022(BFFS*(1/1.61),flw_2022,flrc,TRD_2022)
+                    FFS_2022 = FFS_2022_c*1.61;
+                    $('#FFS_o_2022').val((FFS_2022).toFixed(1))
+                }
+
+                if ((FFS_2022/1.61)>=55 && (FFS_2022/1.61)<60){
+                    if ($('#cond_atmos').val()==="Precipitação Média") {
+                        CAF = 0.94;
+                        SAF = 0.96;
+                    }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                        CAF = 0.89;
+                        SAF = 0.94;
+                    }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                        CAF = 0.97;
+                        SAF = 0.94;
+                    }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                        CAF = 0.95;
+                        SAF = 0.92;
+                    }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                        CAF = 0.93;
+                        SAF = 0.9;
+                    }else if  ($('#cond_atmos').val()==="Nevão") {
+                        CAF = 0.8;
+                        SAF = 0.88;
+
+                    }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                        CAF = 0.93;
+                        SAF = 0.95;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                        CAF = 0.90;
+                        SAF = 0.96;
+
+                    }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                        CAF = 0.88;
+                        SAF = 0.95;
+
+                    }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                        CAF = 0.90;
+                        SAF = 0.95;
+
+                    }else{
+                        CAF = 1.0;
+                        SAF = 1.0;
+                    }
+
+                }else if((FFS_2022/1.61)>=60 && (FFS_2022/1.61)<65){
+
+                    if ($('#cond_atmos').val()==="Precipitação Média") {
+                        CAF = 0.93;
+                        SAF = 0.95;
+                    }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                        CAF = 0.88;
+                        SAF = 0.93;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                        CAF = 0.96;
+                        SAF = 0.92;
+
+                    }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                        CAF = 0.94
+                        SAF = 0.9;
+
+                    }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                        CAF = 0.91;
+                        SAF = 0.88;
+
+                    }else if  ($('#cond_atmos').val()==="Nevão") {
+                        CAF = 0.78;
+                        SAF = 0.86;
+
+                    }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                        CAF = 0.92;
+                        SAF = 0.95;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                        CAF = 0.9;
+                        SAF = 0.95;
+
+                    }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                        CAF = 0.88;
+                        SAF = 0.94;
+
+                    }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                        CAF = 0.9;
+                        SAF = 0.94;
+
+                    }else{
+                        CAF = 1.0;
+                        SAF = 1.0;
+                    }
+                }else if((FFS_2022/1.61)>=65 && (FFS_2022/1.61)<70){
+                    if ($('#cond_atmos').val()==="Precipitação Média") {
+                        CAF = 0.92;
+                        SAF = 0.94;
+
+                    }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                        CAF = 0.86;
+                        SAF = 0.93;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                        CAF = 0.96;
+                        SAF = 0.89;
+
+                    }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                        CAF = 0.92;
+                        SAF = 0.88;
+
+                    }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                        CAF = 0.9;
+                        SAF = 0.86;
+
+                    }else if  ($('#cond_atmos').val()==="Nevão") {
+                        CAF = 0.76;
+                        SAF = 0.85;
+
+                    }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                        CAF = 0.92;
+                        SAF = 0.94;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                        CAF = 0.9;
+                        SAF = 0.94;
+
+                    }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                        CAF = 0.88;
+                        SAF = 0.93;
+
+                    }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                        CAF = 0.9;
+                        SAF = 0.93;
+
+                    }else{
+                        CAF = 1.0;
+                        SAF = 1.0;
+                    }
+                } else if ((FFS_2022/1.61)>=70 && (FFS_2022/1.61)<75){
+                    if ($('#cond_atmos').val()==="Precipitação Média") {
+                        CAF = 0.91;
+                        SAF = 0.93;
+
+                    } else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                        CAF = 0.84;
+                        SAF = 0.92;
+
+                    } else if ($('#cond_atmos').val()==="Pouca Neve") {
+                        CAF = 0.95;
+                        SAF = 0.87;
+
+                    } else if ($('#cond_atmos').val()==="Neve Ligeira") {
+                        CAF = 0.9;
+                        SAF = 0.86;
+
+                    } else if ($('#cond_atmos').val()==="Muita Neve") {
+                        CAF = 0.88;
+                        SAF = 0.84;
+
+                    } else if ($('#cond_atmos').val()==="Nevão") {
+                        CAF = 0.74;
+                        SAF = 0.83;
+
+                    } else if ($('#cond_atmos').val()==="Frio Severo") {
+                        CAF = 0.91;
+                        SAF = 0.93;
+
+                    } else if ($('#cond_atmos').val()==="Pouca visibilidade") {
+                        CAF = 0.9;
+                        SAF = 0.94;
+
+                    } else if ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                        CAF = 0.88;
+                        SAF = 0.92;
+
+                    } else if ($('#cond_atmos').val()==="Visibilidade Minima") {
+                        CAF = 0.9;
+                        SAF = 0.92;
+
+                    } else{
+                        CAF = 1.0;
+                        SAF = 1.0;
+                    }
+                }else if((FFS_2022/1.61)>=75){
+                    if ($('#cond_atmos').val()==="Precipitação Média") {
+                        CAF = 0.9;
+                        SAF = 0.93;
+
+                    }else if  ($('#cond_atmos').val()==="Precipitação Elevada") {
+                        CAF = 0.82;
+                        SAF = 0.91;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca Neve") {
+                        CAF = 0.95;
+                        SAF = 0.84;
+
+                    }else if  ($('#cond_atmos').val()==="Neve Ligeira") {
+                        CAF = 0.88;
+                        SAF = 0.83;
+
+                    }else if  ($('#cond_atmos').val()==="Muita Neve") {
+                        CAF = 0.87;
+                        SAF = 0.82;
+
+                    }else if  ($('#cond_atmos').val()==="Nevão") {
+                        CAF = 0.72;
+                        SAF = 0.81;
+
+                    }else if  ($('#cond_atmos').val()==="Frio Severo") {
+                        CAF = 0.9;
+                        SAF = 0.92;
+
+                    }else if  ($('#cond_atmos').val()==="Pouca visibilidade") {
+                        CAF = 0.9;
+                        SAF = 0.93;
+
+                    }else if  ($('#cond_atmos').val()==="Péssima Visibilidade") {
+                        CAF = 0.88;
+                        SAF = 0.91;
+
+                    }else if  ($('#cond_atmos').val()==="Visibilidade Minima") {
+                        CAF = 0.9;
+                        SAF = 0.91;
+
+                    }else{
+                        CAF = 1.0;
+                        SAF = 1.0;
+                    }
+                }
+                c_2022 = c_f(FFS_2022/1.61);
+                $('#c_2022').val(c_2022.toFixed(0));
+                if (c_2022>2400){
+                    $('#S_2022').val('');
+                    $('#D_2022').val('');
+                    $('#FFS_o_2022').val('');
+                    $('#service_level_2022').val("F");
+                }else{
+                    FFSadj=FFSadj_f(FFS_2022/1.61,SAF); //mi/h
+                    cadj_2022 = cadj_f(c_2022,CAF);
+                    BP=BP_f(FFS_2022/1.61,CAF);
+                    BPadj=BPadj_f(FFSadj,CAF);
+                    S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
+                    $('#S_2022').val((S_2022*1.61).toFixed(1));
+                    D_2022 = D_f(vp_2022,S_2022);
+                    $('#D_2022').val((D_2022/1.61).toFixed(1));
+                    $('#service_level_2022').val(LOS_2022(D_2022));
+                }
+                $('#c').val(2400);
+                S = S_f(FFS,vp);
+                $('#S').val(S.toFixed(1));
+                D = D_f(vp,S);
+                $('#D').val(D.toFixed(1));
+                $('#service_level').val(LOS(D));
+            }else {
+                $('#c').val(2400);
+                $('#S').val('');
+                $('#D').val('');
+                $('#FFS_o').val('');
+                $('#service_level').val("F");
                 $('#S_2022').val('');
                 $('#D_2022').val('');
                 $('#FFS_o_2022').val('');
                 $('#service_level_2022').val("F");
-            }else{
-                FFSadj=FFSadj_f(FFS_2022/1.61,SAF); //mi/h
-                cadj_2022 = cadj_f(c_2022,CAF);
-                BP=BP_f(FFS_2022/1.61,CAF);
-                BPadj=BPadj_f(FFSadj,CAF);
-                S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
-                $('#S_2022').val((S_2022*1.61).toFixed(1));
-                D_2022 = D_f(vp_2022,S_2022); 
-                $('#D_2022').val((D_2022/1.61).toFixed(1));
-                $('#service_level_2022').val(LOS_2022(D_2022));
             }
-            $('#c').val(2400);
-            S = S_f(FFS,vp);
-            $('#S').val(S.toFixed(1));
-            D = D_f(vp,S);
-            $('#D').val(D.toFixed(1));
-            $('#service_level').val(LOS(D));
-        }else {
-            $('#c').val(2400);
-            $('#S').val('');
-            $('#D').val('');
-            $('#FFS_o').val('');
-            $('#service_level').val("F");
-            $('#S_2022').val('');
-            $('#D_2022').val('');
-            $('#FFS_o_2022').val('');
-            $('#service_level_2022').val("F");
-        }
-        // HCM 7ªEdição
-        
-            // $('#service_level').val(vp.toFixed());
+            // HCM 7ªEdição
 
-        $(['fhv','fhv_2022','vp','vp_2022','FFS_o','FFS_o_2022','c','c_2022','S','S_2022','D','D_2022','service_level','service_level_2022','label_fhv','label_vp','label_ffs','label_capacidade','label_velocidade_media','label_densidade','label_service_level']).each( function (key, el) {
-            $('#'+el).change();
-        })
+            // $('#service_level').val(vp.toFixed());
+        }
+
+        $('#Exportar').attr('disabled', false)
+    })
+
+    $('#Limpar').click(function(e) {
+        e.preventDefault();
+        ///inputs
+        $('input[name="terreno"]').prop('checked', false);
+        $('input[name="FFS"]').prop('checked', false);
+        $('#car_volume').val('');
+        $('#N_acessos').val('');
+        $('#phf').val('');
+        $('#pt').val('');
+        $('#pr').val('');
+        $('#berma').val('');
+        $('#FFS').val('');
+        $('#via').val('')
+        $('#length').val('');
+        $('#N_vias').val('');
+        $('#BFFS').val('');
+        $('#tipos_de_condutores').val("")
+        $('#cond_atmos').val("")
+        ///outputs
+        $('#fhv').val('');
+        $('#fhv_2022').val('');
+        $('#vp').val('');
+        $('#vp_2022').val('');
+        $('#FFS_o').val('');
+        $('#FFS_o_2022').val('');
+        $('#S').val('');
+        $('#S_2022').val('');
+        $('#c').val('');
+        $('#c_2022').val('');
+        $('#D').val('');
+        $('#service_level').val("");
+        $('#D_2022').val('');
+        $('#service_level_2022').val("");
     })
 </script>
 </html>
