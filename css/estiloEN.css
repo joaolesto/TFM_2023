@@ -135,8 +135,8 @@ button[type="submit"]:hover {
 
 .parent {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns: repeat(8, auto);
+  grid-template-rows: repeat(8, auto);
   grid-column-gap: 50px;
   grid-row-gap: 10px;
 }
