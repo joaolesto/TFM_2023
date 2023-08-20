@@ -400,6 +400,8 @@
                 $('#FFS_o').val(FFS.toFixed(1));
                 $('#FFS_o_2022').val(FFS.toFixed(1));
                 FFS_2022 = FFS;
+                $('#FFS_o_ajustada').val(FFS_2022.toFixed(1));
+                $('#FFS_o_2022_ajustada').val(FFS_2022.toFixed(1));
 
             } else if ($('#FFS_c').is(":checked")) {
                 //HCM2000
@@ -657,7 +659,8 @@
             $('#c_2022').val(c_2022.toFixed(0));
             //verificação//
             FFSadj=FFSadj_f(FFS_2022/1.61,SAF);
-             
+            $('#FFS_o_2022_ajustada').val((FFSadj*1.61).toFixed(1))
+            $('#FFS_o_ajustada').val((FFS).toFixed(1))
             console.log(FFSadj_2022)//mi/h
             //verificação
             cadj_2022 = cadj_f(c_2022,CAF);
@@ -688,9 +691,6 @@
             $('#FFS_o_2022').val('');
             $('#service_level_2022').val("F");
         }
-        // HCM 7ªEdição
-
-            // $('#service_level').val(vp.toFixed());
         }
 
         $('#Exportar').attr('disabled', false)
@@ -721,10 +721,14 @@
         $('#vp_2022').val('');
         $('#FFS_o').val('');
         $('#FFS_o_2022').val('');
+        $('#FFS_o_ajustada').val('');
+        $('#FFS_o_2022_ajustada').val('');
         $('#S').val('');
         $('#S_2022').val('');
         $('#c').val('');
         $('#c_2022').val('');
+        $('#c_ajustada').val('');
+        $('#c_2022_ajustada').val('');
         $('#D').val('');
         $('#service_level').val("");
         $('#D_2022').val('');
