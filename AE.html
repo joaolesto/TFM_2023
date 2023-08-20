@@ -31,7 +31,7 @@
                     <br/>
                     <div class="general-inputs">
                         <div class="row">
-                            <label for="car_volume">Volume de tráfego (pc/h)</label>
+                            <label for="car_volume">Volume de tráfego (veiculos/h)</label>
                             <input type="number" name="car_volume" id="car_volume" min="0" number-only />
                         </div>
                         <div class="row">
@@ -129,9 +129,19 @@
                             <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
                         </tr>
                         <tr>
+                            <td id="label_ffs_ajustada">Velocidade de fluxo livre ajustada (km/h)</td>
+                            <td><input type="text" name="FFS_o_ajustada" id="FFS_o_ajustada" disabled></td>
+                            <td><input type="text" name="FFS_o_2022_ajustada" id="FFS_o_2022_ajustada" disabled></td>
+                        </tr>
+                        <tr>
                             <td  id="label_capacidade">Capacidade (uvl/h/via)</td>
                             <td><input type="text" name="capacidade" id="c" disabled></td>
                             <td><input type="text" name="capacidade_2022" id="c_2022" disabled></td>
+                        </tr>
+                        <tr>
+                            <td  id="label_capacidade_ajustada">Capacidade ajustada (uvl/h/via)</td>
+                            <td><input type="text" name="capacidade" id="c_ajustada" disabled></td>
+                            <td><input type="text" name="capacidade_2022" id="c_2022_ajustada" disabled></td>
                         </tr>
                         <tr>
                             <td id="label_velocidade_media">Velocidade média (km/h)</td>
@@ -258,7 +268,9 @@
         $([ 'label_fhv','fhv','fhv_2022',
             'label_vp','vp','vp_2022',
             'label_ffs','FFS_o','FFS_o_2022',
+            'label_ffs_ajustada','FFS_o_ajustada','FFS_o_2022_ajustada',
             'label_capacidade','c','c_2022',
+            'label_capacidade_ajustada','c_ajustada','c_2022_ajustada',
             'label_velocidade_media','S','S_2022',
             'label_densidade','D','D_2022',
             'label_service_level','service_level','service_level_2022'
@@ -643,23 +655,23 @@
             }
             c_2022 = c_f(FFS_2022/1.61);
             $('#c_2022').val(c_2022.toFixed(0));
-            if (c_2022>2400){
-                $('#S_2022').val('');
-                $('#D_2022').val('');
-                $('#FFS_o_2022').val('');
-                $('#service_level_2022').val("F");
-            }else{
-                FFSadj=FFSadj_f(FFS_2022/1.61,SAF); //mi/h
-                cadj_2022 = cadj_f(c_2022,CAF);
-                BP=BP_f(FFS_2022/1.61,CAF);
-                BPadj=BPadj_f(FFSadj,CAF);
-                S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
-                $('#S_2022').val((S_2022*1.61).toFixed(1));
-                D_2022 = D_f(vp_2022,S_2022);
-                $('#D_2022').val((D_2022/1.61).toFixed(1));
-                $('#service_level_2022').val(LOS_2022(D_2022));
-            }
+            //verificação//
+            FFSadj=FFSadj_f(FFS_2022/1.61,SAF);
+             
+            console.log(FFSadj_2022)//mi/h
+            //verificação
+            cadj_2022 = cadj_f(c_2022,CAF);
+            $('#c_2022_ajustada').val(cadj_2022.toFixed(0));
+            //verificação
+            BP=BP_f(FFS_2022/1.61,CAF);
+            BPadj=BPadj_f(FFSadj,CAF);
+            S_2022 = S_f_2022(FFSadj,vp,BPadj,c_2022,cadj_2022);
+            $('#S_2022').val((S_2022*1.61).toFixed(1));
+            D_2022 = D_f(vp_2022,S_2022);
+            $('#D_2022').val((D_2022/1.61).toFixed(1));
+            $('#service_level_2022').val(LOS_2022(D_2022));
             $('#c').val(2400);
+            $('#c_ajustada').val(2400);
             S = S_f(FFS,vp);
             $('#S').val(S.toFixed(1));
             D = D_f(vp,S);
