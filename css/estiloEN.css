@@ -151,6 +151,18 @@ input {
 .form-outputs_2022 { grid-area: 5 / 5 / 7 / 9; }
 .form-outputs-gerais { grid-area: 7 / 2 / 9 / 8; }
 
+@media only screen and (max-width: 1150px) {
+  .parent {
+    grid-template-rows: repeat(12, auto);
+  }
+
+  .form-hcm-2000 { grid-area: 3 / 2 / 5 / 8; }
+  .form-outputs_2000 { grid-area: 5 / 2 / 7 / 8; }
+  .form-hcm-7-edition { grid-area: 7 / 2 / 9 / 8; }
+  .form-outputs_2022 { grid-area: 9 / 2 / 11 / 8; }
+  .form-outputs-gerais { grid-area: 11 / 2 / 13 / 8; }
+}
+
 #error-N_vias, #error-pt, #error-pr, #error-FFS, #error-phf {
   display: block;
   color: red;
