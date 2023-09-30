@@ -125,11 +125,10 @@ button[type="submit"]:hover {
 }
 
 .row input[type="number"] {
-  width: 50%;
+  width: unset;
 }
 
 .row label{
-  width: 50%;
   margin-right: 10px;
 }
 
@@ -163,5 +162,4 @@ select {
   height: fit-content;
   display: flex;
   align-self: center;
-  width: 100%;
 }
