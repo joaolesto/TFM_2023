@@ -56,7 +56,7 @@ function BFFS_f(Spl){
     return 1.14*Spl
 }
 //passo 6
-function FFS_f(BFFS,a,HV,fls,fA){
+function FFS_f_2022(BFFS,a,HV,fls,fA){
     return BFFS-a*HV-fls-fA
 }
 //passo 7
@@ -262,10 +262,10 @@ function p1_f_2022(classe,FFS,HV,L,vo) {
 function PF_f(m,p,vd){
     return (100*(1-Math.E**(m*((vd/1000)**p))))
 }
-function m2_f_2022(d1,d2,PFcap,PF25cap,cap){
+function m2_f_2022(PFcap,PF25cap,cap){
     return -0.29764*((0-Math.log(1-(PF25cap/100)))/(0.25*(cap/1000)))+-0.71917*((0-Math.log(1-(PFcap/100)))/((cap/1000)))
 }
-function PFcap_f(classe,L,FFS,HV,vo,FFS){
+function PFcap_f(classe,L,FFS,HV,vo){
     let b0 = 0
     let b1 = 0
     let b2 = 0
@@ -322,7 +322,7 @@ function PFcap_f(classe,L,FFS,HV,vo,FFS){
     }
     return b0+b1*L+b2*Math.sqrt(L)+b3*FFS+b4*Math.sqrt(FFS)+b5*HV+b6*(FFS*(vo/1000))+b7*(Math.sqrt(vo/1000))
 }
-function PF25cap_f(classe,L,FFS,HV,vo,FFS){
+function PF25cap_f(classe,L,FFS,HV,vo){
     let c0 = 0
     let c1 = 0
     let c2 = 0

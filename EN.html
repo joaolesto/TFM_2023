@@ -415,6 +415,7 @@
         let fa=0;
         let fls=0;
         let FFS = 0;
+        let FFS_2022 = 0;
         let ATS_d = 0;
         let fnp_s = 0;
         let BPTSF_d = 0;
@@ -424,6 +425,9 @@
         let fnp_ts=0;
         let classe_estrada = 0;
         let LOS = "";
+        let LOS_2022 = "";
+        //hcm2022
+        let fls_2022 =0;
         if ($('#car_volume').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' ||  $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
             alert("Preencha todos os campos necessários");
             return
@@ -530,7 +534,6 @@
             }
             //
             //sentido oposto
-
             fhv_s_d = fhv_f(PT,ET_s_d,PR,ER_s_d); // Passo 2
             fhv_ts_d = fhv_f(PT,ET_ts_d,PR,ER_ts_d);
             fhv_s_o = fhv_f(PT,ET_s_o,PR,ER_s_o);
@@ -546,19 +549,40 @@
             $('#vo_ts').val(vo_ts.toFixed(0));
             var fhvmax=[fhv_s_d,fhv_ts_d];
             var max = Math.max(...fhvmax);
+            //débito
+            let vd_2022 = 0;
+            vd_2022 = v_f(car_volume_d,phf)
+            $('#vd_2022').val(vd_2022);
+            //classe vertical (i,L)
+            classe 
+
+            //BFFS
+            let spl = parseFloat($('#SPL').val());
+            let BFFS_2022 = 0;
+            BFFS_2022 = BFFS_f(spl/1.61)
+            $('#BFFS_2022').val(BFFS_2022*1.61);
+            let vo_2022 = 0;
             //passo 4
             if(vd_s>1700 || vo_s>1700 || vd_ts>1700 || vo_ts>1700){
                 $('#service_level').val("F");
             }else{
                 if($('#FFS_m').is(":checked")){
                     let SFM = parseFloat($('#SFM').val());
-                    FFS=SFM+0.0125*(car_volume_d/max);
+                    FFS=SFM+0.0125*(car_volume_d/fhv_s_d);
+                    FFS_2022=FFS
                     $('#FFS_o').val(FFS.toFixed(2));
+                    $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
+
                 }else{
                     fls=f_ls(berma,via);
+                    fls_2022=fLS_f_2022(via/0.305,berma/0.305);
                     fa=fa_f(N_acessos);
+                    fa_2022 = fA_f_2022(N_acessos); 
+                    a_2022 = a_f(classe,vo_2022,length/1.61,BFFS_2022)
+                    FFS_2022 = FFS_f_2022(BFFS_2022,a,PT,fls_2022,fa_2022)
                     FFS=FFS_f(BFFS,fls,fA)
                     $('#FFS_o').val(FFS.toFixed(0));
+                    $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
                     //if ($('#classe_estrada').val()==="I"){
                 }
                 //escrever aqui o restante código
@@ -579,14 +603,36 @@
                 }
                 LOS=LOS_f(classe_estrada,ATS_d,PTSF_d)
                 $('#service_level').val(LOS);
+                
+                let m1_2022 = 0;
+                let p1_2022 = 0;
+                let S_2022 = 0;
+                let PF25cap_2022 = 0;
+                let PFcap_2022 = 0;
+                let m2_2022 = 0;
+                let p2_2022 = 0;
+                let cap = 1700;
+                let PF_2022 = 0;
+                let FD_2022 = 0;
+                m1_2022=m1_f_2022(classe,vo_2022,length/1.61,PT,FFS_2022);
+                p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61,vo_2022);
+                S_2022 = S_f_2022(vd_2022,m1_2022,p1_2022);
+                $('#S_2022').val(S_2022/1.61.toFixed(2));
+                PF25cap_2022=PFPF25cap_f(classe,lenght/1.61,FFS,PT,vo_2022);
+                $('#PF25cap_2022').val((PF25cap_2022.toFixed(2)));
+                PFcap_2022=PFcap_f(classe,length/1.61,FFS,PT,vo);
+                $('#PFcap_2022').val((PFcap_2022.toFixed(2)));
+                m2_2022=m2_f_2022(PFcap,PF25cap,cap);
+                p2_2022=p2_f_2022(PFcap,PF25cap,cap);
+                PF_2022=PF_f(m2_2022,p2_2022,vd_2022);
+                $("#PF_2022").val(PF_2022.toFixed(2));
+                FD_2022=PF_f(m2_2022,p2_2022,vd_2022);
+                $("#FD_2022").val(FD_2022/1.61.toFixed(2));
+                LOS_2022=NS2022_f(spl/1.61,FD_2022,vd_2022,vo_2022)
             }
         }
-    
-
         $('#Exportar').attr('disabled', false)
     })
-
-
     $('#Limpar').click(function(e) {
         e.preventDefault();
         ///inputs
