@@ -153,6 +153,13 @@ input {
   .form-outputs { grid-area: 5 / 2 / 7 / 6; }
 }
 
+@media only screen and (max-width: 625px) {
+  .form-input-gerais { grid-area: 1 / 2 / 3 / 6; }
+  .form-hcm-2000 { grid-area: 3 / 2 / 5 / 6; }
+  .form-hcm-7-edition { grid-area: 5 / 2 / 7 / 6; }
+  .form-outputs { grid-area: 7 / 2 / 9 / 6; }
+}
+
 #error-N_vias, #error-pt, #error-pr, #error-FFS, #error-phf {
   display: block;
   color: red;
