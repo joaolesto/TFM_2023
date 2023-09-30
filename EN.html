@@ -39,25 +39,25 @@
                         </div>
                         <input type="radio" name="FFS" id="FFS_m"/>
                         <label for="FFS_m">FFS (com dados de campo)</label>
-                        <div class="row">
-                            <label for="FFS">Velocidade média medida no terreno (km/h)</label>
-                            <input type="number" name="FFS_m" id="SFM" min="0"/>
-                        </div>
                         <input type="radio" name="FFS" id="FFS_c"/>
                         <label for="FFS_c">FFS (Calculado)</label>
-                        <div class="row">
-                            <label for="berma">Largura da Berma (m)</label>
-                            <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
-                        </div>
-                        <div class="row">
-                            <label for="via">Largura da Via (m)</label>
-                            <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
-                        </div>
                         <div class="row">
                             <label for="length">Comprimento da Via (km)</label>
                             <input type="number" name="length" id="length" step ="0.01" min="0" max="100" />
                         </div>
-                        <div class="row">
+                        <div class="row"  style="display: none">
+                            <label for="SFM">Velocidade média medida no terreno (km/h)</label>
+                            <input type="number" name="FFS_m" id="SFM" min="0"/>
+                        </div>
+                        <div class="row" style="display: none">
+                            <label for="berma">Largura da Berma (m)</label>
+                            <input type="number" name="berma" id="berma" step ="0.01" min="0"/>
+                        </div>
+                        <div class="row" style="display: none">
+                            <label for="via">Largura da Via (m)</label>
+                            <input type="number" name="via" id="via" step ="0.01" min="3.0"/>
+                        </div>
+                        <div class="row"  style="display: none">
                             <label for="N_acessos">Número de Acessos</label>
                             <input type="number" name="acessos" id="N_acessos" min="0" />
                         </div>
@@ -121,10 +121,6 @@
                         <td><input type="text" name="ffs_o" id="FFS_o" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_service_level">Nivel de Serviço</td>
-                        <td><input type="text" name="service_level" id="service_level" disabled></td>
-                    </tr>
-                    <tr>
                         <td id="label_ATS_d">Velocidade média de viagem (km/h)</td>
                         <td><input type="text" name="ATS_d" id="ATS_d" disabled></td>
                     </tr>
@@ -147,20 +143,16 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td id="label_fhv_2022">FHV</td>
+                        <td id="label_fhv_2022">Velocidade de fluxo base (km/h)</td>
                         <td><input type="text" name="fhv_2022" id="fhv_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_vp_2022">Vp (uvl/h/via)</td>
+                        <td id="label_vp_2022">Débito de trafeto (no sentido em análise) (uvl/h)</td>
                         <td><input type="text" name="vp_2022" id="vp_2022" disabled></td>
                     </tr>
                     <tr>
                         <td id="label_ffs_2022">Velocidade de fluxo livre (km/h)</td>
                         <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
-                    </tr>
-                    <tr>
-                        <td  id="label_capacidade_2022">Capacidade (uvl/h/via)</td>
-                        <td><input type="text" name="capacidade_2022" id="c_2022" disabled></td>
                     </tr>
                     <tr>
                         <td id="label_velocidade_media_2022">Velocidade média (km/h)</td>
@@ -171,8 +163,12 @@
                         <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_service_level_2022">Nivel de Serviço</td>
-                        <td><input type="text" name="service_level_2022" id="service_level_2022" disabled></td>
+                        <td id="label_densidade_2022">% de seguidores</td>
+                        <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_densidade_2022">% de seguidores para 25% da capacidade</td>
+                        <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
                     </tr>
                     </tbody>
                 </table>
@@ -212,41 +208,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td id="label_fhv_gerais">FHV</td>
-                        <td><input type="text" name="fhv_gerais" id="fhv_gerais" disabled></td>
-                        <td><input type="text" name="fhv_gerais" id="fhv_gerais" disabled></td>
-                    </tr>
-                    <tr>
-                        <td id="label_vp_gerais">Vp (uvl/h/via)</td>
-                        <td><input type="text" name="vp_gerais" id="vp_gerais" disabled></td>
-                        <td><input type="text" name="vp_gerais" id="vp_gerais" disabled></td>
-                    </tr>
-                    <tr>
-                        <td id="label_ffs_gerais">Velocidade de fluxo livre (km/h)</td>
-                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
-                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
-                    </tr>
-                    <tr>
-                        <td  id="label_capacidade_gerais">Capacidade (uvl/h/via)</td>
-                        <td><input type="text" name="capacidade_gerais" id="c_gerais" disabled></td>
-                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
-                    </tr>
-                    <tr>
-                        <td id="label_velocidade_media_gerais">Velocidade média (km/h)</td>
-                        <td><input type="text" name="velocidade_media_gerais" id="S_gerais" disabled></td>
-                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
-                    </tr>
-                    <tr>
-                        <td id="label_densidade_gerais">Densidade de tráfego por via (uvl/km/via)</td>
-                        <td><input type="text" name="densidade_gerais" id="D_gerais" disabled></td>
-                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
-                    </tr>
-                    <tr>
-                        <td id="label_service_level_gerais">Nivel de Serviço</td>
-                        <td><input type="text" name="service_level_gerais" id="service_level_gerais" disabled></td>
-                        <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
-                    </tr>
+                        <tr>
+                            <td id="label_service_level_gerais">Nivel de Serviço</td>
+                            <td><input type="text" name="service_level_gerais" id="service_level_gerais" disabled></td>
+                            <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
+                        </tr>
                     </tbody>
                 </table>
             </form>
@@ -262,24 +228,22 @@
     $(function () {
         $("#FFS_m").click(function () {
             if ($(this).is(":checked")) {
-                $("#FFS").attr("disabled", false);
-                $("#length").attr("disabled",true);
-                $("#via").attr("disabled",true);
-                $("#berma").attr("disabled",true);
-                $("#BFFS").attr("disabled",true);
-                $("#N_acessos").attr("disabled",true)
+                $("#SFM").attr("disabled", false).parent().show();
+                $("#via").attr("disabled",true).parent().hide();
+                $("#berma").attr("disabled",true).parent().hide();
+                $("#BFFS").attr("disabled",true).parent().hide();
+                $("#N_acessos").attr("disabled",true).parent().hide();
             }
         });
     });
     $(function () {
         $("#FFS_c").click(function () {
             if ($(this).is(":checked")) {
-                $("#FFS").attr("disabled", true);
-                $("#length").attr("disabled",false);
-                $("#berma").attr("disabled",false);
-                $("#via").attr("disabled",false);
-                $("#BFFS").attr("disabled",false);
-                $("#N_acessos").attr("disabled",false)
+                $("#SFM").attr("disabled", true).parent().hide();
+                $("#berma").attr("disabled",false).parent().show();
+                $("#via").attr("disabled",false).parent().show();
+                $("#BFFS").attr("disabled",false).parent().show();
+                $("#N_acessos").attr("disabled",false).parent().show();
             }
         });
     });
@@ -376,6 +340,7 @@
 </script>
 <script defer>
     $('#Calcular').click(function(e) {
+        console.log('entrei')
         e.preventDefault();
         // HCM2000
         let car_volume_d = parseInt($('#car_volume_d').val());
@@ -430,197 +395,197 @@
         }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#length').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#BFFS').val() === '')) {
             alert("Preencha todos os campos necessários para calcular o FFS");
             return;
-            // Campos preenchidos, prosseguir com o cálculo
-            if ($('#ondulado').is(":checked")) {
-                if(car_volume_d=>0 && car_volume_d<=600){
-                    fg_s_d=0.71;
-                    fg_ts_d=0.77;
-                    ET_s_d=2.5;
-                    ER_s_d=1.1;
-                    ET_ts_d=1.8;
-                    ER_ts_d=1.0;
+        }
+        // Campos preenchidos, prosseguir com o cálculo
+        if ($('#ondulado').is(":checked")) {
+            if(car_volume_d =>0 && car_volume_d<=600){
+                fg_s_d=0.71;
+                fg_ts_d=0.77;
+                ET_s_d=2.5;
+                ER_s_d=1.1;
+                ET_ts_d=1.8;
+                ER_ts_d=1.0;
 
-                }else if(car_volume_d=>600 && car_volume_d<=1200){
-                    fg_s_d=0.93;
-                    fg_ts_d=0.94;
-                    ET_s_d=1.9;
-                    ER_s_d=1.1;
-                    ET_ts_d=1.5;
-                    ER_ts_d=1.0;
-                }else if(car_volume_d>1200){
-                    fg_s_d=0.99;
-                    fg_ts_d=1.00;
-                    ET_s_d=1.5;
-                    ER_s_d=1.1;
-                    ET_ts_d=1.0;
-                    ER_ts_d=1.0;
-                }
-            }else if ($('#plano').is(":checked")) {
-                fg_s_d = 1.00;
-                fg_ts_d = 1.00;
-                if(car_volume_d=>0 && car_volume_d<=600){
-                    ET_s_d=1.7;
-                    ER_s_d=1.0;
-                    ET_ts_d=1.1;
-                    ER_ts_d=1.0;
-                }else if(car_volume_d=>600 && car_volume_d<=1200){
-                    ET_s_d=1.2;
-                    ER_s_d=1.0;
-                    ET_ts_d=1.1;
-                    ER_ts_d=1.0;
-                }else if(car_volume_d>1200){
-                    ET_s_d=1.1;
-                    ER_s_d=1.0;
-                    ET_ts_d=1.0;
-                    ER_ts_d=1.0;
-                }
+            }else if(car_volume_d=>600 && car_volume_d<=1200){
+                fg_s_d=0.93;
+                fg_ts_d=0.94;
+                ET_s_d=1.9;
+                ER_s_d=1.1;
+                ET_ts_d=1.5;
+                ER_ts_d=1.0;
+            }else if(car_volume_d>1200){
+                fg_s_d=0.99;
+                fg_ts_d=1.00;
+                ET_s_d=1.5;
+                ER_s_d=1.1;
+                ET_ts_d=1.0;
+                ER_ts_d=1.0;
             }
-            //sentido oposto
-            //
-            if ($('#ondulado').is(":checked")) {
-                if(car_volume_o=>0 && car_volume_o<=600){
-                    fg_s_o=0.71;
-                    fg_ts_o=0.77;
-                    ET_s_o=2.5;
-                    ER_s_o=1.1;
-                    ET_ts_o=1.8;
-                    ER_ts_o=1.0;
-
-                }else if(car_volume_o=>600 && car_volume_o<=1200){
-                    fg_s_o=0.93;
-                    fg_ts_o=0.94;
-                    ET_s_o=1.9;
-                    ER_s_o=1.1;
-                    ET_ts_o=1.5;
-                    ER_ts_o=1.0;
-                }else if(car_volume_o>1200){
-                    fg_s_o=0.99;
-                    fg_ts_o=1.00;
-                    ET_s_o=1.5;
-                    ER_s_o=1.1;
-                    ET_ts_o=1.0;
-                    ER_ts_o=1.0;
-                }
-            }else if ($('#plano').is(":checked")) {
-                fg_s_o = 1.00;
-                fg_ts_o = 1.00;
-                if(car_volume_o=>0 && car_volume_o<=600){
-                    ET_s_o=1.7;
-                    ER_s_o=1.0;
-                    ET_ts_o=1.1;
-                    ER_ts_o=1.0;
-                }else if(car_volume_o=>600 && car_volume_o<=1200){
-                    ET_s_d=1.2;
-                    ER_s_d=1.0;
-                    ET_ts_d=1.1;
-                    ER_ts_d=1.0;
-                }else if(car_volume_o>1200){
-                    ET_s_o=1.1;
-                    ER_s_o=1.0;
-                    ET_ts_o=1.0;
-                    ER_ts_o=1.0;
-                }
-            }
-            //
-            //sentido oposto
-            fhv_s_d = fhv_f(PT,ET_s_d,PR,ER_s_d); // Passo 2
-            fhv_ts_d = fhv_f(PT,ET_ts_d,PR,ER_ts_d);
-            fhv_s_o = fhv_f(PT,ET_s_o,PR,ER_s_o);
-            fhv_ts_o = fhv_f(PT,ET_ts_o,PR,ER_ts_o);
-            //passo3
-            vd_s=vp_f(car_volume_d,phf,fg_s_d,fhv_s_d);
-            $('#vd_s').val(vd_s.toFixed(0));
-            vd_ts=vp_f(car_volume_d,phf,fg_ts_d,fhv_ts_d);
-            $('#vd_ts').val(vd_ts.toFixed(0));
-            vo_s=vp_f(car_volume_o,phf,fg_s_o,fhv_s_o);
-            $('#vo_s').val(vo_s.toFixed(0));
-            vo_ts=vp_f(car_volume_o,phf,fg_ts_o,fhv_ts_o);
-            $('#vo_ts').val(vo_ts.toFixed(0));
-            var fhvmax=[fhv_s_d,fhv_ts_d];
-            var max = Math.max(...fhvmax);
-            //débito
-            let vd_2022 = 0;
-            vd_2022 = v_f(car_volume_d,phf)
-            $('#vd_2022').val(vd_2022);
-            //classe vertical (i,L)
-            classe 
-
-            //BFFS
-            let spl = parseFloat($('#SPL').val());
-            let BFFS_2022 = 0;
-            BFFS_2022 = BFFS_f(spl/1.61)
-            $('#BFFS_2022').val(BFFS_2022*1.61);
-            let vo_2022 = 0;
-            //passo 4
-            if(vd_s>1700 || vo_s>1700 || vd_ts>1700 || vo_ts>1700){
-                $('#service_level').val("F");
-            }else{
-                if($('#FFS_m').is(":checked")){
-                    let SFM = parseFloat($('#SFM').val());
-                    FFS=SFM+0.0125*(car_volume_d/fhv_s_d);
-                    FFS_2022=FFS
-                    $('#FFS_o').val(FFS.toFixed(2));
-                    $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
-
-                }else{
-                    fls=f_ls(berma,via);
-                    fls_2022=fLS_f_2022(via/0.305,berma/0.305);
-                    fa=fa_f(N_acessos);
-                    fa_2022 = fA_f_2022(N_acessos); 
-                    a_2022 = a_f(classe,vo_2022,length/1.61,BFFS_2022)
-                    FFS_2022 = FFS_f_2022(BFFS_2022,a,PT,fls_2022,fa_2022)
-                    FFS=FFS_f(BFFS,fls,fA)
-                    $('#FFS_o').val(FFS.toFixed(0));
-                    $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
-                    //if ($('#classe_estrada').val()==="I"){
-                }
-                //escrever aqui o restante código
-                fnp_s = 3;//falta meter a funcionar
-                ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_s)
-                $('#ATS_d').val(ATS_d.toFixed(2))
-                a=1;//falta meter a funcionar
-                b=2;//falta meter a funcionar
-                BPTSF_d=BPTSF_f(vd_ts,a,b)
-                $('#BPTSF_d').val((BPTSF_d).toFixed(2))
-                fnp_ts=3;//falta meter a funcionar
-                PTSF_d=PTSF_f(BPTSF_d,fnp_ts)
-                $('#PTSF_d').val(((PTSF_d)).toFixed(2))
-                if ($('#classe_estrada').val()==="1"){
-                    clase_estrada=1;
-                }else{
-                    classe_estrada=2;
-                }
-                LOS=LOS_f(classe_estrada,ATS_d,PTSF_d)
-                $('#service_level').val(LOS);
-                
-                let m1_2022 = 0;
-                let p1_2022 = 0;
-                let S_2022 = 0;
-                let PF25cap_2022 = 0;
-                let PFcap_2022 = 0;
-                let m2_2022 = 0;
-                let p2_2022 = 0;
-                let cap = 1700;
-                let PF_2022 = 0;
-                let FD_2022 = 0;
-                m1_2022=m1_f_2022(classe,vo_2022,length/1.61,PT,FFS_2022);
-                p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61,vo_2022);
-                S_2022 = S_f_2022(vd_2022,m1_2022,p1_2022);
-                $('#S_2022').val(S_2022/1.61.toFixed(2));
-                PF25cap_2022=PFPF25cap_f(classe,lenght/1.61,FFS,PT,vo_2022);
-                $('#PF25cap_2022').val((PF25cap_2022.toFixed(2)));
-                PFcap_2022=PFcap_f(classe,length/1.61,FFS,PT,vo);
-                $('#PFcap_2022').val((PFcap_2022.toFixed(2)));
-                m2_2022=m2_f_2022(PFcap,PF25cap,cap);
-                p2_2022=p2_f_2022(PFcap,PF25cap,cap);
-                PF_2022=PF_f(m2_2022,p2_2022,vd_2022);
-                $("#PF_2022").val(PF_2022.toFixed(2));
-                FD_2022=PF_f(m2_2022,p2_2022,vd_2022);
-                $("#FD_2022").val(FD_2022/1.61.toFixed(2));
-                LOS_2022=NS2022_f(spl/1.61,FD_2022,vd_2022,vo_2022)
-                $('#service_level_2022').val(LOS_2022);
+        }else if ($('#plano').is(":checked")) {
+            fg_s_d = 1.00;
+            fg_ts_d = 1.00;
+            if(car_volume_d=>0 && car_volume_d<=600){
+                ET_s_d=1.7;
+                ER_s_d=1.0;
+                ET_ts_d=1.1;
+                ER_ts_d=1.0;
+            }else if(car_volume_d=>600 && car_volume_d<=1200){
+                ET_s_d=1.2;
+                ER_s_d=1.0;
+                ET_ts_d=1.1;
+                ER_ts_d=1.0;
+            }else if(car_volume_d>1200){
+                ET_s_d=1.1;
+                ER_s_d=1.0;
+                ET_ts_d=1.0;
+                ER_ts_d=1.0;
             }
         }
+        //sentido oposto
+        //
+        if ($('#ondulado').is(":checked")) {
+            if(car_volume_o=>0 && car_volume_o<=600){
+                fg_s_o=0.71;
+                fg_ts_o=0.77;
+                ET_s_o=2.5;
+                ER_s_o=1.1;
+                ET_ts_o=1.8;
+                ER_ts_o=1.0;
+
+            }else if(car_volume_o=>600 && car_volume_o<=1200){
+                fg_s_o=0.93;
+                fg_ts_o=0.94;
+                ET_s_o=1.9;
+                ER_s_o=1.1;
+                ET_ts_o=1.5;
+                ER_ts_o=1.0;
+            }else if(car_volume_o>1200){
+                fg_s_o=0.99;
+                fg_ts_o=1.00;
+                ET_s_o=1.5;
+                ER_s_o=1.1;
+                ET_ts_o=1.0;
+                ER_ts_o=1.0;
+            }
+        }else if ($('#plano').is(":checked")) {
+            fg_s_o = 1.00;
+            fg_ts_o = 1.00;
+            if(car_volume_o=>0 && car_volume_o<=600){
+                ET_s_o=1.7;
+                ER_s_o=1.0;
+                ET_ts_o=1.1;
+                ER_ts_o=1.0;
+            }else if(car_volume_o=>600 && car_volume_o<=1200){
+                ET_s_d=1.2;
+                ER_s_d=1.0;
+                ET_ts_d=1.1;
+                ER_ts_d=1.0;
+            }else if(car_volume_o>1200){
+                ET_s_o=1.1;
+                ER_s_o=1.0;
+                ET_ts_o=1.0;
+                ER_ts_o=1.0;
+            }
+        }
+
+        //sentido oposto
+        fhv_s_d = fhv_f(PT,ET_s_d,PR,ER_s_d); // Passo 2
+        fhv_ts_d = fhv_f(PT,ET_ts_d,PR,ER_ts_d);
+        fhv_s_o = fhv_f(PT,ET_s_o,PR,ER_s_o);
+        fhv_ts_o = fhv_f(PT,ET_ts_o,PR,ER_ts_o);
+        //passo3
+        vd_s=vp_f(car_volume_d,phf,fg_s_d,fhv_s_d);
+        $('#vd_s').val(vd_s.toFixed(0));
+        vd_ts=vp_f(car_volume_d,phf,fg_ts_d,fhv_ts_d);
+        $('#vd_ts').val(vd_ts.toFixed(0));
+        vo_s=vp_f(car_volume_o,phf,fg_s_o,fhv_s_o);
+        $('#vo_s').val(vo_s.toFixed(0));
+        vo_ts=vp_f(car_volume_o,phf,fg_ts_o,fhv_ts_o);
+        $('#vo_ts').val(vo_ts.toFixed(0));
+        var fhvmax=[fhv_s_d,fhv_ts_d];
+        var max = Math.max(...fhvmax);
+        //débito
+        let vd_2022 = 0;
+        vd_2022 = v_f(car_volume_d,phf)
+        $('#vd_2022').val(vd_2022);
+        //classe vertical (i,L)
+        let classe = 1;
+        //BFFS
+        let spl = parseFloat($('#SPL').val());
+        let BFFS_2022 = 0;
+        BFFS_2022 = BFFS_f(spl/1.61)
+        $('#BFFS_2022').val(BFFS_2022*1.61);
+        let vo_2022 = 0;
+        //passo 4
+        if(vd_s>1700 || vo_s>1700 || vd_ts>1700 || vo_ts>1700){
+            $('#service_level').val("F");
+        }else{
+            if($('#FFS_m').is(":checked")){
+                let SFM = parseFloat($('#SFM').val());
+                FFS=SFM+0.0125*(car_volume_d/fhv_s_d);
+                FFS_2022=FFS
+                $('#FFS_o').val(FFS.toFixed(2));
+                $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
+
+            }else{
+                fls=f_ls(berma,via);
+                fls_2022=fLS_f_2022(via/0.305,berma/0.305);
+                fa=fa_f(N_acessos);
+                fa_2022 = fA_f_2022(N_acessos);
+                a_2022 = a_f(classe,vo_2022,length/1.61,BFFS_2022)
+                FFS_2022 = FFS_f_2022(BFFS_2022,a,PT,fls_2022,fa_2022)
+                FFS=FFS_f(BFFS,fls,fa)
+                $('#FFS_o').val(FFS.toFixed(0));
+                $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
+                //if ($('#classe_estrada').val()==="I"){
+            }
+            //escrever aqui o restante código
+            fnp_s = 3;//falta meter a funcionar
+            ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_s)
+            $('#ATS_d').val(ATS_d.toFixed(2))
+            a=1;//falta meter a funcionar
+            b=2;//falta meter a funcionar
+            BPTSF_d=BPTSF_f(vd_ts,a,b)
+            $('#BPTSF_d').val((BPTSF_d).toFixed(2))
+            fnp_ts=3;//falta meter a funcionar
+            PTSF_d=PTSF_f(BPTSF_d,fnp_ts)
+            $('#PTSF_d').val(((PTSF_d)).toFixed(2))
+            if ($('#classe_estrada').val()==="1"){
+                clase_estrada=1;
+            }else{
+                classe_estrada=2;
+            }
+            LOS=LOS_f(classe_estrada,ATS_d,PTSF_d)
+            $('#service_level').val(LOS);
+
+            let m1_2022 = 0;
+            let p1_2022 = 0;
+            let S_2022 = 0;
+            let PF25cap_2022 = 0;
+            let PFcap_2022 = 0;
+            let m2_2022 = 0;
+            let p2_2022 = 0;
+            let cap = 1700;
+            let PF_2022 = 0;
+            let FD_2022 = 0;
+            m1_2022=m1_f_2022(classe,vo_2022,length/1.61,PT,FFS_2022);
+            p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61,vo_2022);
+            S_2022 = S_f_2022(vd_2022,m1_2022,p1_2022);
+            $('#S_2022').val(S_2022/1.61.toFixed(2));
+            PF25cap_2022=PF25cap_f(classe,length/1.61,FFS,PT,vo_2022);
+            $('#PF25cap_2022').val((PF25cap_2022.toFixed(2)));
+            PFcap_2022=PFcap_f(classe,length/1.61,FFS,PT,vo_2022);
+            $('#PFcap_2022').val((PFcap_2022.toFixed(2)));
+            m2_2022=m2_f_2022(PFcap_2022,PF25cap_2022,cap);
+            p2_2022=p2_f_2022(PFcap_2022,PF25cap_2022,cap);
+            PF_2022=PF_f(m2_2022,p2_2022,vd_2022);
+            $("#PF_2022").val(PF_2022.toFixed(2));
+            FD_2022=PF_f(m2_2022,p2_2022,vd_2022);
+            $("#FD_2022").val(FD_2022/1.61.toFixed(2));
+            LOS_2022=NS2022_f(spl/1.61,FD_2022,vd_2022,vo_2022)
+            $('#service_level_2022').val(LOS_2022);
+        }
+
         $('#Exportar').attr('disabled', false)
     })
     $('#Limpar').click(function(e) {

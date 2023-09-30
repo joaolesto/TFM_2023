@@ -154,6 +154,10 @@ input {
 }
 
 @media only screen and (max-width: 625px) {
+  .parent {
+    grid-template-rows: repeat(18, auto);
+  }
+
   .form-hcm-2000 { grid-area: 3 / 2 / 5 / 6; }
   .form-hcm-7-edition { grid-area: 5 / 2 / 7 / 6; }
   .form-outputs { grid-area: 7 / 2 / 9 / 6; }
