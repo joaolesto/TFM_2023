@@ -41,7 +41,142 @@ function NS2022_f(limite,FD,vd,vo){
 }
 //passo 2 
 function class_vertical(i,L){
-    
+    let classe = "";
+    if (i>0) { //para as subidas
+        if (i<=1 && i<=2) {
+            classe = 1;
+        }else if ((i>2 && i<=3) && (L<=0.483)){
+            classe = 1;
+        }else if ((i>2 && i<=3) && (L>0.483)){
+            classe = 2;
+        }else if ((i>3 && i<=4) && (L<=0.322)){
+            classe = 1;
+        }else if ((i>3 && i<=4) && (L>0.322 && L<=0.805)){
+            classe = 2;
+        }else if ((i>3 && i<=4) && (L>0.805 && L<=1.771)){
+            classe = 3;
+        }else if ((i>3 && i<=4) && (L>1.771)){
+            classe = 4;
+        }else if ((i>4 && i<=5) && ( L<=0.161)){
+            classe = 1;
+        }else if ((i>4 && i<=5) && ( L>0.161 && L<=0.483)){
+            classe = 2;
+        }else if ((i>4 && i<=5) && ( L>0.483 && L<=0.966)){
+            classe = 3;
+        }else if ((i>4 && i<=5) && ( L>0.966)){
+            classe = 4;
+        }else if ((i>5 && i<=6) && (L<=0.161)){
+            classe = 1;
+        }else if ((i>5 && i<=6) && ( L>0.161 && L<=0.322)){
+            classe = 2;
+        }else if ((i>5 && i<=6) && ( L>0.322 && L<=0.644)){
+            classe = 3;
+        }else if ((i>5 && i<=6) && ( L>0.644 && L<=1.127)){
+            classe = 4;
+        }else if ((i>5 && i<=6) && ( L>1.127)){
+            classe = 5;
+        }else if ((i>6 && i<=7) && ( L<=0.161)){
+            classe = 1;
+        }else if ((i>6 && i<=7) && ( L>0.161 && L<=0.322)){
+            classe = 2;
+        }else if ((i>6 && i<=7) && ( L>0.322 && L<=0.483)){
+            classe = 3;
+        }else if ((i>6 && i<=7) && ( L>0.483 && L<=0.644)){
+            classe = 4;
+        }else if ((i>6 && i<=7) && ( L>0.644)){
+            classe = 5;
+        }else if ((i>7 && i<=8) && ( L<=0.161)){
+            classe = 2;
+        }else if ((i>7 && i<=8) && ( L>0.161 && L<=0.322)){
+            classe = 3;
+        }else if ((i>7 && i<=8) && ( L>0.322 && L<=0.483)){
+            classe = 4;
+        }else if ((i>7 && i<=8) && ( L>0.483)){
+            classe = 5;
+        }else if ((i>8 && i<=9) && ( L<=0.161)){
+            classe = 2;
+        }else if ((i>8 && i<=9) && ( L>0.161 && L<=0.322)){
+            classe = 3;
+        }else if ((i>8 && i<=9) && ( L>0.322 && L<=0.483)){
+            classe = 4;
+        }else if ((i>8 && i<=9) && ( L>0.483)){
+            classe = 5;
+        }else if (i>9 && (L<=0.161)){
+            classe = 2;
+        }else if (i>9 && (L>0.161 && L<=0.322)){
+            classe = 3;
+        }else if (i>9 && L>0.322){
+            classe = 5;
+        }
+    }else{
+        im = Math.abs(i); //para as descidas
+        if(im>1 && im<=-2){
+            classe = 1;
+        }else if (im>2 && im<=3 && L<=1.449){
+            classe = 1;
+        }else if (im>2 && im<=3 && L>1.449){
+            classe = 2;
+        }else if (im>3 && im<=4 && L<=0.483){
+            classe = 1;
+        }else if (im>3 && im<=4 && L>0.483 && L<=1.127){
+            classe = 2;
+        }else if (im>3 && im<=4 && L>1.127){
+            classe = 3;
+        }else if (im>4 && im<=5 && L<0.322){
+            classe = 1;
+        }else if (im>4 && im<=5 && L>0.322 && L<=0.644){
+            classe = 2;
+        }else if (im>4 && im<=5 && L>0.644 && L<=1.127){
+            classe = 3;
+        }else if (im>4 && im<=5 && L>1.127){
+            classe = 4;
+        }else if (im>5 && im<=6 && L<=0.161){
+            classe = 1;
+        }else if (im>5 && im<=6 && L>0.161 && L<=0.483){
+            classe = 2;
+        }else if (im>5 && im<=6 && L>0.483 && L<=0.805){
+            classe = 3;
+        }else if (im>5 && im<=6 && L>0.805 && L<=1.288){
+            classe = 4;
+        }else if (im>5 && im<=6 && L>1.288){
+            classe = 5;
+        }else if (im>6 && im<=7 && L<=0.161){
+            classe = 1;
+        }else if (im>6 && im<=7 && L>0.161 && L<=0.322){
+            classe = 2;
+        }else if (im>6 && im<=7 && L>0.322 && L<=0.483){
+            classe = 3;
+        }else if (im>6 && im<=7 && L>0.483 && L<=0.805){
+            classe = 4;
+        }else if (im>6 && im<=7 && L>0.805){
+            classe = 5;
+        }else if (im>7 && im<=8 && L<=0.161){
+            classe = 1;
+        }else if (im>7 && im<=8 && L>0.161 && L<=0.322){
+            classe = 2;
+        }else if (im>7 && im<=8 && L>0.322 && L<=0.483){
+            classe = 3;
+        }else if (im>7 && im<=8 && L>0.483 && L<=0.644){
+            classe = 4;
+        }else if (im>7 && im<=8 && L>0.644){
+            classe = 5;
+        }else if (im>8 && im<=9 && L<=0.161){
+            classe = 2;
+        }else if (im>8 && im<=9 && L>0.161 && L<=0.322){
+            classe = 3;
+        }else if (im>8 && im<=9 && L>0.322 && L<=0.483){
+            classe = 4;
+        }else if (im>8 && im<=9 && L>0.483){
+            classe = 5;
+        }else if (im>9 && L<=0.161){
+            classe = 2;
+        }else if (im>9 && L>0.161 && L<=0.322){
+            classe = 3;
+        }else if (im>9 && L>0.322){
+            classe = 5;
+        }
+    }
+      return classe
 }
 //passo 3
 function ext_f(classeV,L){

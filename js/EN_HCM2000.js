@@ -172,7 +172,38 @@ function Ats_f(FFS,vd_s,vo_s,fnp_s) {
 function BPTSF_f(vd_ts,a,b) {
     return 100*(1-Math.E**(a*vd_ts**(b)))
 }
-//passo 14
+//passo 14.1
+function exps_ts(vo){
+    let a = 0;
+    let b = 0;
+    if (vo<=200){
+        a=-0.013;
+        b=0.668;
+    }else if(vo>200 && vo<=400){
+        a=-0.057;
+        b=0.479;
+    }else if (vo>400 && vo<=600){
+        a=-0.100;
+        b= 0.413;
+    }else if (vo>600 && vo<=800){
+        a=-0.173;
+        b= 0.349;
+    }else if (vo>800 && vo<=1000){
+        a=-0.320;
+        b=0.276;
+    }else if (vo>1000 && vo<=1200){
+        a=-0.430;
+        b=0.242;
+    }else if (vo>1200 && vo<=1400){
+        a=-0.522;
+        b=0.225;
+    }else if (vo=>1600){
+        a=-0.665;
+        b=0.199;
+    }
+    return [a, b]
+}
+//passo 14 (corrigir)
 function PTSF_f(BPTSF,fnp_ts) {
   return BPTSF+fnp_ts
 }
