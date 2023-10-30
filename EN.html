@@ -509,7 +509,7 @@
         vd_2022 = v_f(car_volume_d,phf)
         $('#vd_2022').val(vd_2022);
         //classe vertical (i,L)
-        let classe = 1;
+        let classe = 1; //meter a funcionar
         //BFFS
         let spl = parseFloat($('#SPL').val());
         let BFFS_2022 = 0;
@@ -539,8 +539,9 @@
                 $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
             }
             //escrever aqui o restante código
-            fnp_s = 3;//falta meter a funcionar
-            ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_s)
+            fnp_ats = 3;//falta meter a funcionar
+
+            ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_ats)
             $('#ATS_d').val(ATS_d.toFixed(2))
             a=1;//falta meter a funcionar
             b=2;//falta meter a funcionar
