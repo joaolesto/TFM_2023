@@ -125,6 +125,10 @@
                         <td><input type="text" name="ATS_d" id="ATS_d" disabled></td>
                     </tr>
                     <tr>
+                        <td id="label_BPTSF_d">% base de tempo de seguimento(km/h)</td>
+                        <td><input type="text" name="BPTSF_d" id="BPTSF_d" disabled></td>
+                    </tr>
+                    <tr>
                         <td id="label_PTSF_d">% de tempo de seguimento</td>
                         <td><input type="text" name="PTSF_d" id="PTSF_d" disabled></td>
                     </tr>
@@ -143,32 +147,40 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td id="label_fhv_2022">Velocidade de fluxo base (km/h)</td>
-                        <td><input type="text" name="fhv_2022" id="fhv_2022" disabled></td>
+                        <td id="label_FFS_o_2022">Velocidade de fluxo base (km/h)</td>
+                        <td><input type="text" name="FFS_o_2022" id="FFS_o_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_vp_2022">Débito de trafeto (no sentido em análise) (uvl/h)</td>
-                        <td><input type="text" name="vp_2022" id="vp_2022" disabled></td>
+                        <td id="label_vd_2022">Débito de tráfego (no sentido em análise) (uvl/h)</td>
+                        <td><input type="text" name="vd_2022" id="vd_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_ffs_2022">Velocidade de fluxo livre (km/h)</td>
-                        <td><input type="text" name="ffs_o_2022" id="FFS_o_2022" disabled></td>
+                        <td id="label_classe_vertical">Classe vertical</td>
+                        <td><input type="text" name="classe_vertical" id="classe_vertical" disabled></td>
                     </tr>
                     <tr>
                         <td id="label_velocidade_media_2022">Velocidade média (km/h)</td>
                         <td><input type="text" name="velocidade_media_2022" id="S_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_densidade_2022">Densidade de tráfego por via (uvl/km/via)</td>
-                        <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
+                        <td id="label_BFFS_2022">Velocidade de fluxo livre base (km/h)</td>
+                        <td><input type="text" name="BFFS_2022" id="BFFS_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_densidade_2022">% de seguidores</td>
-                        <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
+                        <td id="label_PF25cap_2022">% de seguidores para 25% da capacidade</td>
+                        <td><input type="text" name="PF25cap_2022" id="PF25cap_2022" disabled></td>
                     </tr>
                     <tr>
-                        <td id="label_densidade_2022">% de seguidores para 25% da capacidade</td>
-                        <td><input type="text" name="densidade_2022" id="D_2022" disabled></td>
+                        <td id="label_PFcap_2022">% de seguidores para a capacidade máxima</td>
+                        <td><input type="text" name="PFcap_2022" id="PFcap_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_PF_2022">% de seguidores</td>
+                        <td><input type="text" name="PF_2022" id="PF_2022" disabled></td>
+                    </tr>
+                    <tr>
+                        <td id="label_FD_2022">Densidade de tráfego (uvl/km/via) </td>
+                        <td><input type="text" name="FD_2022" id="FD_2022" disabled></td>
                     </tr>
                     </tbody>
                 </table>
@@ -209,9 +221,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="label_service_level_gerais">Nivel de Serviço</td>
-                            <td><input type="text" name="service_level_gerais" id="service_level_gerais" disabled></td>
-                            <td><input type="text" name="ffs_o_gerais" id="FFS_o_gerais" disabled></td>
+                            <td id="label_service_level">Nivel de Serviço</td>
+                            <td><input type="text" name="service_level" id="service_level" disabled></td>
+                            <td><input type="text" name="service_level_2022" id="service_level_2022" disabled></td>
                         </tr>
                     </tbody>
                 </table>
@@ -340,7 +352,6 @@
 </script>
 <script defer>
     $('#Calcular').click(function(e) {
-        console.log('entrei')
         e.preventDefault();
         // HCM2000
         let car_volume_d = parseInt($('#car_volume_d').val());
