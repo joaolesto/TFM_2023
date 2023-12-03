@@ -252,7 +252,7 @@ function fA_f_2022(APD){
     return Math.min(APD/4,10)
 }
 //passo 10
-function S_f_2022(vd,m,p){
+function S_f_2022(vd,m,p,FFS){
     if (vd<=100){
         return FFS
     }else if(vd>100){

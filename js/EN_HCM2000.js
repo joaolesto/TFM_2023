@@ -1,7 +1,7 @@
 //classe 1
 //passo 2
 function fhv_f(PT,ET,PR,ER) {
-    return 1/(1+PT*(ET-1)+PR*(ER-1))
+    return 1/(1+(PT/100)*(ET-1)+(PR/100)*(ER-1))
   }
   //passo3
   function vp_f(V,PHF,fg,fhv) {
