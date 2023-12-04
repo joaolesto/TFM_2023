@@ -72,7 +72,7 @@ function FFS_f(BFFS,fls,fA) {
 }
 
 
-//fnp
+//fnp_ats
 
   
 
@@ -84,7 +84,7 @@ function Ats_f(FFS,vd_s,vo_s,fnp_s) {
 //classe 2
 //passo 13
 function BPTSF_f(vd_ts,a,b) {
-    return 100*(1-Math.E**(a*vd_ts**(b)))
+    return 100*(1-Math.exp(a*vd_ts**(b)))
 }
 //passo 14.1
 function exps_ts(vo){
@@ -120,8 +120,8 @@ function exps_ts(vo){
 //fnp_ts
 function fnp_f_ts(FFS,vo,U){ //fnp tempo de seguimentp
     let fnp_ts = 0;
-    if (U===0){
-        if (FFS=>110){
+    if (U===0){ //sem ultrapassagem
+        if (FFS>=110){
             if (vo<=100){
                 fnp_ts=10.1;
             }else if (vo>100 && vo<=200){
@@ -222,8 +222,8 @@ function fnp_f_ts(FFS,vo,U){ //fnp tempo de seguimentp
                 fnp_ts=0.4;
             }
         }
-    }else{
-         if (FFS=>110){
+    }else{ //com ultrapassagem
+         if (FFS>=110){
             if (vo<=100){
                 fnp_ts=21.8;
             }else if (vo>100 && vo<=200){
@@ -331,7 +331,7 @@ function fnp_f_ts(FFS,vo,U){ //fnp tempo de seguimentp
 function fnp_f_ats(FFS,vo,U){ //fnp velocidade média de viagem
     let fnp_ats = 0;
     if (U===0){
-        if (FFS=>110){
+        if (FFS>=110){
             if (vo<=100){
                 fnp_ats=1.7;
             }else if (vo>100 && vo<=200){

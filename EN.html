@@ -563,14 +563,19 @@
             }
             //escrever aqui o restante código
             fnp_ats = 3;//falta meter a funcionar
-
-            ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_ats)
-            $('#ATS_d').val(ATS_d.toFixed(2))
-            a=1;//falta meter a funcionar
-            b=2;//falta meter a funcionar
-            BPTSF_d=BPTSF_f(vd_ts,a,b)
-            $('#BPTSF_d').val((BPTSF_d).toFixed(2))
-            fnp_ts=3;//falta meter a funcionar
+            ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_ats);
+            $('#ATS_d').val(ATS_d.toFixed(2));
+            a = exps_ts(vo_ts)[0];
+            b = exps_ts(vo_ts)[1];
+            BPTSF_d=BPTSF_f(vd_ts,a,b);
+            $('#BPTSF_d').val((BPTSF_d).toFixed(2));
+            fnp_ts = 0;
+            if(tipo_segmento=="Zona de Ultrapassagem Impedida"){
+                U=1;
+            }else{
+                U=0;
+            }
+            fnp_ts = fnp_f_ts(FFS,vo_ts,U)
             PTSF_d=PTSF_f(BPTSF_d,fnp_ts)
             $('#PTSF_d').val(((PTSF_d)).toFixed(2))
             if ($('#classe_estrada').val()==="1"){
