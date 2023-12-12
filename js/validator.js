@@ -145,7 +145,7 @@ $(document).ready(function() {
         let validacao = !(parseFloat($(this).val()) >= 40);
 
         if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser superior a 40km/h</strong>`);
+            $(this).parent().after(`<strong class="error">Numero tem que ser superior a 40km/h</strong>`);
             return false;
 
         }
@@ -165,7 +165,7 @@ $(document).ready(function() {
         let validacao = (!(parseFloat($(this).val()) >= 40) || !(parseFloat($(this).val()) <= 125));
 
         if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 40-125km/h</strong>`);
+            $(this).parent().after(`<strong class="error">Numero tem que ser entre 40-125km/h</strong>`);
             return false;
 
         }
@@ -185,7 +185,7 @@ $(document).ready(function() {
         let validacao = (!(parseFloat($(this).val()) >= -10) || !(parseFloat($(this).val()) <= 10));
 
         if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre -10% a 10%</strong>`);
+            $(this).parent().after(`<strong class="error">Numero tem que ser entre -10% a 10%</strong>`);
             return false;
 
         }
