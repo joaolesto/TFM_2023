@@ -397,19 +397,38 @@
         let LOS_2022 = "";
         //hcm2022
         let fls_2022 =0;
-        if ($('#car_volume_d').val() === '' || $('#phf').val() === '' || $('#pt').val() === ''|| $('#pr').val() === '' ||  $('input[name="FFS"]:checked').length === 0 || $('input[name="terreno"]:checked').length === 0) {
-            alert("Preencha todos os campos necessários");
-            return
-        }else if ($('#FFS_m').is(":checked") && $('#FFS').val()===''){
+        if (
+            $('#car_volume_d').val() === '' ||
+            $('#car_volume_o').val() === '' ||
+            $('#phf').val() === '' ||
+            $('#pt').val() === ''||
+            $('#pr').val() === '' ||
+            !$('input[name="FFS"]').is(':checked') ||
+        ) {
+            alert("Preencha todos os campos inputs gerais");
+            return;
+        }else if ($('#FFS_m').is(":checked") && ($('#length').val() === '' || $('#SFM').val() === '')){
             alert("Introduza o valor do FFS (km/h)");
             return;
-        }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#length').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#BFFS').val() === '')) {
+        }else if ($('#FFS_c').is(":checked") && ($('#berma').val() === '' || $('#N_acessos').val() === '' || $('#via').val() === '' || $('#N_acessos').val() === '')) {
             alert("Preencha todos os campos necessários para calcular o FFS");
+            return;
+        } else if (
+            !$('input[name="terreno"]').is(':checked') ||
+            !$('#classe_estrada').val() === '' ||
+            !$('#BFFS').val() === ''
+        ) {
+            alert("Preencha todos os campos inputs HCM 2000");
+            return;
+        } else if (
+            !$('#tipo_segmento').is(':checked') ||
+            !$('#ldv').val() === '' ||
+            !$('#inclinação').val() === ''
+        ) {
+            alert("Preencha todos os campos inputs HCM 7ª edição");
             return;
         }
         // Campos preenchidos, prosseguir com o cálculo
-        console.log(car_volume_d)
-        console.log(car_volume_o)
         if ($('#ondulado').is(":checked")) {
             if(car_volume_d>=0 && car_volume_d<=300){
                 fg_s_d=0.71;
