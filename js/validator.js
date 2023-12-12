@@ -185,7 +185,7 @@ $(document).ready(function() {
         let validacao = (!(parseFloat($(this).val()) >= -10) || !(parseFloat($(this).val()) <= 10));
 
         if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre -10% - 10%</strong>`);
+            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre -10% a 10%</strong>`);
             return false;
 
         }
