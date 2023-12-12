@@ -3,7 +3,7 @@ $(document).ready(function() {
     /**
      * Positive Decimal Numbers
      */
-    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS").each(function(){
+    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#inclinação").each(function(){
         $(this).on('keydown',  function(event) {
 
             // Handle paste
@@ -18,13 +18,13 @@ $(document).ready(function() {
             return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 43 && event.keyCode !== 187
         });
     });
-    
+
      /**
      * Positive Whole Numbers
      */
-    $("#car_volume,#N_vias,#N_acessos").each(function(){
+    $("#car_volume,#N_vias,#N_acessos,#ldv").each(function(){
         $(this).on('keydown',  function(event) {
-            
+
             // Handle paste
             if (event.type === 'paste') {
                 key = event.clipboardData.getData('text/plain');
@@ -38,6 +38,7 @@ $(document).ready(function() {
 
         });
     });
+
     /**
      * Show error message
      */
@@ -67,13 +68,13 @@ $(document).ready(function() {
         if( validacao && !$('#error-N_vias').length && !($(this).val() === '')) {
             $(this).parent().after(`<strong id="error-N_vias">Numero tem que ser entre 2-10</strong>`)
             return false
-           
+
         }
 
         if( validacao ) {
             return false
         }
-        
+
         $('#error-N_vias').remove();
     })
 
@@ -85,7 +86,7 @@ $(document).ready(function() {
         let validacao = (!(parseFloat($(this).val()) >= 0) || !(parseFloat($(this).val()) <= 100));
 
         if( validacao && !$('#error-pt').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 1-99</strong>`)
+            $(this).parent().after(`<strong id="error-pt">Numero tem que ser entre 0-100</strong>`)
 
             return false
         }
@@ -93,7 +94,7 @@ $(document).ready(function() {
         if( validacao ) {
             return false
         }
-        
+
         $('#error-pt').remove();
     })
 
@@ -105,14 +106,14 @@ $(document).ready(function() {
         let validacao = (!(parseFloat($(this).val()) >= 0) || !(parseFloat($(this).val()) <= 100))
 
         if( validacao && !$('#error-pr').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 1-100</strong>`)
+            $(this).parent().after(`<strong id="error-pr">Numero tem que ser entre 0-100</strong>`)
             return false
         }
 
         if( validacao ) {
             return false
         }
-        
+
         $('#error-pr').remove();
     })
 
@@ -132,9 +133,10 @@ $(document).ready(function() {
         if( validacao ) {
             return false;
         }
-        
+
         $('#error-FFS').remove()
     })
+
     $("#berma").on('focusout', function() {
 
         let validacao = (!(parseFloat($(this).val()) >= 0) || !(parseFloat($(this).val()) <= 4));
@@ -148,11 +150,11 @@ $(document).ready(function() {
         if( validacao ) {
             return false;
         }
-        
+
         $('#error-berma').remove()
     })
-    $("#lenght").on('focusout', function() {
 
+    $(document).on('focusout', "#lenght, #car_volume_d, #car_volume_o", function() {
         let validacao = (!(parseFloat($(this).val()) > 0));
 
         if( validacao && !$('#error-lenght').length && !($(this).val() === '')) {
@@ -164,7 +166,7 @@ $(document).ready(function() {
         if( validacao ) {
             return false;
         }
-        
+
         $('#error-lenght').remove()
     })
 });
