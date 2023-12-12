@@ -3,7 +3,7 @@ $(document).ready(function() {
     /**
      * Positive Decimal Numbers
      */
-    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#inclinação").each(function(){
+    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#inclinação,#SFM").each(function(){
         $(this).on('keydown',  function(event) {
 
             // Handle paste
@@ -117,7 +117,7 @@ $(document).ready(function() {
         $('#error-pr').remove();
     })
 
-     /**
+    /**
      * Show error message for velcidade de fluxo livre
      */
      $("#FFS").on('focusout', function() {
@@ -125,7 +125,7 @@ $(document).ready(function() {
         let validacao = (!(parseFloat($(this).val()) >= 90) || !(parseFloat($(this).val()) <= 120));
 
         if( validacao && !$('#error-FFS').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120</strong>`);
+            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 90-120km/h</strong>`);
             return false;
 
         }
@@ -135,6 +135,66 @@ $(document).ready(function() {
         }
 
         $('#error-FFS').remove()
+    })
+
+    /**
+     * Show error message for velcidade media no terreno
+     */
+    $("#SFM").on('focusout', function() {
+
+        let validacao = !(parseFloat($(this).val()) >= 40);
+
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser superior a 40km/h</strong>`);
+            return false;
+
+        }
+
+        if( validacao ) {
+            return false;
+        }
+
+        $(this).parent().next(".error").remove()
+    })
+
+    /**
+     * Show error message for limite de velocidade
+     */
+    $("#ldv").on('focusout', function() {
+
+        let validacao = (!(parseFloat($(this).val()) >= 40) || !(parseFloat($(this).val()) <= 125));
+
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre 40-125km/h</strong>`);
+            return false;
+
+        }
+
+        if( validacao ) {
+            return false;
+        }
+
+        $(this).parent().next(".error").remove()
+    })
+
+    /**
+     * Show error message for inlcinação
+     */
+    $("#inclinação").on('focusout', function() {
+
+        let validacao = (!(parseFloat($(this).val()) >= -10) || !(parseFloat($(this).val()) <= 10));
+
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong id="error-FFS">Numero tem que ser entre -10% - 10%</strong>`);
+            return false;
+
+        }
+
+        if( validacao ) {
+            return false;
+        }
+
+        $(this).parent().next(".error").remove()
     })
 
     $("#berma").on('focusout', function() {
