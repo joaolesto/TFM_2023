@@ -166,7 +166,7 @@ input {
   .form-outputs-gerais { grid-area: 11 / 2 / 13 / 8; }
 }
 
-#error-N_vias, #error-pt, #error-pr, #error-FFS, #error-phf, #error-berma, #error-lenght {
+#error-N_vias, #error-pt, #error-pr, #error-FFS, #error-phf, #error-berma, #error-lenght, .error {
   display: block;
   color: red;
   margin-top: 0;

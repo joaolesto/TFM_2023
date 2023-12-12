@@ -154,20 +154,34 @@ $(document).ready(function() {
         $('#error-berma').remove()
     })
 
-    $("#lenght, #car_volume_d, #car_volume_o").on('focusout',function() {
+    $("#length, #berma, #via").on('focusout',function() {
         let validacao = (!(parseFloat($(this).val()) > 0));
 
-        if( validacao && !$('#error-lenght').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-lenght">A berma deve ter um valor superior ao número que indicou</strong>`);
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong class="error">A berma deve ter um valor superior ao número que indicou</strong>`);
             return false;
-
         }
 
         if( validacao ) {
             return false;
         }
 
-        $('#error-lenght').remove()
+        $(this).parent().next(".error").remove()
+    })
+
+    $("#car_volume_d, #car_volume_o").on('focusout',function() {
+        let validacao = (!(parseFloat($(this).val()) > 0));
+
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong class="error">O volume de trafego deve ter um valor superior ao número que indicou</strong>`);
+            return false;
+        }
+
+        if( validacao ) {
+            return false;
+        }
+
+        $(this).parent().next(".error").remove()
     })
 });
 
