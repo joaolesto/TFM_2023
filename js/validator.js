@@ -154,66 +154,30 @@ $(document).ready(function() {
         $('#error-berma').remove()
     })
 
-    $("#length").on('focusout',function() {
+    $("#lenght, #car_volume_d, #car_volume_o").on('focusout',function() {
         let validacao = (!(parseFloat($(this).val()) > 0));
 
         if( validacao && !$('#error-lenght').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-lenght">Insira um valor superior ao número que indicou</strong>`);
-            return false;
-
-        }
-
-        if( validacao ) {
+            $(this).parent().after(`<strong id="error-lenght">A berma deve ter um valor superior ao número que indicou</strong>`);
             return false;
         }
 
-        $('#error-length').remove()
+        $(this).parent().next(".error").remove()
     })
-    $("#car_volume_d").on('focusout',function() {
+
+    $("#car_volume_d, #car_volume_o").on('focusout',function() {
         let validacao = (!(parseFloat($(this).val()) > 0));
 
-        if( validacao && !$('#error-car_volume_d').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-lenght">Insira um valor superior ao número que indicou</strong>`);
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong class="error">O volume de trafego deve ter um valor superior ao número que indicou</strong>`);
             return false;
-
         }
 
         if( validacao ) {
             return false;
         }
 
-        $('#error-car_volume_d').remove()
-    })
-    $("#via").on('focusout',function() {
-        let validacao = (!(parseFloat($(this).val()) >= 2.75));
-
-        if( validacao && !$('#error-via').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-via">Insira um valor superior ou igual a 2.75 m</strong>`);
-            return false;
-
-        }
-
-        if( validacao ) {
-            return false;
-        }
-
-        $('#error-via').remove()
-    })
-    $("#ldv").on('focusout', function() {
-
-        let validacao = (!(parseFloat($(this).val()) >= 40));
-
-        if( validacao && !$('#error-ldv').length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong id="error-ldv">O limite de velocidade deve ser superior a 40 km/h</strong>`);
-            return false;
-
-        }
-
-        if( validacao ) {
-            return false;
-        }
-
-        $('#error-ldv').remove()
+        $('#error-lenght').remove()
     })
 });
 
