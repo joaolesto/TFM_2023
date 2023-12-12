@@ -3,7 +3,7 @@ $(document).ready(function() {
     /**
      * Positive Decimal Numbers
      */
-    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#inclinação,#SFM").each(function(){
+    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#SFM").each(function(){
         $(this).on('keydown',  function(event) {
 
             // Handle paste
@@ -160,7 +160,7 @@ $(document).ready(function() {
     /**
      * Show error message for limite de velocidade
      */
-    $("#ldv").on('focusout', function() {
+    $("#ldv,#BFFS").on('focusout', function() {
 
         let validacao = (!(parseFloat($(this).val()) >= 40) || !(parseFloat($(this).val()) <= 125));
 
