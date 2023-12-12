@@ -415,15 +415,15 @@
             return;
         } else if (
             !$('input[name="terreno"]').is(':checked') ||
-            !$('#classe_estrada').val() === '' ||
-            !$('#BFFS').val() === ''
+            $('#classe_estrada').val() === '' ||
+            $('#BFFS').val() === ''
         ) {
             alert("Preencha todos os campos inputs HCM 2000");
             return;
         } else if (
-            !$('#tipo_segmento').is(':checked') ||
-            !$('#ldv').val() === '' ||
-            !$('#inclinação').val() === ''
+            $('#tipo_segmento').val() === '' ||
+            $('#ldv').val() === '' ||
+            $('#inclinação').val() === ''
         ) {
             alert("Preencha todos os campos inputs HCM 7ª edição");
             return;
