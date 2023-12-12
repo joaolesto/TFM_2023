@@ -154,11 +154,26 @@ $(document).ready(function() {
         $('#error-berma').remove()
     })
 
-    $("#length, #berma, #via").on('focusout',function() {
-        let validacao = (!(parseFloat($(this).val()) > 0));
+    $("#via").on('focusout',function() {
+        let validacao = (!(parseFloat($(this).val()) >= 2.75));
 
         if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong class="error">A berma deve ter um valor superior ao número que indicou</strong>`);
+            $(this).parent().after(`<strong class="error">A largura da via deve ter um valor superior a 2,75m</strong>`);
+            return false;
+        }
+
+        if( validacao ) {
+            return false;
+        }
+
+        $(this).parent().next(".error").remove()
+    })
+
+    $("#length").on('focusout',function() {
+        let validacao = (!(parseFloat($(this).val()) >= 1));
+
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong class="error">A berma deve ter um valor superior a 1km</strong>`);
             return false;
         }
 
