@@ -154,7 +154,7 @@ $(document).ready(function() {
         $('#error-berma').remove()
     })
 
-    $(document).on('focusout', "#lenght, #car_volume_d, #car_volume_o", function() {
+    $("#lenght, #car_volume_d, #car_volume_o").on('focusout',function() {
         let validacao = (!(parseFloat($(this).val()) > 0));
 
         if( validacao && !$('#error-lenght').length && !($(this).val() === '')) {
