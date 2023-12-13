@@ -687,8 +687,7 @@
     })
     $('#Limpar').click(function(e) {
         e.preventDefault();
-        $('input[name="terreno"]').prop('checked', false);
-        $('input[name="FFS"]').prop('checked', false);
+        $('input[type="radio"]').prop('checked', false);
         $('input, select').val('');
     })
 </script>
