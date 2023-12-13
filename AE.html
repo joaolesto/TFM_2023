@@ -282,7 +282,7 @@
         $.ajax({
             url: $('#outputs').attr('action'),
             method: 'POST',
-            data: { input: data_input, output : data_output },
+            data: {input: data_input, output : data_output, 'type': 'ae'},
             xhrFields: {
                 responseType: 'blob'
             },
@@ -661,7 +661,6 @@
             FFSadj=FFSadj_f(FFS_2022/1.61,SAF);
             $('#FFS_o_2022_ajustada').val((FFSadj*1.61).toFixed(1))
             $('#FFS_o_ajustada').val((FFS).toFixed(1))
-            console.log(FFSadj_2022)//mi/h
             //verificação
             cadj_2022 = cadj_f(c_2022,CAF);
             $('#c_2022_ajustada').val(cadj_2022.toFixed(0));

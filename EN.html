@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="css/estiloEN.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/validator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -268,6 +269,8 @@
 
         let data_input = [];
         let data_output = [];
+        let data_output2000 = [];
+        let data_output2022 = [];
 
         // preparation to send the post inputs
         data_input.push('Terreno')
@@ -276,55 +279,112 @@
         data_input.push('FFS')
         data_input.push($('input[name="FFS"]:checked').next('label').text())
 
-
         $('.general-inputs .row').each(function (key, el) {
             // get the labels and inputs
             let $el = $(el);
             let $label = $el.find('label');
-            let $input = $el.find('input');
+            let value;
+            if ($el.find('select').length !== 0) {
+                value = $el.find('select option:selected').text();
+            } else if ($el.find('input').prop('type') == 'text' || $el.find('input').prop('type') == 'number') {
+                value = $el.find('input').val();
+            } else if ($el.find('input').prop('type') === 'checkbox') {
+                value = $el.find('input').prop('checked') ? 'Sim': 'Não';
+            }
 
             // remove disable ones
-            if ($input.prop('disabled')) {
+            if ($el.find('input').prop('disabled')) {
                 return
             }
 
+            // No empty values
+            if (!value) {
+                return;
+            }
+
             // join
-            data_input.push($label.text())
-            data_input.push(
-                $input.prop('type') === 'checkbox' ?
-                    $input.prop('checked') ? 'Sim': 'Não'
-                    : $input.val()
-            )
+            data_input.push($label.text());
+            data_input.push(value);
         })
 
         $('.form-hcm-2000 .row, .form-hcm-7-edition .row').each(function (key, el) {
             // get the labels and inputs
             let $el = $(el);
             let $label = $el.find('label');
-            let $input = $el.find('select option:selected');
+            let value;
+            if ($el.find('select').length !== 0) {
+                value = $el.find('select option:selected').text();
+            } else if ($el.find('input').prop('type') === 'text' || $el.find('input').prop('type') === 'number') {
+                value = $el.find('input').val();
+            } else if ($el.find('input').prop('type') === 'checkbox') {
+                value = $el.find('input').prop('checked') ? 'Sim': 'Não';
+            }
+
+            // No empty values
+            if (!value) {
+                return;
+            }
 
             // join
             data_input.push($label.text())
-            data_input.push($input.text())
+            data_input.push(value)
         })
 
-        // preparation to send the post outputs
-        $([ 'label_fhv','fhv','fhv_2022',
-            'label_vp','vp','vp_2022',
-            'label_ffs','FFS_o','FFS_o_2022',
-            'label_capacidade','c','c_2022',
-            'label_velocidade_media','S','S_2022',
-            'label_densidade','D','D_2022',
-            'label_service_level','service_level','service_level_2022'
+        $("input[name='FFS'], input[name='terreno']").each(function (key, el) {
+            // get the labels and inputs
+            let $el = $(el);
+            let id = $el.attr('id');
+            let $label = $(`label[for='${id}']`);
+            let value = $el.is(':checked') ? 'Sim' : 'Não';
+
+            // No empty values
+            if (!$el.is(':checked')) {
+                return;
+            }
+
+            // join
+            data_input.push($label.text())
+            data_input.push(value)
+        })
+
+        // preparation to send the post outputs 2000
+        $([ 'label_vd_s','vd_s',
+            'label_vo_s','vo_s',
+            'label_vd_ts','vd_ts',
+            'label_ffs','FFS_o',
+            'label_ATS_d','ATS_d',
+            'label_BPTSF_d','BPTSF_d',
+            'label_PTSF_d','PTSF_d',
+            'label_service_level','service_level'
         ]).each(function (key, el) {
             let $element = $(`#${el}`);
-            data_output.push($element.val() || $element.text())
+            data_output2000.push($element.val() || $element.text())
+        })
+
+        // preparation to send the post outputs 2022
+        $([ 'label_FFS_o_2022','FFS_o_2022',
+            'label_vd_2022','vd_2022',
+            'label_classe_vertical','classe_vertical',
+            'label_velocidade_media_2022','S_2022',
+            'label_BFFS_2022','BFFS_2022',
+            'label_PF25cap_2022','PFcap_2022',
+            'label_PF_2022','PF_2022',
+            'label_FD_2022','FD_2022',
+            'label_service_level','service_level_2022'
+        ]).each(function (key, el) {
+            let $element = $(`#${el}`);
+            data_output2022.push($element.val() || $element.text())
         })
 
         $.ajax({
             url: $('#outputs').attr('action'),
             method: 'POST',
-            data: { input: data_input, output : data_output },
+            data: {
+                input:data_input,
+                output_2000:data_output2000,
+                output_2022:data_output2022,
+                'type': 'en'
+            },
             xhrFields: {
                 responseType: 'blob'
             },
@@ -519,22 +579,13 @@
                 ER_ts_o=1.0;
             }
         }
-        console.log(fg_s_d)
-        console.log(fg_s_o)
-        console.log(fg_ts_d)
-        console.log(fg_ts_o)
         //sentido oposto
         fhv_s_d = fhv_f(PT,ET_s_d,PR,ER_s_d); // Passo 2
         fhv_ts_d = fhv_f(PT,ET_ts_d,PR,ER_ts_d);
         fhv_s_o = fhv_f(PT,ET_s_o,PR,ER_s_o);
         fhv_ts_o = fhv_f(PT,ET_ts_o,PR,ER_ts_o);
         //passo3
-        console.log(fhv_s_d)
-        console.log(fhv_ts_d)
-        console.log(fhv_s_o)
-        console.log(fhv_ts_o)
         vd_s=vp_f(car_volume_d,phf,fg_s_d,fhv_s_d);
-        console.log(vd_s)
         $('#vd_s').val(vd_s.toFixed(0));
         vd_ts=vp_f(car_volume_d,phf,fg_ts_d,fhv_ts_d);
         $('#vd_ts').val(vd_ts.toFixed(0));
@@ -569,10 +620,8 @@
 
             }else{
                 fls=f_ls(berma,via);
-                console.log(fls)
                 fls_2022=fLS_f_2022(via/0.305,berma/0.305);
                 fa=fa_f(N_acessos);
-                console.log(fa)
                 fa_2022 = fA_f_2022(N_acessos);
                 a_2022 = a_f(classe,vo_2022,length/1.61,BFFS_2022)
                 FFS_2022 = FFS_f_2022(BFFS_2022,a,PT,fls_2022,fa_2022)
