@@ -232,7 +232,7 @@
             <div class="buttons">
                 <button type="submit" id="Calcular">Calcular</button>
                 <button type="submit" id="Exportar">Exportar</button>
-                <button type="submit" id="Limpar_gerais">Limpar Dados</button>
+                <button type="submit" id="Limpar">Limpar Dados</button>
             </div>
         </div>
     </div>
@@ -687,37 +687,9 @@
     })
     $('#Limpar').click(function(e) {
         e.preventDefault();
-        ///inputs
         $('input[name="terreno"]').prop('checked', false);
         $('input[name="FFS"]').prop('checked', false);
-        $('#car_volume').val('');
-        $('#N_acessos').val('');
-        $('#phf').val('');
-        $('#pt').val('');
-        $('#pr').val('');
-        $('#berma').val('');
-        $('#FFS').val('');
-        $('#via').val('')
-        $('#length').val('');
-        $('#N_vias').val('');
-        $('#BFFS').val('');
-        $('#tipos_de_condutores').val("")
-        $('#cond_atmos').val("")
-        ///outputs
-        $('#fhv').val('');
-        $('#fhv_2022').val('');
-        $('#vp').val('');
-        $('#vp_2022').val('');
-        $('#FFS_o').val('');
-        $('#FFS_o_2022').val('');
-        $('#S').val('');
-        $('#S_2022').val('');
-        $('#c').val('');
-        $('#c_2022').val('');
-        $('#D').val('');
-        $('#service_level').val("");
-        $('#D_2022').val('');
-        $('#service_level_2022').val("");
+        $('input, select').val('');
     })
 </script>
 </html>
