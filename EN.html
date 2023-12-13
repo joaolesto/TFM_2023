@@ -416,7 +416,7 @@
         } else if (
             !$('input[name="terreno"]').is(':checked') ||
             $('#classe_estrada').val() === '' ||
-            $('#BFFS').val() === ''
+            ($('#FFS_c').is(":checked") && $('#BFFS').val() === '')
         ) {
             alert("Preencha todos os campos inputs HCM 2000");
             return;
