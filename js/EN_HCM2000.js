@@ -58,10 +58,10 @@ function f_ls(B,V){
         return 0
     }
 }
-function fa_f(Acessos){
+function fa_f(A){
     let fa = 0;
-    fa = (4/6)*Acessos
-    if (Acessos=>24){
+    fa = (4/6)*A
+    if (A>24){
         fa=16.0
     }
     return fa
