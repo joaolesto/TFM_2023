@@ -603,7 +603,7 @@
         //débito
         let vd_2022 = 0;
         vd_2022 = v_f(car_volume_d,phf)
-        $('#vd_2022').val(vd_2022);
+        $('#vd_2022').val(vd_2022.toFixed(0));
         //classe vertical (i,L)
         let classe = classe_vertical_f(inclinação,length); //meter a funcionar
         console.log(classe);
@@ -612,7 +612,7 @@
         let ldv = parseFloat($('#ldv').val());
         let BFFS_2022 = 0;
         BFFS_2022 = BFFS_f(ldv/1.61)
-        $('#BFFS_2022').val(BFFS_2022*1.61.toFixed(2));
+        $('#BFFS_2022').val((BFFS_2022*1.61).toFixed(2));
         let vo_2022 = 0;
         //passo 4
         if(vd_s>1700 || vo_s>1700 || vd_ts>1700 || vo_ts>1700){
@@ -623,20 +623,25 @@
                 FFS=SFM+0.0125*(car_volume_d/fhv_s_d);
                 FFS_2022=FFS
                 $('#FFS_o').val(FFS.toFixed(2));
-                $('#FFS_o_2022').val(FFS_2022.toFixed(0));
+                $('#FFS_o_2022').val(FFS_2022.toFixed(2));
 
             }else{
                 fls=f_ls(berma,via);
                 console.log(fls);
                 fls_2022=fLS_f_2022(via/0.305,berma/0.305);
+                console.log(fls_2022)
                 fa=fa_f(N_acessos);
                 console.log(fa);
                 fa_2022 = fA_f_2022(N_acessos);
+                console.log(fa_2022)
                 a_2022 = a_f(classe,vo_2022,length/1.61,BFFS_2022)
-                FFS_2022 = FFS_f_2022(BFFS_2022,a,PT,fls_2022,fa_2022)
+                console.log(a_2022)
+                console.log(BFFS_2022)
+                FFS_2022 = FFS_f_2022(BFFS_2022,a_2022,PT,fls_2022,fa_2022)
+                console.log(FFS_2022)
                 FFS=FFS_f(BFFS,fls,fa)
                 $('#FFS_o').val(FFS.toFixed(2));
-                $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(2));
+                $('#FFS_o_2022').val((FFS_2022*1.61).toFixed(2));
             }
             let U = 0;
             if($('#tipo_segmento').val()==="Zona de Ultrapassagem Impedida"){
@@ -644,7 +649,6 @@
             }else{
                 U=0;
             }
-            console.log(U)
             fnp_ats = fnp_f_ats(FFS,vo_s,U);
             ATS_d=Ats_f(FFS,vd_s,vo_s,fnp_ats);
             $('#ATS_d').val(ATS_d.toFixed(2));
@@ -661,7 +665,6 @@
             }else{
                 classe_estrada=2;
             }
-            console.log(classe_estrada)
             LOS=LOS_f(classe_estrada,ATS_d,PTSF_d)
             $('#service_level').val(LOS);
             let m1_2022 = 0;
@@ -674,20 +677,30 @@
             let cap = 1700;
             let PF_2022 = 0;
             let FD_2022 = 0;
-            m1_2022=m1_f_2022(classe,vo_2022,length/1.61,PT,FFS_2022);
-            p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61,vo_2022);
+            m1_2022=m1_f_2022(classe,length/1.61,PT,FFS_2022);
+            p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61);
             S_2022 = S_f_2022(vd_2022,m1_2022,p1_2022,FFS_2022);
-            $('#S_2022').val(S_2022/1.61.toFixed(2));
-            PF25cap_2022=PF25cap_f(classe,length/1.61,FFS,PT,vo_2022);
+            $('#S_2022').val((S_2022*1.61).toFixed(2));
+
+            
+            PF25cap_2022=PF25cap_f(classe,length/1.61,FFS_2022,PT);
             $('#PF25cap_2022').val((PF25cap_2022.toFixed(2)));
-            PFcap_2022=PFcap_f(classe,length/1.61,FFS,PT,vo_2022);
+
+            PFcap_2022=PFcap_f(classe,length/1.61,FFS_2022,PT);
             $('#PFcap_2022').val((PFcap_2022.toFixed(2)));
+
             m2_2022=m2_f_2022(PFcap_2022,PF25cap_2022,cap);
+            console.log(m2_2022);
             p2_2022=p2_f_2022(PFcap_2022,PF25cap_2022,cap);
+            console.log(p2_2022);
             PF_2022=PF_f(m2_2022,p2_2022,vd_2022);
             $("#PF_2022").val(PF_2022.toFixed(2));
-            FD_2022=PF_f(m2_2022,p2_2022,vd_2022);
-            $("#FD_2022").val(FD_2022/1.61.toFixed(2));
+            
+            
+            FD_2022=FD_f(PF_2022,vd_2022,S_2022)
+            console.log(FD_2022);
+            $("#FD_2022").val((FD_2022/1.61).toFixed(2));
+
             LOS_2022=NS2022_f(ldv/1.61,FD_2022,vd_2022,vo_2022)
             $('#service_level_2022').val(LOS_2022);
         }
