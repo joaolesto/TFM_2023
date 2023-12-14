@@ -3,7 +3,7 @@ $(document).ready(function() {
     /**
      * Positive Decimal Numbers
      */
-    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#SFM").each(function(){
+    $("#pt,#pr,#FFS,#berma,#via,#length,#BFFS,#car_volume_d,#car_volume_o,#phf,#SFM","#ldv").each(function(){
         $(this).on('keydown',  function(event) {
 
             // Handle paste
@@ -22,7 +22,7 @@ $(document).ready(function() {
      /**
      * Positive Whole Numbers
      */
-    $("#car_volume,#N_vias,#N_acessos,#ldv").each(function(){
+    $("#car_volume,#N_vias,#N_acessos").each(function(){
         $(this).on('keydown',  function(event) {
 
             // Handle paste
