@@ -40,9 +40,9 @@ function NS2022_f(limite,FD,vd,vo){
     }
 }
 //passo 2 
-function class_vertical(i,L){
-    let classe = "";
-    if (i>0) { //para as subidas
+function classe_vertical_f(i,L){
+    let classe = 0;
+    if (i>=0) { //para as subidas
         if (i<=1 && i<=2) {
             classe = 1;
         }else if ((i>2 && i<=3) && (L<=0.483)){

@@ -160,7 +160,7 @@ $(document).ready(function() {
     /**
      * Show error message for limite de velocidade
      */
-    $("#ldv,#BFFS").on('focusout', function() {
+    $("#BFFS").on('focusout', function() {
 
         let validacao = (!(parseFloat($(this).val()) >= 40) || !(parseFloat($(this).val()) <= 125));
 
@@ -258,5 +258,22 @@ $(document).ready(function() {
 
         $(this).parent().next(".error").remove()
     })
+    $("#ldv").on('focusout', function() {
+
+        let validacao = (!(parseFloat($(this).val()) >= 40) || !(parseFloat($(this).val()) <= 125));
+    
+        if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
+            $(this).parent().after(`<strong class="error">Numero tem que ser entre 40-125km/h</strong>`);
+            return false;
+    
+        }
+    
+        if( validacao ) {
+            return false;
+        }
+    
+        $(this).parent().next(".error").remove()
+    })
 });
+
 

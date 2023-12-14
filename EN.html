@@ -200,7 +200,7 @@
                         </select>
                     </div>
                     <div class="row">
-                        <label for="Spl">Limite de velocidade (km/h)</label>
+                        <label for="ldv">Limite de velocidade (km/h)</label>
                         <input type="number" name="ldv" id="ldv" min="45"/>
                     </div>
                     <div class="row">
@@ -424,6 +424,7 @@
         let via = parseFloat($('#via').val())
         let length = parseFloat($('#length').val());
         let BFFS = parseFloat($('#BFFS').val());
+        let inclinação = parseFloat($('#inclinação').val());
         let fg_s_d = 0;
         let fg_ts_d = 0;
         let fg_s_o = 0;
@@ -604,12 +605,14 @@
         vd_2022 = v_f(car_volume_d,phf)
         $('#vd_2022').val(vd_2022);
         //classe vertical (i,L)
-        let classe = 1; //meter a funcionar
+        let classe = classe_vertical_f(inclinação,length); //meter a funcionar
+        console.log(classe);
+        $('#classe_vertical').val(classe);
         //BFFS
-        let spl = parseFloat($('#SPL').val());
+        let ldv = parseFloat($('#ldv').val());
         let BFFS_2022 = 0;
-        BFFS_2022 = BFFS_f(spl/1.61)
-        $('#BFFS_2022').val(BFFS_2022*1.61);
+        BFFS_2022 = BFFS_f(ldv/1.61)
+        $('#BFFS_2022').val(BFFS_2022*1.61.toFixed(2));
         let vo_2022 = 0;
         //passo 4
         if(vd_s>1700 || vo_s>1700 || vd_ts>1700 || vo_ts>1700){
@@ -620,7 +623,7 @@
                 FFS=SFM+0.0125*(car_volume_d/fhv_s_d);
                 FFS_2022=FFS
                 $('#FFS_o').val(FFS.toFixed(2));
-                $('#FFS_o_2022').val(FFS_2022*1.61.toFixed(0));
+                $('#FFS_o_2022').val(FFS_2022.toFixed(0));
 
             }else{
                 fls=f_ls(berma,via);
@@ -685,7 +688,7 @@
             $("#PF_2022").val(PF_2022.toFixed(2));
             FD_2022=PF_f(m2_2022,p2_2022,vd_2022);
             $("#FD_2022").val(FD_2022/1.61.toFixed(2));
-            LOS_2022=NS2022_f(spl/1.61,FD_2022,vd_2022,vo_2022)
+            LOS_2022=NS2022_f(ldv/1.61,FD_2022,vd_2022,vo_2022)
             $('#service_level_2022').val(LOS_2022);
         }
 
