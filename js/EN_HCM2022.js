@@ -260,7 +260,7 @@ function S_f_2022(vd,m,p,FFS){
     }
 }
 //passo11
-function m1_f_2022(classe,L,HV,FFS){
+function m1_f_2022(classe,L,HV,FFS,vo){
     let b0 = 0;
     let b1 = 0;
     let b2 = 0;
@@ -336,10 +336,10 @@ function m1_f_2022(classe,L,HV,FFS){
         b5 = 3.5115;
     }
     let m = 0;
-    m = Math.max(b5,b0+b1*FFS+b2*(Math.sqrt(1500/1000))+Math.max(0,b3)*Math.sqrt(L)+Math.max(0,b4)*Math.sqrt(HV))
+    m = Math.max(b5,b0+b1*FFS+b2*(Math.sqrt(vo/1000))+Math.max(0,b3)*Math.sqrt(L)+Math.max(0,b4)*Math.sqrt(HV))
     return m
 }
-function p1_f_2022(classe,FFS,HV,L) {
+function p1_f_2022(classe,FFS,HV,L,vo) {
     let f0 = 0;
     let f1 = 0;
     let f2 = 0;
@@ -390,7 +390,7 @@ function p1_f_2022(classe,FFS,HV,L) {
         f8 = 0.30590;
     }
     let p = 0;
-    p = Math.max(f8,f0+f1*FFS+f2*L+f3*(1500/1000)+f4*Math.sqrt(1500/1000)+f5*HV+f6*Math.sqrt(HV)+f7*(L*HV))
+    p = Math.max(f8,f0+f1*FFS+f2*L+f3*(vo/1000)+f4*Math.sqrt(vo/1000)+f5*HV+f6*Math.sqrt(HV)+f7*(L*HV))
     return p
 }
 //passo 12
@@ -400,7 +400,7 @@ function PF_f(m,p,vd){
 function m2_f_2022(PFcap,PF25cap,cap){
     return -0.29764*((0-Math.log(1-(PF25cap/100)))/(0.25*(cap/1000)))+-0.71917*((0-Math.log(1-(PFcap/100)))/((cap/1000)))
 }
-function PFcap_f(classe,L,FFS,HV){
+function PFcap_f(classe,L,FFS,HV,vo){
     let b0 = 0
     let b1 = 0
     let b2 = 0
@@ -455,9 +455,9 @@ function PFcap_f(classe,L,FFS,HV){
         b6 = -0.02960
         b7 = 9.99453
     }
-    return b0+b1*L+b2*Math.sqrt(L)+b3*FFS+b4*Math.sqrt(FFS)+b5*HV+b6*(FFS*(1500/1000))+b7*(Math.sqrt(1500/1000))
+    return b0+b1*L+b2*Math.sqrt(L)+b3*FFS+b4*Math.sqrt(FFS)+b5*HV+b6*(FFS*(vo/1000))+b7*(Math.sqrt(vo/1000))
 }
-function PF25cap_f(classe,L,FFS,HV){
+function PF25cap_f(classe,L,FFS,HV,vo){
     let c0 = 0
     let c1 = 0
     let c2 = 0
@@ -512,7 +512,7 @@ function PF25cap_f(classe,L,FFS,HV){
         c6 = -0.00480
         c7 = 17.56611
     }
-    return c0+c1*L+c2*Math.sqrt(L)+c3*FFS+c4*Math.sqrt(FFS)+c5*HV+c6*(FFS*(1500/1000))+c7*(Math.sqrt(1500/1000))
+    return c0+c1*L+c2*Math.sqrt(L)+c3*FFS+c4*Math.sqrt(FFS)+c5*HV+c6*(FFS*(vo/1000))+c7*(Math.sqrt(vo/1000))
 }
 function p2_f_2022(PFcap,PF25cap,cap){
     return 0.81165+0.37920*(((0-Math.log(1-(PF25cap/100)))/(0.25*(cap/1000))))-0.49524*(((0-Math.log(1-(PFcap/100)))/(cap/1000)))-2.11289*Math.sqrt(((0-Math.log(1-(PF25cap/100)))/(0.25*(cap/1000))))+2.41146*Math.sqrt(((0-Math.log(1-(PFcap/100)))/((cap/1000))))

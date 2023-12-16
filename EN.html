@@ -614,6 +614,7 @@
         BFFS_2022 = BFFS_f(ldv/1.61)
         $('#BFFS_2022').val((BFFS_2022*1.61).toFixed(2));
         let vo_2022 = 0;
+        vo_2022 = v_f(car_volume_o,phf);
         //passo 4
         if(vd_s>1700 || vo_s>1700 || vd_ts>1700 || vo_ts>1700){
             $('#service_level').val("F");
@@ -677,16 +678,19 @@
             let cap = 1700;
             let PF_2022 = 0;
             let FD_2022 = 0;
-            m1_2022=m1_f_2022(classe,length/1.61,PT,FFS_2022);
-            p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61);
+            m1_2022=m1_f_2022(classe,length/1.61,PT,FFS_2022,vo_2022);
+            console.log(m1_2022)
+            p1_2022=p1_f_2022(classe,FFS_2022,PT,length/1.61,vo_2022);
+            console.log(p1_2022)
             S_2022 = S_f_2022(vd_2022,m1_2022,p1_2022,FFS_2022);
+            console.log(S_2022)
             $('#S_2022').val((S_2022*1.61).toFixed(2));
 
             
-            PF25cap_2022=PF25cap_f(classe,length/1.61,FFS_2022,PT);
+            PF25cap_2022=PF25cap_f(classe,length/1.61,FFS_2022,PT,vo_2022);
             $('#PF25cap_2022').val((PF25cap_2022.toFixed(2)));
 
-            PFcap_2022=PFcap_f(classe,length/1.61,FFS_2022,PT);
+            PFcap_2022=PFcap_f(classe,length/1.61,FFS_2022,PT,vo_2022);
             $('#PFcap_2022').val((PFcap_2022.toFixed(2)));
 
             m2_2022=m2_f_2022(PFcap_2022,PF25cap_2022,cap);

@@ -433,7 +433,7 @@ function fnp_f_ats(FFS,vo,U){ //fnp velocidade média de viagem
             }
         }
     }else{
-         if (FFS=>110){
+         if (FFS>=110){
             if (vo<=100){
                 fnp_ats=5.0;
             }else if (vo>100 && vo<=200){
@@ -547,7 +547,7 @@ function PTSF_f(BPTSF,fnp_ts) {
 function LOS_f(classe,ATS,PTSF) {
     let LOS = ""
     var NS = [];
-    if(classe==1){
+    if(classe===1){
         if(ATS<=60){
             NS[0] = 5;
         }else if(ATS>60 && ATS<=70){
@@ -571,18 +571,18 @@ function LOS_f(classe,ATS,PTSF) {
             NS[1] = 5;
         }
         var max = Math.max(...NS);
-        if (max==1){
+        if (max===1){
             LOS = "A";
-        }else if(max==2){
+        }else if(max===2){
             LOS = "B";
-        }else if(max==3){
+        }else if(max===3){
             LOS = "C";
-        }else if(max==4){
+        }else if(max===4){
             LOS = "D";
-        }else if(max==5){
+        }else if(max===5){
             LOS = "E";
         }
-    }else if(classe==2){
+    }else if(classe===2){
         if(PTSF<=40) {
             LOS = "A";
         }else if(PTSF>40 && PTSF<=55){

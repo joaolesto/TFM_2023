@@ -230,10 +230,10 @@ $(document).ready(function() {
     })
 
     $("#length").on('focusout',function() {
-        let validacao = (!(parseFloat($(this).val()) >= 1));
+        let validacao = (!(parseFloat($(this).val()) >= 1)) || (!(parseFloat($(this).val()) <= 5));
 
         if( validacao && !$(this).parent().next(".error").length && !($(this).val() === '')) {
-            $(this).parent().after(`<strong class="error">A berma deve ter um valor superior a 1km</strong>`);
+            $(this).parent().after(`<strong class="error">A via deve ter um valor superior a 1km e inferior a 5km</strong>`);
             return false;
         }
 
